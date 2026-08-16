@@ -31,16 +31,17 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
         <div class="form-group">
           <label for="contactService">Gewenste Behandeling</label>
           <select id="contactService" name="service" class="form-input form-select">
-            <option value="Algemeen / Overig">Algemeen / Overig</option>
+            <option value="Algemeen / Vraag over afspraak">Algemeen / Vraag over afspraak</option>
             <option value="Intake + Consult (75 min)">Intake + Consult (75 min)</option>
             <option value="Shiatsu therapie / massage (50 min)">Shiatsu therapie / massage (50 min)</option>
             <option value="Shiatsu therapie / massage (75 min)">Shiatsu therapie / massage (75 min)</option>
             <option value="Voetreflextherapie (50 min)">Voetreflextherapie (50 min)</option>
             <option value="Dorn-methode">Dorn-methode</option>
+            <option value="Littekenbehandeling">Littekenbehandeling</option>
             <option value="Oorreflexologie">Oorreflexologie</option>
             <option value="Bioslimming behandeling">Bioslimming behandeling</option>
             <option value="Zwangerschapsmassage">Zwangerschapsmassage</option>
-            <option value="Massage Membership (6x 60 min)">Massage Membership (6x 60 min)</option>
+            <option value="Klassieke ontspanningsmassage">Klassieke ontspanningsmassage</option>
           </select>
         </div>
       </div>
@@ -57,8 +58,9 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
         </label>
       </div>
 
-      <button type="submit" class="btn btn-primary btn-submit">
-        <span>Verstuur Bericht</span>
+      <button type="submit" id="contactSubmitBtn" class="btn btn-primary btn-submit">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+        <span id="submitBtnText">Verstuur Bericht</span>
       </button>
 
       <div id="contactFormStatus" class="form-status"></div>
@@ -188,19 +190,67 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
     display: block;
     background: #dcfce7;
     color: #15803d;
+    border: 1px solid #bbf7d0;
+  }
+
+  .form-status.error {
+    display: block;
+    background: #fee2e2;
+    color: #b91c1c;
+    border: 1px solid #fecaca;
   }
 </style>
 
 <script>
-  const form = document.getElementById('mainContactForm');
+  const form = document.getElementById('mainContactForm') as HTMLFormElement;
   const status = document.getElementById('contactFormStatus');
+  const submitBtn = document.getElementById('contactSubmitBtn') as HTMLButtonElement;
+  const btnText = document.getElementById('submitBtnText');
 
-  if (form && status) {
-    form.addEventListener('submit', (e) => {
+  if (form && status && submitBtn && btnText) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      status.className = 'form-status success';
-      status.textContent = 'Hartelijk dank voor uw bericht! Alianne heeft uw bericht ontvangen en neemt spoedig contact met u op.';
-      if (form instanceof HTMLFormElement) form.reset();
+
+      btnText.textContent = 'Verzenden...';
+      submitBtn.disabled = true;
+      status.style.display = 'none';
+
+      const formData = new FormData(form);
+      const data: Record<string, string> = {
+        _subject: `Nieuw bericht via website van ${formData.get('name')}`,
+        _template: 'table',
+        _captcha: 'false',
+        naam: formData.get('name') as string,
+        email: formData.get('email') as string,
+        telefoon: (formData.get('phone') as string) || 'Niet opgegeven',
+        behandeling: formData.get('service') as string,
+        bericht: formData.get('message') as string
+      };
+
+      try {
+        const response = await fetch('https://formsubmit.co/ajax/info@massagestudioeelde.nl', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+          },
+          body: JSON.stringify(data)
+        });
+
+        if (response.ok) {
+          status.className = 'form-status success';
+          status.textContent = 'Hartelijk dank voor uw bericht! Uw e-mail is succesvol verzonden naar Alianne. U ontvangt binnen 1 werkdag een reactie.';
+          form.reset();
+        } else {
+          throw new Error('Verzending mislukt');
+        }
+      } catch (err) {
+        status.className = 'form-status error';
+        status.innerHTML = 'Er ging helaas iets mis bij het verzenden. U kunt ook direct mailen naar <a href="mailto:info@massagestudioeelde.nl" style="color: #b91c1c; font-weight: 700; text-decoration: underline;">info@massagestudioeelde.nl</a> of appen via WhatsApp.';
+      } finally {
+        btnText.textContent = 'Verstuur Bericht';
+        submitBtn.disabled = false;
+      }
     });
   }
 </script>
