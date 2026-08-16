@@ -10,12 +10,14 @@ interface Props {
 }
 
 const { title, duration, price, description, image, slug = '/behandelingen', tags = [] } = Astro.props;
+
+const isContainImage = image && (image.toLowerCase().includes('oor') || image.toLowerCase().includes('reflexologie'));
 ---
 
 <div class="treatment-card">
   {image && (
-    <div class="card-media">
-      <img src={image} alt={title} class="treatment-img" loading="lazy" />
+    <div class={`card-media ${isContainImage ? 'is-contain' : ''}`}>
+      <img src={image} alt={title} class={`treatment-img ${isContainImage ? 'contain-img' : ''}`} loading="lazy" />
       {price && <div class="price-badge">{price}</div>}
     </div>
   )}
@@ -23,7 +25,12 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
   <div class="card-body">
     <div class="card-meta">
       {duration && <span class="duration-tag">{duration}</span>}
-      {tags.map(t => <span class="custom-tag">{t}</span>)}
+      {tags.map(t => {
+        let tagClass = "custom-tag";
+        if (t.toLowerCase().includes('niet-vergoed')) tagClass += " not-covered";
+        else if (t.toLowerCase().includes('vergoedbaar') || t.toLowerCase().includes('vergoed')) tagClass += " covered";
+        return <span class={tagClass}>{t}</span>;
+      })}
     </div>
 
     <h3 class="card-title">{title}</h3>
@@ -58,9 +65,16 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
 
   .card-media {
     position: relative;
-    height: 200px;
+    height: 220px;
     background: var(--surface);
     overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .card-media.is-contain {
+    background: #ffffff;
   }
 
   .treatment-img {
@@ -70,15 +84,20 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
     transition: transform 0.5s ease;
   }
 
+  .treatment-img.contain-img {
+    object-fit: contain;
+    padding: 8px;
+  }
+
   .treatment-card:hover .treatment-img {
-    transform: scale(1.05);
+    transform: scale(1.04);
   }
 
   .price-badge {
     position: absolute;
     bottom: 12px;
     right: 12px;
-    background: rgba(36, 28, 34, 0.85);
+    background: rgba(36, 28, 34, 0.88);
     backdrop-filter: blur(6px);
     color: #ffffff;
     font-weight: 700;
@@ -86,6 +105,7 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
     padding: 0.35rem 0.85rem;
     border-radius: var(--radius-full);
     border: 1px solid rgba(255, 255, 255, 0.2);
+    z-index: 2;
   }
 
   .card-body {
@@ -97,28 +117,53 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
 
   .card-meta {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.4rem;
     flex-wrap: wrap;
-    margin-bottom: 0.75rem;
+    margin-bottom: 1rem;
   }
 
-  .duration-tag, .custom-tag {
-    font-size: 0.75rem;
-    font-weight: 600;
-    padding: 0.25rem 0.65rem;
-    border-radius: var(--radius-full);
+  .duration-tag {
+    font-size: 0.725rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--primary);
     background: var(--primary-light);
-    color: var(--primary-dark);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+  }
+
+  .custom-tag {
+    font-size: 0.725rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    padding: 0.2rem 0.6rem;
+    border-radius: var(--radius-full);
+  }
+
+  .custom-tag.covered {
+    color: #15803d;
+    background: #dcfce7;
+    border-color: #bbf7d0;
+  }
+
+  .custom-tag.not-covered {
+    color: #991b1b;
+    background: #fee2e2;
+    border-color: #fecaca;
   }
 
   .card-title {
-    font-size: 1.45rem;
+    font-size: 1.35rem;
     color: var(--text-color);
     margin-bottom: 0.75rem;
+    line-height: 1.3;
   }
 
   .card-desc {
-    font-size: 0.925rem;
+    font-size: 0.9rem;
     color: var(--text-muted);
     line-height: 1.6;
     margin-bottom: 1.5rem;
@@ -128,6 +173,7 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
   .card-footer {
     border-top: 1px solid var(--border-color);
     padding-top: 1rem;
+    margin-top: auto;
   }
 
   .card-link {
@@ -136,11 +182,12 @@ const { title, duration, price, description, image, slug = '/behandelingen', tag
     gap: 0.4rem;
     font-size: 0.9rem;
     font-weight: 600;
-    color: var(--primary);
+    color: var(--primary-dark);
+    transition: gap 0.2s ease;
   }
 
   .card-link:hover {
-    color: var(--primary-hover);
-    gap: 0.6rem;
+    color: var(--primary);
+    gap: 0.65rem;
   }
 </style>
