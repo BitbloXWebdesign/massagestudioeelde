@@ -236,7 +236,7 @@ const isEnabled = siteConfig.modules.callback || siteConfig.modules.callBack;
       const subject = subjectInput?.value || 'Algemene vraag / Afspraak';
 
       const waText = encodeURIComponent(
-        `Hallo Alianne, graag ontvang ik een terugbelverzoek van Massage Studio Eelde.\n\n👤 Naam: ${name}\n📞 Telefoonnummer: ${phone}\n📋 Onderwerp: ${subject}`
+        `Hallo Alianne, graag ontvang ik een terugbelverzoek van Massage Studio Eelde.\n\n- Naam: ${name}\n- Telefoonnummer: ${phone}\n- Onderwerp: ${subject}`
       );
 
       const waUrl = `https://wa.me/31623560803?text=${waText}`;
