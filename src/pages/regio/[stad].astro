@@ -5,6 +5,7 @@ import TreatmentCard from '../../components/TreatmentCard.astro';
 import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
 import FAQSection from '../../components/FAQSection.astro';
 import ContactForm from '../../components/ContactForm.astro';
+import AiSummaryBox from '../../components/AiSummaryBox.astro';
 
 export function getStaticPaths() {
   return siteConfig.regions.map((reg) => ({
@@ -16,6 +17,13 @@ export function getStaticPaths() {
 const { region } = Astro.props;
 
 const waMessage = encodeURIComponent(`Hallo Alianne, ik woon in ${region.name} en wil graag een afspraak maken bij Massage Studio Eelde.`);
+
+const regionSummary = [
+  { term: `Reistijd vanaf ${region.name}`, description: `Slechts ${region.distance} naar Nieuwe Akkers 18a Eelde (gratis parkeren voor de deur).` },
+  { term: "Beroepserkenning", description: "Alianne Zuidhof-Hoiting is erkend BATC Complementair Therapeut (HBO-conform) & NAP." },
+  { term: "Vergoeding Zorgverzekering", description: "Therapeutische consulten (Shiatsu, Dorn, Voetreflex, Litteken) deels vergoedbaar." },
+  { term: "Afspraak & Contact", description: "Eenvoudig afspreken via WhatsApp (06-23560803) of via het contactformulier." }
+];
 
 const regionTreatments = [
   {
@@ -88,6 +96,10 @@ const regionTreatments = [
         Op zoek naar een deskundige massage of therapeutisch consult in de omgeving van <strong>{region.name}</strong>? Onze sfeervolle praktijk in Eelde ligt op slechts <strong>{region.distance}</strong> en biedt volop gratis parkeergelegenheid.
       </p>
     </div>
+  </div>
+
+  <div class="container">
+    <AiSummaryBox points={regionSummary} title={`Praktijkinformatie voor ${region.name}`} />
   </div>
 
   <!-- Introductie & Nabijheid -->

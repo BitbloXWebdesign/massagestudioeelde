@@ -1,8 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
+import AiSummaryBox from '../components/AiSummaryBox.astro';
 
 const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak maken bij Massage Studio Eelde.");
+
+const summaryPoints = [
+  { term: "Erkend BATC Therapeut", description: "Behandelingen uitgevoerd door Alianne Zuidhof-Hoiting (HBO-conform & NAP-koepel)." },
+  { term: "Vergoeding via Zorgpolis", description: "Shiatsu, Dorn, Voetreflex, Litteken- en Oorreflexologie deels vergoed bij aanvullende verzekering." },
+  { term: "Zwangerschap & Wellness", description: "Zwangerschapsmassage bij klachten vergoedbaar; ontspanningsmassage & Bioslimming zijn niet-vergoed." },
+  { term: "Locatie & Afspraak", description: "Nieuwe Akkers 18a Eelde (voormalig kerkje). Afspraken via WhatsApp (06-23560803) of e-mail." }
+];
 
 const allTreatments = [
   {
@@ -178,6 +186,8 @@ LET OP: BIOSLIMMING behandelingen zijn puur wellness/lichaamsverzorging en valle
 
   <section class="section-py">
     <div class="container">
+      <AiSummaryBox points={summaryPoints} title="Samenvatting & Vergoedingen Behandelingen" />
+      
       <div class="treatments-detail-list">
         {allTreatments.map((t, index) => (
           <article class={`treatment-detail-card ${index % 2 === 1 ? 'reverse' : ''}`} id={t.id}>

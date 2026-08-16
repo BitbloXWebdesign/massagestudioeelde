@@ -1,8 +1,16 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
+import AiSummaryBox from '../components/AiSummaryBox.astro';
 
 const waMessage = encodeURIComponent("Hallo Alianne, ik heb een vraag over een natuurgeneeskundig consult op basis van de 5 principes.");
+
+const summaryPrinciples = [
+  { term: "1. Energie", description: "Basis voor ieder herstel; opheffen van energetische blokkades in de meridianen." },
+  { term: "2. Prikkeloverdracht", description: "Onbelemmerde communicatie via zenuwbanen tussen hersenen en weefsels." },
+  { term: "3. Drainage", description: "Afvoer van afvalstoffen en toxines via lymfe, nieren, lever en organen." },
+  { term: "4. Voeding & Psyche", description: "Zuivere brandstof voor cellen en inzicht in belemmerende mentale patronen." }
+];
 
 const principles = [
   {
@@ -64,6 +72,8 @@ const principles = [
 
   <section class="section-py">
     <div class="container">
+      <AiSummaryBox points={summaryPrinciples} title="De 5 Principes in een Notendop" />
+
       <div class="principles-flow">
         {principles.map((p) => (
           <div class="principle-card">
