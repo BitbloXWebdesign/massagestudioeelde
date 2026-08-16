@@ -7,6 +7,8 @@ import ReviewsCarousel from '../components/ReviewsCarousel.astro';
 import FAQSection from '../components/FAQSection.astro';
 import ContactForm from '../components/ContactForm.astro';
 
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak maken bij Massage Studio Eelde.");
+
 const treatments = [
   {
     title: "Shiatsu Therapie & Massage",
@@ -24,7 +26,7 @@ const treatments = [
     image: "/images/DSC_1502.1.jpg",
     slug: "/behandelingen#dorn",
     description: "Een milde en zachte wervelkolom- en gewrichtscorrectie in dynamische beweging. Zeer effectief bij bekkenscheefstand, beenlengteverschil en rug-/nekpijn.",
-    tags: ["Wervelkolom", "Zacht & Veilig"]
+    tags: ["BATC Vergoedbaar", "Wervelkolom"]
   },
   {
     title: "Voetreflextherapie",
@@ -33,13 +35,22 @@ const treatments = [
     image: "/images/DSC_1465.jpg",
     slug: "/behandelingen#voetreflex",
     description: "Stimulatie van reflexzones op de voeten die corresponderen met alle organen en weefsels. Activeert het zelfhelend vermogen en verbetert drainage en doorbloeding.",
-    tags: ["Natuurlijk Herstel", "Reflexzones"]
+    tags: ["BATC Vergoedbaar", "Reflexzones"]
+  },
+  {
+    title: "Littekenbehandeling",
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/Handenbeen.jpg",
+    slug: "/behandelingen#litteken",
+    description: "Specifieke weefsel- en reflextechnieken om stugge, verkleefde littekens te versoepelen, de doorstroming te herstellen en energetische blokkades op te heffen.",
+    tags: ["Herstelweefsel", "Doorstroming"]
   },
   {
     title: "Oorreflexologie",
     duration: "50 min",
     price: "€80,-",
-    image: "/images/oorreflexologie--150x150.jpg",
+    image: "/images/Oorreflexologie.png",
     slug: "/behandelingen#oorreflexologie",
     description: "Gerichte behandelmethode via reflexpunten op de oorschelp. Uitermate krachtig bij acute pijndemping, ontspanning en ondersteuning van het zenuwstelsel.",
     tags: ["Pijndemping", "Zenuwstelsel"]
@@ -50,24 +61,15 @@ const treatments = [
     price: "Vanaf €108,-",
     image: "/images/Bioslimming.jpg",
     slug: "/behandelingen#bioslimming",
-    description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging, lymfedrainage en cellulitisvermindering.",
-    tags: ["100% Natuurlijk", "Detox & Strak"]
-  },
-  {
-    title: "Klassieke Ontspanningsmassage",
-    duration: "50 of 75 min",
-    price: "Vanaf €80,-",
-    image: "/images/massage-betaalde-stockfoto.jpg",
-    slug: "/behandelingen#klassiek",
-    description: "Verzorgende en losmakende massage van strakke spiergroepen. Verbetert de circulatie, voert afvalstoffen af en geeft pure ontspanning voor lichaam en geest.",
-    tags: ["Spierherstel", "Totale Rust"]
+    description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging en cellulitisvermindering. (Niet-vergoed).",
+    tags: ["100% Natuurlijk", "Niet-vergoed"]
   }
 ];
 ---
 
 <Layout 
-  title="Massage Studio Eelde | BATC Complementair Therapeut Alianne Zuidhof"
-  description="Professionele massage en natuurgeneeskunde in Eelde-Paterswolde. Shiatsu, Voetreflexologie, Dorn methode & Bioslimming. Waar kwaliteit en gevoel voorop staan."
+  title="Massage Studio Eelde | BATC Complementair Therapeut Alianne Zuidhof-Hoiting"
+  description="Professionele massage en natuurgeneeskunde in Eelde-Paterswolde. Shiatsu, Voetreflexologie, Dorn methode, Littekenbehandeling & Bioslimming door Alianne Zuidhof-Hoiting."
 >
   <!-- Hero Section -->
   <section class="hero-section">
@@ -75,7 +77,7 @@ const treatments = [
       <div class="hero-content">
         <div class="hero-badge">
           <span class="pulse-dot"></span>
-          <span>BATC Complementair Therapeut &bull; HBO-Conform</span>
+          <span>BATC Complementair Therapeut &bull; HBO-Conform &bull; NAP</span>
         </div>
         
         <h1 class="hero-title">
@@ -83,31 +85,31 @@ const treatments = [
         </h1>
         
         <p class="hero-lead">
-          Welkom bij Massage Studio Eelde. Onder begeleiding van erkend therapeut Alianne Zuidhof-Hoiting vindt u een veilige haven voor diepe ontspanning, energetische balans en gerichte ondersteuning bij chronische of vage klachten.
+          Welkom bij Massage Studio Eelde. Onder deskundige begeleiding van erkend therapeut <strong>Alianne Zuidhof-Hoiting</strong> vindt u een veilige haven voor diepe ontspanning, energetische balans en gerichte ondersteuning bij chronische of vage klachten.
         </p>
 
         <div class="hero-actions">
-          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            <span>Afspraak Maken</span>
+          <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <span>Afspraak Maken via WhatsApp</span>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
           </a>
-          <a href="/behandelingen" class="btn btn-secondary">
-            Bekijk Behandelingen
+          <a href="/contact" class="btn btn-secondary">
+            Contact & E-mail
           </a>
         </div>
 
         <div class="hero-trust-strip">
           <div class="trust-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Vergoeding via aanvullende zorgverzekering</span>
+            <span>Therapeutische consulten deels vergoed via aanvullende zorgverzekering</span>
           </div>
           <div class="trust-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Op basis van de 5 natuurgerichte principes</span>
+            <span>Holistische benadering op basis van de 5 natuurgerichte principes</span>
           </div>
           <div class="trust-item">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-            <span>Gevestigd in pand Movere Fysiotherapie Eelde</span>
+            <span>Gevestigd in voormalig kerkje (met Mài Beauty & Fysiotherapie Noorderstee)</span>
           </div>
         </div>
       </div>
@@ -128,8 +130,8 @@ const treatments = [
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
             </div>
             <div>
-              <strong>Alianne Zuidhof</strong>
-              <span>Gediplomeerd Therapeut</span>
+              <strong>Alianne Zuidhof-Hoiting</strong>
+              <span>BATC Complementair Therapeut</span>
             </div>
           </div>
         </div>
@@ -145,7 +147,7 @@ const treatments = [
           <span class="section-badge">Persoonlijke Zorg & Aandacht</span>
           <h2 class="section-title">Aandacht voor uw gezondheid en natuurlijk herstel</h2>
           <p>
-            Shiatsu, massagetherapie en voetreflextherapie zijn veilige en effectieve behandelvormen bij uiteenlopende gezondheidsproblemen. Met vakkennis, empathie en zorgzame aandacht bent u bij Massage Studio Eelde in vertrouwde handen.
+            Shiatsu, massagetherapie, voetreflextherapie, littekenbehandeling en de Dorn-methode zijn veilige en effectieve behandelvormen bij uiteenlopende gezondheidsproblemen. Met vakkennis, empathie en zorgzame aandacht bent u bij Massage Studio Eelde in vertrouwde handen.
           </p>
           <p>
             Luisteren zonder oordeel en aanraken met respect vormen het fundament van elke ontmoeting. Een consult is een waardevolle aanvulling wanneer u een arts bezoekt, last heeft van chronische of vage klachten, herstellend bent van een zware periode (zoals oncologische trajecten), of simpelweg behoefte heeft aan diepe ontspanning.
@@ -162,7 +164,7 @@ const treatments = [
             <div class="benefit-col">
               <ul class="clean-list">
                 <li>Opheffen van energetische blokkades</li>
-                <li>Meer energie in plaats van geleefd worden</li>
+                <li>Soepel maken van stug littekenweefsel</li>
                 <li>Persoonlijk behandelplan op maat</li>
               </ul>
             </div>
@@ -193,7 +195,7 @@ const treatments = [
         <span class="section-badge">Gespecialiseerd Aanbod</span>
         <h2 class="section-title">Onze Behandelingen</h2>
         <p class="section-subtitle">
-          Ieder consult wordt persoonlijk afgestemd op basis van de 5 natuurgerichte principes, lichamelijk onderzoek en een zorgvuldige anamnese.
+          Ieder consult wordt persoonlijk afgestemd op basis van de 5 natuurgerichte principes, lichamelijk onderzoek en een zorgvuldige intake.
         </p>
       </div>
 
@@ -262,13 +264,16 @@ const treatments = [
 
           <div class="banner-actions">
             <a href="/5-natuurgerichte-principes" class="btn btn-primary">
-              Ontdek de 5 Principes
+              Ontdek de 5 Principes & BATC Richtlijnen
             </a>
           </div>
         </div>
 
         <div class="banner-visual hide-tablet">
-          <img src="/images/DSC_1480.jpg" alt="Therapeutische aanraking en energie" class="banner-img" />
+          <div class="principles-logos-card">
+            <img src="/images/batc-logo.jpg" alt="BATC Complementair Therapeut" class="banner-batc-img" />
+            <img src="/images/Logo knap.png" alt="NAP Koepel" class="banner-nap-img" />
+          </div>
         </div>
       </div>
     </div>
@@ -285,12 +290,15 @@ const treatments = [
           </div>
         </div>
         <div class="bioslimming-text">
-          <span class="section-badge">Wetenschappelijk Bewezen</span>
+          <span class="section-badge">100% Natuurlijk &bull; Niet-Vergoede Zorg</span>
           <h2 class="section-title">BIOSLIMMING Eelde</h2>
           <h3 class="bioslimming-subtitle">Multi-Award winnende behandeling voor een slank & strak figuur</h3>
           <p>
             Droomt u van een strakker lichaam via een methode die écht werkt en tegelijkertijd een ontspannend verwenmoment is? BIOSLIMMING stimuleert de vetverbranding, verbetert de lymfe-afvoer en vermindert cellulitis met 100% natuurlijke actieve werkstoffen.
           </p>
+          <div class="non-reimbursed-alert">
+            <em>Let op: BIOSLIMMING behandelingen zijn cosmetisch van aard en vallen <u>niet</u> onder de vergoedbare zorg van de zorgverzekering.</em>
+          </div>
           <ul class="stats-list">
             <li><strong>93%</strong> gladdere huid</li>
             <li><strong>86%</strong> stevigere huid</li>
@@ -298,21 +306,21 @@ const treatments = [
             <li><strong>74%</strong> zichtbaar slanker & strakker</li>
           </ul>
           <div class="bioslimming-cta">
-            <a href="/tarieven#bioslimming" class="btn btn-primary">Bekijk Bioslimming Tarieven</a>
+            <a href="/tarieven" class="btn btn-primary">Bekijk Bioslimming Tarieven</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Tarieven & Membership Highlight -->
+  <!-- Tarieven Highlight -->
   <section class="section-py bg-surface" id="tarieven">
     <div class="container">
       <div class="section-header text-center">
         <span class="section-badge">Transparante Tarieven</span>
-        <h2 class="section-title">Prijzen & Massage Membership</h2>
+        <h2 class="section-title">Prijzen & Behandelingen</h2>
         <p class="section-subtitle">
-          Helderheid over consulten, memberships en behandelingen. Vrijgesteld van BTW conform art. 11 Wet OB.
+          Helderheid over consulten en behandelingen. Vrijgesteld van BTW conform art. 11 Wet OB.
         </p>
       </div>
 
@@ -334,9 +342,14 @@ const treatments = [
           <span class="section-badge">Centraal in Eelde</span>
           <h2 class="section-title">Praktijklocatie & Bereikbaarheid</h2>
           <p>
-            Massage Studio Eelde is gevestigd aan de <strong>Nieuwe Akkers 18a in Eelde</strong>, in hetzelfde pand als Fysiotherapie Movere. De praktijk beschikt over gratis parkeergelegenheid direct voor de deur en is gelijkvloers toegankelijk.
+            Massage Studio Eelde is gevestigd aan de <strong>Nieuwe Akkers 18a in Eelde</strong> in het voormalig kerkgebouw (waar ook <strong>Schoonheidssalon Mài Beauty</strong> en <strong>Fysiotherapie Noorderstee</strong> gevestigd zijn).
           </p>
           
+          <div class="bicycle-info-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 6H4m8 11.5l3.5-7 4.5 1"/></svg>
+            <p><strong>Komt u met de fiets?</strong> Graag uw fiets buiten het hek plaatsen i.v.m. gemeentelijke afspraken en de veiligheid.</p>
+          </div>
+
           <div class="travel-times">
             <div class="travel-badge">
               <strong>Groningen-Zuid</strong>
@@ -358,7 +371,8 @@ const treatments = [
 
           <div class="location-contact-box">
             <p><strong>Adres:</strong> Nieuwe Akkers 18a, 9765 GC Eelde-Paterswolde</p>
-            <p><strong>Telefoon:</strong> <a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a></p>
+            <p><strong>Praktijktijden:</strong> Ma, Wo en Vr: 09:00 - 18:00 (in uitzonderlijke gevallen overleg mogelijk)</p>
+            <p><strong>WhatsApp / Tel:</strong> <a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a></p>
             <p><strong>E-mail:</strong> <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
           </div>
         </div>
@@ -688,12 +702,26 @@ const treatments = [
     color: var(--text-muted);
   }
 
-  .banner-img {
+  .principles-logos-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
+    padding: 2.5rem;
     box-shadow: var(--shadow-md);
-    width: 100%;
-    height: 380px;
-    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .banner-batc-img {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .banner-nap-img {
+    max-width: 140px;
+    height: auto;
   }
 
   /* BIOSLIMMING */
@@ -742,6 +770,16 @@ const treatments = [
   .bioslimming-subtitle {
     font-size: 1.35rem;
     color: var(--primary-dark);
+    margin-bottom: 1rem;
+  }
+
+  .non-reimbursed-alert {
+    background: #fff1f2;
+    border-left: 3px solid #e11d48;
+    padding: 0.65rem 1rem;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    color: #9f1239;
     margin-bottom: 1.25rem;
   }
 
@@ -783,11 +821,35 @@ const treatments = [
     }
   }
 
+  .bicycle-info-box {
+    background: #fefce8;
+    border: 1px solid #fef08a;
+    border-radius: var(--radius-sm);
+    padding: 0.85rem 1rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .bicycle-info-box svg {
+    color: #ca8a04;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .bicycle-info-box p {
+    font-size: 0.85rem;
+    color: #854d0e;
+    margin: 0;
+    line-height: 1.45;
+  }
+
   .travel-times {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 0.85rem;
-    margin: 2rem 0;
+    margin: 1.5rem 0;
   }
 
   .travel-badge {

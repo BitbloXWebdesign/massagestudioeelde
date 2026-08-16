@@ -13,19 +13,19 @@
     "city": "Eelde-Paterswolde",
     "province": "Drenthe",
     "country": "Nederland",
-    "locationNote": "Gevestigd in het pand van Movere Fysiotherapie"
+    "locationNote": "Gevestigd in voormalig kerkgebouw waar ook schoonheidssalon Mài Beauty & fysiotherapie Noorderstee zijn gevestigd"
   },
   "kvk": "56086113",
-  "iban": "NL63 INGB 0007 3295 64",
-  "bookingUrl": "https://massageeelde.clientomgeving.nl/afspraak-maken",
   "openingHours": [
     { "day": "Maandag", "hours": "09:00 - 18:00" },
     { "day": "Dinsdag", "hours": "Gesloten" },
     { "day": "Woensdag", "hours": "09:00 - 18:00" },
-    { "day": "Donderdag", "hours": "09:00 - 21:00" },
-    { "day": "Vrijdag", "hours": "09:00 - 17:00" },
-    { "day": "Zaterdag & Zondag", "hours": "Gesloten" }
+    { "day": "Donderdag", "hours": "Gesloten" },
+    { "day": "Vrijdag", "hours": "09:00 - 18:00" },
+    { "day": "Zaterdag & Zondag", "hours": "Gesloten*" }
   ],
+  "openingHoursNote": "* In uitzonderlijke gevallen valt er te overleggen.",
+  "bicycleNotice": "Komt u met de fiets? Graag uw fiets buiten het hek plaatsen i.v.m. gemeentelijke afspraken en de veiligheid.",
   "theme": {
     "primary": "#9d467e",
     "primaryDark": "#7a2b60",
@@ -64,8 +64,14 @@
     {
       "name": "BATC Complementair Therapeut",
       "code": "BATC HBO-conform",
-      "logo": "/images/logobatc.jpg",
-      "url": "https://batc.nl/"
+      "logo": "/images/batc-logo.jpg",
+      "url": "https://batc.nu/"
+    },
+    {
+      "name": "NAP Koepel",
+      "code": "Nederlandse Associatie voor Psychotherapie & Natuurgeneeskunde",
+      "logo": "/images/Logo knap.png",
+      "url": "https://nap-koepel.nl/"
     },
     {
       "name": "KIWA gecertificeerd",
@@ -78,12 +84,6 @@
       "code": "Practice Based Evidence",
       "logo": "/images/pbep-aantoonbaar-beter-logo.svg",
       "url": "https://www.aantoonbaar-beter.nl/"
-    },
-    {
-      "name": "Koepel KAB / NAP",
-      "code": "Aansluiting KAB",
-      "logo": "/images/Logo Koepel KAB.png",
-      "url": "https://nap-koepel.nl/"
     },
     {
       "name": "AVG Compliant",

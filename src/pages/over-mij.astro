@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je opnemen over een behandeling.");
 ---
 
 <Layout 
@@ -31,11 +33,11 @@ import siteConfig from '../../public/site-config.json';
             </div>
             <div class="badge-row">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              <span>KIWA & KAB Gecertificeerd</span>
+              <span>NAP & KIWA Gecertificeerd</span>
             </div>
             <div class="badge-row">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
-              <span>Gevestigd in pand Movere Eelde</span>
+              <span>Gevestigd in voormalig kerkgebouw Eelde</span>
             </div>
           </div>
         </div>
@@ -44,10 +46,10 @@ import siteConfig from '../../public/site-config.json';
           <span class="section-badge">Mijn Filosofie</span>
           <h2 class="about-title">&ldquo;Waar kwaliteit en gevoel voorop staan&rdquo;</h2>
           <p>
-            Mijn naam is Alianne Zuidhof-Hoiting. In mijn praktijk in Eelde begeleid ik al vele jaren mensen die op zoek zijn naar diepe fysieke en mentale ontspanning, herstel van chronische klachten of ondersteuning bij het terugvinden van hun energetische balans.
+            Mijn naam is <strong>Alianne Zuidhof-Hoiting</strong>. In mijn praktijk in Eelde begeleid ik al vele jaren mensen die op zoek zijn naar diepe fysieke en mentale ontspanning, herstel van chronische klachten of ondersteuning bij het terugvinden van hun energetische balans.
           </p>
           <p>
-            Wat mij drijft is de overtuiging dat het lichaam beschikt over een formidabel zelfgenezend vermogen, mits het de juiste prikkels, rust en aandacht krijgt. Door écht te luisteren zonder oordeel en aan te raken met respect ontstaat er een veilige omgeving waarin spanning mag worden losgelaten.
+            Wat mij drijft is de overtuiging dat het menselijk lichaam beschikt over een <strong>geweldig</strong> zelfgenezend vermogen, mits het de juiste prikkels, rust en aandacht krijgt. Door écht te luisteren zonder oordeel en aan te raken met respect ontstaat er een veilige omgeving waarin opgebouwde spanning mag worden losgelaten.
           </p>
           
           <h3 class="about-subheading">Specialisaties & Vakgebieden</h3>
@@ -69,27 +71,30 @@ import siteConfig from '../../public/site-config.json';
               <span>Orgaanstimulatie en lymfedrainage via de reflexzones.</span>
             </div>
             <div class="spec-item">
+              <strong>Littekenbehandeling</strong>
+              <span>Zachte bindweefseltechnieken om verklevingen soepel te maken.</span>
+            </div>
+            <div class="spec-item">
               <strong>Oorreflexologie</strong>
               <span>Doelgerichte pijndemping en zenuwstelselregulatie.</span>
             </div>
             <div class="spec-item">
               <strong>BIOSLIMMING</strong>
-              <span>100% natuurlijke body wrap, detox en huidversteviging.</span>
-            </div>
-            <div class="spec-item">
-              <strong>Klassieke Massage</strong>
-              <span>Spierontspanning, circulatiebevordering en stressverlaging.</span>
+              <span>100% natuurlijke body wrap, detox en huidversteviging (niet-vergoed).</span>
             </div>
           </div>
 
-          <h3 class="about-subheading">Kwaliteit & Opleiding</h3>
+          <h3 class="about-subheading">Kwaliteit & Samenwerking</h3>
           <p>
-            Ik voldoe aan de strenge kwaliteitseisen van de BATC en de Plato-eisen voor medische basiskennis op HBO-niveau. Jaarlijks volg ik intensieve bij- en nascholingen om mijn kennis up-to-date te houden. Bovendien werk ik nauw samen met de fysiotherapeuten van Movere in ons pand.
+            Ik voldoe aan de strenge kwaliteitseisen van de BATC, ben aangesloten bij de NAP-koepel en voldoe aan de Plato-eisen voor medische basiskennis op HBO-niveau. Jaarlijks volg ik intensieve bij- en nascholingen om mijn kennis up-to-date te houden.
+          </p>
+          <p>
+            Bovendien werk ik nauw samen met de fysiotherapeuten van <strong>Noorderstee</strong> in ons pand (het voormalig kerkgebouw waar tevens schoonheidssalon <strong>Mài Beauty</strong> gevestigd is).
           </p>
 
           <div class="about-actions">
-            <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              Afspraak Inplannen
+            <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Afspraak via WhatsApp
             </a>
             <a href="/contact" class="btn btn-secondary">
               Neem Contact Op

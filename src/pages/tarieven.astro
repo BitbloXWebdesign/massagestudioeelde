@@ -2,18 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
 import PriceTable from '../components/PriceTable.astro';
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak maken bij Massage Studio Eelde.");
 ---
 
 <Layout 
-  title="Tarieven & Massage Membership | Massage Studio Eelde"
-  description="Overzicht van tarieven voor consulten, Shiatsu, Voetreflextherapie, Dorn methode, Bioslimming en het voordelige Massage Membership in Eelde."
+  title="Tarieven & Prijzen | Massage Studio Eelde"
+  description="Overzicht van tarieven voor consulten, Shiatsu, Voetreflextherapie, Dorn methode, Littekenbehandeling en Bioslimming in Eelde."
 >
   <div class="page-hero">
     <div class="container text-center">
       <span class="section-badge">Tarieven & Vergoedingen</span>
-      <h1 class="page-title">Prijzen & Investeringen in Uw Welzijn</h1>
+      <h1 class="page-title">Prijzen & Behandelingen</h1>
       <p class="page-lead">
-        Duidelijke en transparante tarieven voor consulten, behandelingen, kuren en ons exclusieve Massage Membership.
+        Duidelijke en transparante tarieven voor al onze therapeutische consulten, massages en Bioslimming kuren.
       </p>
     </div>
   </div>
@@ -32,7 +34,10 @@ import PriceTable from '../components/PriceTable.astro';
             <h3 class="notice-title">Belangrijke Informatie over Betaling & Vergoeding</h3>
             <ul class="notice-list">
               <li>
-                <strong>Zorgverzekering:</strong> Individuele curatieve consulten (zoals Shiatsu therapie en reflexologie) komen bij een aanvullende verzekering veelal in aanmerking voor een (gedeeltelijke) vergoeding door uw zorgverzekeraar. Dit valt buiten het verplichte eigen risico.
+                <strong>Zorgverzekering (Vergoeding):</strong> Individuele curatieve consulten (zoals Shiatsu therapie, Voetreflexologie, Littekenbehandeling en Dorn methode) komen bij een aanvullende zorgverzekering veelal in aanmerking voor een (gedeeltelijke) vergoeding. Dit valt <u>buiten</u> het verplichte eigen risico.
+              </li>
+              <li>
+                <strong>BIOSLIMMING (Niet-vergoed):</strong> Let op dat BIOSLIMMING lichaamsbehandelingen cosmetisch/wellness van aard zijn en <u>niet</u> worden vergoed door de zorgverzekeraar.
               </li>
               <li>
                 <strong>Vrijstelling van BTW:</strong> Als erkend BATC Complementair Therapeut zijn onze therapeutische gezondheidsbehandelingen vrijgesteld van BTW conform artikel 11 van de Wet op de Omzetbelasting.
@@ -41,7 +46,7 @@ import PriceTable from '../components/PriceTable.astro';
                 <strong>Betaalmethoden:</strong> U kunt in de praktijk eenvoudig betalen via PIN, contant, iDEAL of bankoverschrijving.
               </li>
               <li>
-                <strong>Annulering:</strong> Afspraken kunnen tot 24 uur van tevoren kosteloos worden geannuleerd. Bij latere annuleringen of no-show wordt het behandeltarief conform de huisregels in rekening gebracht.
+                <strong>Annulering (24-uur):</strong> Afspraken kunnen tot 24 uur van tevoren kosteloos worden geannuleerd of verplaatst. Bij annuleringen korter dan 24 uur van tevoren of no-show wordt het behandeltarief conform de huisregels in rekening gebracht.
               </li>
             </ul>
           </div>
@@ -52,14 +57,14 @@ import PriceTable from '../components/PriceTable.astro';
       <div class="booking-cta-box text-center">
         <h2 class="section-title">Direct een afspraak inplannen?</h2>
         <p class="section-subtitle">
-          Kies eenvoudig een datum en tijdstip die u schikken via ons beveiligde cliëntenportaal.
+          Stuur een bericht via WhatsApp of e-mail, dan stemmen we samen een passend moment af.
         </p>
         <div class="cta-btns">
-          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
-            Online Afspraak Plannen
+          <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Afspraak Maken via WhatsApp
           </a>
           <a href="/contact" class="btn btn-secondary btn-lg">
-            Vraag Stellen via Contact
+            Bericht Sturen via Contact
           </a>
         </div>
       </div>

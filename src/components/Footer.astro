@@ -11,13 +11,13 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
     <div class="container">
       <div class="badges-flex">
         {siteConfig.accreditations.map((badge) => (
-          <div class="badge-item">
+          <a href={badge.url} target="_blank" rel="noopener noreferrer" class="badge-item">
             <img src={badge.logo} alt={badge.name} class="badge-img" />
             <div class="badge-text">
               <span class="badge-title">{badge.name}</span>
               <span class="badge-sub">{badge.code}</span>
             </div>
-          </div>
+          </a>
         ))}
       </div>
     </div>
@@ -32,11 +32,14 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
           <div class="footer-brand">
             <img src="/images/MSE.png" alt="Massage Studio Eelde" class="footer-logo" />
             <p class="brand-desc">
-              Waar kwaliteit en gevoel voorop staan. Erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting biedt therapeutische massages, Shiatsu, Voetreflexologie, Dorn en Bioslimming in Eelde-Paterswolde.
+              Waar kwaliteit en gevoel voorop staan. Erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting biedt therapeutische massages, Shiatsu, Voetreflexologie, Dorn, Littekenbehandeling en Bioslimming in Eelde-Paterswolde.
             </p>
             <div class="footer-meta-info">
               <p><strong>KvK:</strong> {siteConfig.kvk}</p>
-              <p><strong>IBAN:</strong> {siteConfig.iban}</p>
+              <p class="location-highlight">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                Gevestigd in voormalig kerkgebouw (met Mài Beauty & Fysiotherapie Noorderstee)
+              </p>
             </div>
           </div>
         </div>
@@ -49,7 +52,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
             <li><a href="/behandelingen">Behandelingen & Massages</a></li>
             <li><a href="/5-natuurgerichte-principes">5 Natuurgerichte Principes</a></li>
             <li><a href="/tarieven">Tarieven & Prijzen</a></li>
-            <li><a href="/over-mij">Over Alianne Zuidhof</a></li>
+            <li><a href="/over-mij">Over Alianne Zuidhof-Hoiting</a></li>
             <li><a href="/contact">Contact & Locatie</a></li>
             <li><a href="/huisregels">Huisregels</a></li>
             <li><a href="/privacyverklaring">Privacyverklaring (AVG)</a></li>
@@ -62,7 +65,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
           <div class="contact-details">
             <p class="contact-line">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-              <span>{siteConfig.address.street}<br />{siteConfig.address.postalCode} {siteConfig.address.city}<br /><em>({siteConfig.address.locationNote})</em></span>
+              <span>{siteConfig.address.street}<br />{siteConfig.address.postalCode} {siteConfig.address.city}<br /><em>(Gevestigd in voormalig kerkje)</em></span>
             </p>
             <p class="contact-line">
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
@@ -74,12 +77,17 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
             </p>
           </div>
           <div class="opening-hours-block">
-            <h5 class="hours-subheading">Praktijkdagen Alianne:</h5>
+            <h5 class="hours-subheading">Praktijktijden Alianne:</h5>
             <ul class="hours-list">
               {siteConfig.openingHours.map((item) => (
                 <li><span>{item.day}:</span> <span>{item.hours}</span></li>
               ))}
             </ul>
+            <p class="hours-note">{siteConfig.openingHoursNote}</p>
+            <p class="bicycle-note">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm-3 11.5L9 6H4m8 11.5l3.5-7 4.5 1"/></svg>
+              {siteConfig.bicycleNotice}
+            </p>
           </div>
         </div>
 
@@ -87,7 +95,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
         {isMicrositesEnabled && (
           <div class="footer-col">
             <h4 class="footer-heading">Werkgebied & Regio</h4>
-            <p class="region-intro">Centraal gelegen en uitstekend bereikbaar vanuit:</p>
+            <p class="region-intro">Centraal gelegen in Eelde en uitstekend bereikbaar vanuit:</p>
             <ul class="footer-links region-links">
               {siteConfig.regions.map((reg) => (
                 <li>
@@ -104,7 +112,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
       <!-- Wettelijke Beroepsvereniging & Klachten Disclaimer -->
       <div class="footer-disclaimer">
         <p>
-          <strong>Kwaliteit & Vergoedingen:</strong> Alianne Zuidhof-Hoiting is als gekwalificeerd BATC Complementair Therapeut aangesloten bij de beroepsorganisatie BATC en de KAB-koepel. Behandelingen zijn vrijgesteld van BTW (artikel 11 Wet OB). Therapeutische consulten komen bij een aanvullende zorgverzekering veelal in aanmerking voor gedeeltelijke vergoeding. Informeer hiervoor altijd bij uw zorgverzekeraar. In het kader van de Wkkgz is de praktijk aangesloten bij een erkende geschillencommissie via de koepelorganisatie.
+          <strong>Kwaliteit & Vergoedingen:</strong> Alianne Zuidhof-Hoiting is als gekwalificeerd BATC Complementair Therapeut aangesloten bij de beroepsorganisatie BATC en de NAP-koepel. Therapeutische consulten (zoals Shiatsu en Voetreflextherapie) zijn vrijgesteld van BTW (artikel 11 Wet OB) en komen bij een aanvullende zorgverzekering veelal in aanmerking voor gedeeltelijke vergoeding. <em>Let op: BIOSLIMMING behandelingen vallen niet onder vergoedbare zorg.</em> Informeer hiervoor altijd bij uw zorgverzekeraar. In het kader van de Wkkgz is de praktijk aangesloten bij een erkende geschillencommissie via de koepelorganisatie.
         </p>
       </div>
     </div>
@@ -121,7 +129,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
         <span>&bull;</span>
         <a href="/huisregels">Huisregels</a>
         <span>&bull;</span>
-        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">MijnDiad Portaal</a>
+        <a href="/contact">Contact</a>
       </p>
     </div>
   </div>
@@ -157,6 +165,13 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
     padding: 0.5rem 1rem;
     border-radius: var(--radius-sm);
     border: 1px solid rgba(255, 255, 255, 0.08);
+    text-decoration: none;
+    transition: all 0.2s ease;
+  }
+
+  .badge-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
   }
 
   .badge-img {
@@ -233,6 +248,15 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
     font-size: 0.825rem;
     color: #9d8e98;
     margin-bottom: 0.25rem;
+  }
+
+  .location-highlight {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--secondary) !important;
+    font-size: 0.8rem !important;
+    margin-top: 0.5rem !important;
   }
 
   .footer-heading {
@@ -331,6 +355,29 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
     display: flex;
     justify-content: space-between;
     color: #b8aab3;
+  }
+
+  .hours-note {
+    font-size: 0.75rem;
+    color: #9d8e98;
+    font-style: italic;
+    margin-top: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .bicycle-note {
+    font-size: 0.775rem;
+    color: #dec148;
+    margin: 0.5rem 0 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    line-height: 1.4;
+  }
+
+  .bicycle-note svg {
+    flex-shrink: 0;
+    margin-top: 2px;
   }
 
   .region-intro {

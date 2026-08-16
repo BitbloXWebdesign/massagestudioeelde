@@ -1,6 +1,8 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je opnemen over een afspraak.");
 ---
 
 <Layout 
@@ -27,22 +29,25 @@ import siteConfig from '../../public/site-config.json';
 
         <ul class="rules-list">
           <li>
-            <strong>Ethiek & Hygiëne:</strong> Ethiek en hygiëne staan binnen Massage Studio Eelde hoog aangeschreven. Wij verwachten van onze cliënten dat zij hier eveneens zorg voor dragen. In verband met de hygiëne worden alle badlakens en textiel na iedere behandeling grondig gewassen en gedesinfecteerd.
+            <strong>Ethiek & Hygiëne:</strong> Ethiek en hygiëne staan binnen Massage Studio Eelde hoog aangeschreven. Wij verwachten van onze cliënten dat zij hier eveneens zorg voor dragen. In verband met de hygiëne worden alle badlakens en textiel na iedere behandeling grondig gereinigd.
           </li>
           <li>
             <strong>Privacy & Medische Gegevens:</strong> Al uw persoonlijke en medische gegevens worden strikt vertrouwelijk behandeld en nooit zonder uw uitdrukkelijke toestemming aan derden verstrekt conform de AVG 2023 wetgeving.
           </li>
           <li>
-            <strong>Intake & Gezondheid:</strong> Voorafgaand aan de eerste behandeling nemen we een intakeformulier door met betrekking tot uw medische situatie en voorgeschiedenis. Het is uw eigen verantwoordelijkheid om relevante aandoeningen, blessures, zwangerschap of medicijngebruik te melden.
+            <strong>Intake & Gezondheid:</strong> Voorafgaand aan de eerste behandeling nemen we een intake door met betrekking tot uw medische situatie en voorgeschiedenis. Het is uw eigen verantwoordelijkheid om relevante aandoeningen, blessures, zwangerschap of medicijngebruik te melden.
           </li>
           <li>
-            <strong>Doorverwijzing naar Arts of Fysiotherapeut:</strong> Bij twijfel over een bestaande aandoening of blessure behouden wij ons het recht voor om de behandeling te staken of aan te passen en u door te verwijzen naar uw behandelend arts of de fysiotherapeut in ons pand (Movere).
+            <strong>Doorverwijzing naar Arts of Fysiotherapeut:</strong> Bij twijfel over een bestaande aandoening of blessure behouden wij ons het recht voor om de behandeling aan te passen of te staken en u door te verwijzen naar uw behandelend arts of de fysiotherapeuten van <strong>Noorderstee</strong> in ons pand.
           </li>
           <li>
-            <strong>Annuleringsbeleid (24-uurs regeling):</strong> Bent u verhinderd en wilt u uw afspraak afzeggen of verzetten? Laat dit dan minimaal 24 uur van tevoren weten. Er worden dan geen kosten in rekening gebracht. Bij afspraken die niet worden nagekomen of korter dan 24 uur van tevoren worden afgezegd, moet helaas het volledige behandeltarief in rekening worden gebracht.
+            <strong>Annuleringsbeleid (24-uurs regeling):</strong> Bent u verhinderd en wilt u uw afspraak afzeggen of verzetten? Laat dit dan minimaal 24 uur van tevoren weten (via WhatsApp of e-mail). Er worden dan geen kosten in rekening gebracht. Bij afspraken die niet worden nagekomen of korter dan 24 uur van tevoren worden afgezegd, moet helaas het volledige behandeltarief in rekening worden gebracht.
           </li>
           <li>
-            <strong>Geen Erotische Massages:</strong> Massage Studio Eelde is een therapeutische gezondheidspraktijk. Voor erotische massages kunt u pertinent <em>niet</em> bij ons terecht.
+            <strong>Geen Erotische Massages:</strong> Massage Studio Eelde is een erkende therapeutische gezondheidspraktijk. Voor erotische massages kunt u pertinent <em>niet</em> bij ons terecht.
+          </li>
+          <li>
+            <strong>Fietsen & Parkeren:</strong> Parkeren voor de auto is gratis voor de deur. Komt u met de fiets? Graag uw fiets buiten het hek plaatsen i.v.m. gemeentelijke afspraken en de veiligheid.
           </li>
           <li>
             <strong>Rust in de Praktijk:</strong> In verband met de beoogde diepe ontspanning vragen wij u vriendelijk uw mobiele telefoon uit te schakelen of op stil te zetten tijdens de behandeling.
@@ -56,8 +61,8 @@ import siteConfig from '../../public/site-config.json';
         </ul>
 
         <div class="rules-action text-center">
-          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-            Afspraak Maken in Vertrouwen
+          <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Afspraak Maken via WhatsApp
           </a>
         </div>
       </div>

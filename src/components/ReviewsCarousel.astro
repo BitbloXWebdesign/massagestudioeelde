@@ -9,7 +9,7 @@ const reviews = [
     location: "Eelde",
     treatment: "Shiatsu & Massagetherapie",
     rating: 5,
-    text: "Alianne heeft gouden handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!",
+    text: "Alianne heeft geweldige handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!",
     date: "1 maand geleden"
   },
   {
@@ -37,6 +37,8 @@ const reviews = [
     date: "Recent"
   }
 ];
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak maken bij Massage Studio Eelde.");
 ---
 
 {isEnabled && (
@@ -81,8 +83,8 @@ const reviews = [
       </div>
 
       <div class="reviews-cta text-center">
-        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-          Ervaar Zelf de Rust &ndash; Boek een Consult
+        <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Ervaar Zelf de Rust &ndash; Neem Contact Op
         </a>
       </div>
     </div>

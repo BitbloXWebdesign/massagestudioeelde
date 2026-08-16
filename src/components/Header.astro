@@ -15,6 +15,8 @@ const navItems = [
   { name: 'Over Mij', href: '/over-mij' },
   { name: 'Contact', href: '/contact' },
 ];
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak maken bij Massage Studio Eelde.");
 ---
 
 <header class="site-header">
@@ -24,11 +26,11 @@ const navItems = [
       <div class="topbar-info">
         <span class="topbar-item">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          {siteConfig.address.street}, {siteConfig.address.city}
+          {siteConfig.address.street}, {siteConfig.address.city} (Voormalig kerkje)
         </span>
         <span class="topbar-item hide-mobile">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-          BATC HBO-conform gecertificeerd
+          BATC HBO-conform &bull; NAP aangesloten
         </span>
       </div>
       <div class="topbar-actions">
@@ -65,8 +67,8 @@ const navItems = [
 
       <!-- Action Button -->
       <div class="header-cta hide-mobile">
-        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
-          Afspraak Maken
+        <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Afspraak Maken (WhatsApp / Mail)
         </a>
       </div>
 
@@ -97,8 +99,11 @@ const navItems = [
         </ul>
       </nav>
       <div class="mobile-drawer-footer">
-        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full">
-          Afspraak Maken
+        <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full">
+          Afspraak via WhatsApp
+        </a>
+        <a href="/contact" class="btn btn-secondary w-full">
+          Contact & Mail
         </a>
         <div class="mobile-contact-block">
           <p><strong>Direct contact:</strong></p>
@@ -288,7 +293,7 @@ const navItems = [
   .mobile-drawer-footer {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 0.75rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border-color);
   }
@@ -302,6 +307,7 @@ const navItems = [
     display: flex;
     flex-direction: column;
     gap: 0.25rem;
+    margin-top: 0.5rem;
   }
 
   @media (max-width: 960px) {

@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import siteConfig from '../../public/site-config.json';
 
+const waMessage = encodeURIComponent("Hallo Alianne, ik heb een vraag over een natuurgeneeskundig consult op basis van de 5 principes.");
+
 const principles = [
   {
     number: "1",
@@ -25,7 +27,7 @@ const principles = [
     tagline: "Doeltreffende afvoer van opgestapelde afvalstoffen",
     content: `In het dagelijks leven krijgt ons lichaam continu te maken met belasting door afvalstoffen. Denk aan externe factoren zoals luchtverontreiniging, pesticiden of toevoegingen in voeding, maar ook interne afvalstoffen door stress, vertraagde bloedcirculatie of een traag lymfesysteem.
     
-    Onder gunstige omstandigheden scheidt het lichaam toxines uit via lever, nieren, darmen, huid en longen. Wanneer dit stagneert, raken weefsels overbelast. Door therapeutische drainage (zoals reflexologie, lymfemassage en BIOSLIMMING) stimuleren we de natuurlijke uitscheidingsorganen.`
+    Onder gunstige omstandigheden scheidt het lichaam toxines uit via lever, nieren, darmen, huid en longen. Wanneer dit stagneert, raken weefsels overbelast. Door therapeutische drainage (zoals reflexologie en lymfemassage) stimuleren we de natuurlijke uitscheidingsorganen.`
   },
   {
     number: "4",
@@ -48,14 +50,14 @@ const principles = [
 
 <Layout 
   title="De 5 Natuurgerichte Principes | Massage Studio Eelde"
-  description="Uitleg over de 5 natuurgerichte principes van de BATC: Energie, Prikkeloverdracht, Drainage, Voeding en Geestelijk Welzijn bij Massage Studio Eelde."
+  description="Uitleg over de 5 natuurgerichte principes van de BATC: Energie, Prikkeloverdracht, Drainage, Voeding en Geestelijk Welzijn door Alianne Zuidhof-Hoiting."
 >
   <div class="page-hero">
     <div class="container text-center">
-      <span class="section-badge">Holistische Filosofie</span>
+      <span class="section-badge">Holistische Filosofie &bull; BATC &bull; NAP</span>
       <h1 class="page-title">De 5 Natuurgerichte Principes</h1>
       <p class="page-lead">
-        Het fundament van de BATC complementaire natuurgeneeskunde. Een integrale benadering van de mens op fysiek, emotioneel, mentaal en energetisch niveau.
+        Het fundament van de BATC complementaire natuurgeneeskunde. Een integrale benadering van de mens op fysiek, emotioneel, mentaal en energetisch niveau door Alianne Zuidhof-Hoiting.
       </p>
     </div>
   </div>
@@ -87,7 +89,7 @@ const principles = [
     <div class="container">
       <div class="quality-box">
         <div class="quality-content">
-          <span class="section-badge">BATC Beroepsorganisatie</span>
+          <span class="section-badge">BATC Beroepsorganisatie &bull; NAP Koepel</span>
           <h2 class="section-title">Wat mag u van een BATC Therapeut verwachten?</h2>
           <p>
             Een BATC Complementair Therapeut helpt u bij het herstellen en behouden van uw natuurlijke gezondheid. Daarbij wordt altijd naar de gehele mens gekeken, met de 5 principes als leidraad.
@@ -96,12 +98,12 @@ const principles = [
             <li><strong>Minimaal HBO-niveau:</strong> Medische en psychosociale basiskennis conform de strenge Plato-eisen.</li>
             <li><strong>Jaarlijkse bijscholing:</strong> Verplichte nascholing om de hoogste kwaliteit en vakkennis te garanderen.</li>
             <li><strong>Erkende accreditaties:</strong> Opleidingen getoetst door instanties zoals KTNO, SNRO, SHO en CPION.</li>
-            <li><strong>Wkkgz en klachtenregeling:</strong> Zorgvuldige aansluiting bij de koepelorganisatie en geschillencommissie.</li>
+            <li><strong>Wkkgz en klachtenregeling:</strong> Zorgvuldige aansluiting bij de NAP-koepelorganisatie en geschillencommissie.</li>
           </ul>
           
           <div class="quality-actions">
-            <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              Maak een Afspraak
+            <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Afspraak via WhatsApp
             </a>
             <a href="/tarieven" class="btn btn-secondary">
               Bekijk Vergoedingen & Tarieven
@@ -110,9 +112,9 @@ const principles = [
         </div>
 
         <div class="quality-logos">
-          <img src="/images/msebatc.png" alt="BATC Complementair Therapeut" class="batc-badge" />
+          <img src="/images/batc-logo.jpg" alt="BATC Complementair Therapeut Logo" class="batc-badge" />
+          <img src="/images/Logo knap.png" alt="NAP Koepel Logo" class="sub-badge" />
           <img src="/images/kiwa.png" alt="KIWA Keurmerk" class="sub-badge" />
-          <img src="/images/Logo Koepel KAB.png" alt="KAB Koepel" class="sub-badge" />
         </div>
       </div>
     </div>
@@ -270,16 +272,17 @@ const principles = [
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1.75rem;
   }
 
   .batc-badge {
     max-width: 220px;
     height: auto;
+    border-radius: 6px;
   }
 
   .sub-badge {
-    height: 48px;
+    height: 52px;
     width: auto;
     object-fit: contain;
   }

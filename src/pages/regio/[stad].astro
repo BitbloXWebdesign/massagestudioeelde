@@ -15,6 +15,8 @@ export function getStaticPaths() {
 
 const { region } = Astro.props;
 
+const waMessage = encodeURIComponent(`Hallo Alianne, ik woon in ${region.name} en wil graag een afspraak maken bij Massage Studio Eelde.`);
+
 const regionTreatments = [
   {
     title: `Shiatsu Therapie & Massage voor inwoners van ${region.name}`,
@@ -22,7 +24,7 @@ const regionTreatments = [
     price: "Vanaf €80,-",
     image: "/images/DSC_1450.jpg",
     slug: "/behandelingen#shiatsu",
-    description: `Japanse drukpunttherapie en meridiaanbehandeling voor diepe ontspanning en verlichting van spierspanning, hoofdpijn en stress.`,
+    description: `Japanse drukpunttherapie en meridiaanbehandeling voor diepe ontspanning en verlichting van spierspanning, hoofdpijn en stress (BATC vergoedbaar).`,
     tags: ["BATC Vergoedbaar", "Meridianen"]
   },
   {
@@ -31,8 +33,8 @@ const regionTreatments = [
     price: "€80,-",
     image: "/images/DSC_1502.1.jpg",
     slug: "/behandelingen#dorn",
-    description: `Zachte correctie van beenlengteverschil, bekkenscheefstand en rugklachten zonder kraken.`,
-    tags: ["Zacht & Veilig", "Houdingsherstel"]
+    description: `Zachte correctie van beenlengteverschil, bekkenscheefstand en rugklachten in dynamische beweging zonder te kraken.`,
+    tags: ["BATC Vergoedbaar", "Zacht & Veilig"]
   },
   {
     title: `Voetreflexologie & Lymfedrainage ${region.name}`,
@@ -41,7 +43,25 @@ const regionTreatments = [
     image: "/images/DSC_1465.jpg",
     slug: "/behandelingen#voetreflex",
     description: `Reflexzonebehandeling op de voeten ter stimulatie van orgaanfuncties, spijsvertering en afvoer van afvalstoffen.`,
-    tags: ["Detox", "Reflexzones"]
+    tags: ["BATC Vergoedbaar", "Reflexzones"]
+  },
+  {
+    title: `Littekenbehandeling nabij ${region.name}`,
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/Handenbeen.jpg",
+    slug: "/behandelingen#litteken",
+    description: `Zachte bindweefseltechnieken om verkleefde, pijnlijke littekens soepel te maken en de doorbloeding te herstellen.`,
+    tags: ["BATC Vergoedbaar", "Herstelweefsel"]
+  },
+  {
+    title: `Oorreflexologie regio ${region.name}`,
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/Oorreflexologie.png",
+    slug: "/behandelingen#oorreflexologie",
+    description: `Gerichte acupressuur op de oorschelp voor acute pijndemping, zenuwstelselregulatie en diepe ontspanning.`,
+    tags: ["Pijndemping", "Zenuwstelsel"]
   },
   {
     title: `BIOSLIMMING Body Wrap Eelde (nabij ${region.name})`,
@@ -49,15 +69,15 @@ const regionTreatments = [
     price: "Vanaf €108,-",
     image: "/images/Bioslimming.jpg",
     slug: "/behandelingen#bioslimming",
-    description: `100% natuurlijke Multi-Award winnende body wrap voor vetverbranding, huidversteviging en cellulitisvermindering.`,
-    tags: ["100% Natuurlijk", "Bewezen Effectief"]
+    description: `100% natuurlijke Multi-Award winnende body wrap voor vetverbranding, huidversteviging en cellulitisvermindering. (Let op: niet-vergoed).`,
+    tags: ["100% Natuurlijk", "Niet-vergoed"]
   }
 ];
 ---
 
 <Layout 
   title={`Massage ${region.name} | Shiatsu, Dorn & Reflextherapie | Massage Studio Eelde`}
-  description={`Zoekt u een professionele massagetherapeut in ${region.name}? Massage Studio Eelde ligt op slechts ${region.distance}. Erkend BATC therapeut Alianne Zuidhof.`}
+  description={`Zoekt u een professionele massagetherapeut nabij ${region.name}? Massage Studio Eelde ligt op slechts ${region.distance}. Erkend BATC therapeut Alianne Zuidhof-Hoiting.`}
 >
   <!-- Hero Section -->
   <div class="page-hero">
@@ -78,10 +98,10 @@ const regionTreatments = [
           <span class="section-badge">Dichtbij & Persoonlijk</span>
           <h2 class="section-title">Persoonlijke Massagetherapie Nabij {region.name}</h2>
           <p>
-            Voor inwoners van <strong>{region.name}</strong> is Massage Studio Eelde dé aangewezen praktijk voor diepe ontspanning en gerichte klachtenbehandeling. Of u nu kampt met spanning in nek en schouders, rugklachten, vermoeidheid of simpelweg verlangt naar een oase van rust: bij erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting bent u in deskundige handen.
+            Voor inwoners van <strong>{region.name}</strong> is Massage Studio Eelde dé aangewezen praktijk voor diepe ontspanning en gerichte klachtenbehandeling. Of u nu kampt met spanning in nek en schouders, rugklachten, vermoeidheid of simpelweg verlangt naar een oase van rust: bij erkend BATC Complementair Therapeut <strong>Alianne Zuidhof-Hoiting</strong> bent u in deskundige handen.
           </p>
           <p>
-            Dankzij de centrale ligging aan de Nieuwe Akkers 18a in Eelde (in hetzelfde pand als Fysiotherapie Movere) is de praktijk vanuit {region.name} snel enFile link file:///file-preview/c:/Users/hzuid/OneDrive%20-%20BitbloX/BitbloX/WebDesign/Sites/MSE/MassageStudioEelde/src/pages/regio/%5Bstad%5D.astro file-preview eenvoudig bereikbaar via de doorgaande wegen of de A28.
+            Dankzij de centrale ligging aan de Nieuwe Akkers 18a in Eelde (in het voormalig kerkgebouw waar tevens <strong>Schoonheidssalon Mài Beauty</strong> en <strong>Fysiotherapie Noorderstee</strong> gevestigd zijn) is de praktijk vanuit {region.name} snel en eenvoudig bereikbaar.
           </p>
 
           <div class="region-perks">
@@ -91,17 +111,17 @@ const regionTreatments = [
             </div>
             <div class="perk-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span><strong>Vergoeding:</strong> Consulten veelal vergoed via aanvullende verzekering</span>
+              <span><strong>Vergoeding:</strong> Therapeutische consulten deels vergoed via aanvullende verzekering</span>
             </div>
             <div class="perk-item">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
-              <span><strong>Parkeren:</strong> Gratis en gemakkelijk parkeren voor de deur</span>
+              <span><strong>Parkeren:</strong> Gratis en gemakkelijk parkeren voor de deur (fietsen graag buiten het hek)</span>
             </div>
           </div>
 
           <div class="region-cta-btns">
-            <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
-              Afspraak Inboeken
+            <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Afspraak via WhatsApp
             </a>
             <a href="/contact" class="btn btn-secondary">
               Route & Contact
@@ -111,7 +131,7 @@ const regionTreatments = [
 
         <div class="region-visual">
           <div class="blob-frame">
-            <img src="/images/Alianne.webp" alt={`Alianne Zuidhof - Massage Studio Eelde voor cliënten uit ${region.name}`} />
+            <img src="/images/Alianne.webp" alt={`Alianne Zuidhof-Hoiting - Massage Studio Eelde voor cliënten uit ${region.name}`} />
           </div>
         </div>
       </div>
@@ -129,7 +149,7 @@ const regionTreatments = [
         </p>
       </div>
 
-      <div class="grid-2">
+      <div class="grid-3">
         {regionTreatments.map((t) => (
           <TreatmentCard {...t} />
         ))}
