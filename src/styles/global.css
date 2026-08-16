@@ -59,29 +59,28 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Unna', Georgia, serif;
   color: var(--text-color);
   line-height: 1.25;
-  font-weight: 400;
+  font-weight: 700;
 }
 
 h1 {
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-size: clamp(2.25rem, 4.5vw, 3.5rem);
   letter-spacing: -0.01em;
 }
 
 h2 {
-  font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+  font-size: clamp(1.85rem, 3.5vw, 2.6rem);
 }
 
 h3 {
-  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+  font-size: clamp(1.4rem, 2.5vw, 1.85rem);
 }
 
 h4 {
-  font-size: 1.35rem;
+  font-size: 1.25rem;
 }
 
 p {
-  margin-bottom: 1.25rem;
-  color: var(--text-muted);
+  margin-bottom: 1rem;
 }
 
 p:last-child {
@@ -91,7 +90,7 @@ p:last-child {
 a {
   color: var(--primary);
   text-decoration: none;
-  transition: all 0.25s ease;
+  transition: all 0.2s ease;
 }
 
 a:hover {
@@ -104,7 +103,7 @@ img {
   display: block;
 }
 
-/* Layout Utilities */
+/* Container */
 .container {
   width: 100%;
   max-width: var(--container-max);
@@ -114,6 +113,7 @@ img {
   padding-right: 1.5rem;
 }
 
+/* Sections */
 .section-py {
   padding-top: 5rem;
   padding-bottom: 5rem;
@@ -130,23 +130,31 @@ img {
   background-color: var(--surface);
 }
 
+.bg-surface-alt {
+  background-color: var(--surface-alt);
+}
+
 .bg-subtle {
   background-color: var(--primary-light);
 }
 
-.text-center {
-  text-align: center;
+.bg-white {
+  background-color: #ffffff;
 }
 
-/* Section Headers */
+/* Section Header */
 .section-header {
   margin-bottom: 3.5rem;
 }
 
+.section-header.text-center {
+  text-align: center;
+}
+
 .section-badge {
   display: inline-block;
-  padding: 0.35rem 1.1rem;
-  background-color: var(--primary-subtle);
+  padding: 0.35rem 1rem;
+  background-color: var(--primary-light);
   color: var(--primary-dark);
   font-size: 0.825rem;
   font-weight: 600;
@@ -318,7 +326,9 @@ img {
   text-decoration: underline;
 }
 
-/* Accessibility (A11y) States */
+/* =========================================================================
+   Accessibility (A11y) States - WCAG AAA Compliant
+   ========================================================================= */
 html.a11y-text-large {
   font-size: 115%;
 }
@@ -327,22 +337,136 @@ html.a11y-text-larger {
   font-size: 130%;
 }
 
-html.a11y-high-contrast {
-  --bg-color: #000000 !important;
-  --surface: #121212 !important;
-  --surface-card: #1e1e1e !important;
-  --text-color: #ffffff !important;
-  --text-muted: #e0e0e0 !important;
-  --border-color: #ffff00 !important;
-  --primary: #ffff00 !important;
-  --primary-hover: #ffd700 !important;
+/* 1. Hoog Contrast Mode (Pure Black & Bright Yellow/White) */
+html.a11y-high-contrast,
+html.a11y-high-contrast body,
+html.a11y-high-contrast main,
+html.a11y-high-contrast section,
+html.a11y-high-contrast header,
+html.a11y-high-contrast footer,
+html.a11y-high-contrast div:not(.a11y-container):not(.a11y-menu),
+html.a11y-high-contrast article,
+html.a11y-high-contrast aside,
+html.a11y-high-contrast .site-header,
+html.a11y-high-contrast .site-footer,
+html.a11y-high-contrast .header-topbar,
+html.a11y-high-contrast .header-main,
+html.a11y-high-contrast .hero-section,
+html.a11y-high-contrast .treatment-card,
+html.a11y-high-contrast .price-card,
+html.a11y-high-contrast .ai-summary-box,
+html.a11y-high-contrast .notice-card,
+html.a11y-high-contrast .quality-box,
+html.a11y-high-contrast .info-card,
+html.a11y-high-contrast .rules-card,
+html.a11y-high-contrast .review-card,
+html.a11y-high-contrast .faq-item,
+html.a11y-high-contrast .principle-card,
+html.a11y-high-contrast .treatment-detail-card,
+html.a11y-high-contrast .bg-surface,
+html.a11y-high-contrast .bg-surface-alt,
+html.a11y-high-contrast .bg-subtle,
+html.a11y-high-contrast .card-body,
+html.a11y-high-contrast .card-media,
+html.a11y-high-contrast .detail-body,
+html.a11y-high-contrast .detail-media {
+  background-color: #000000 !important;
+  background-image: none !important;
+  color: #ffffff !important;
+  border-color: #ffff00 !important;
 }
 
-html.a11y-high-contrast .btn-primary {
+html.a11y-high-contrast h1,
+html.a11y-high-contrast h2,
+html.a11y-high-contrast h3,
+html.a11y-high-contrast h4,
+html.a11y-high-contrast h5,
+html.a11y-high-contrast h6,
+html.a11y-high-contrast .section-title,
+html.a11y-high-contrast .page-title,
+html.a11y-high-contrast .hero-title,
+html.a11y-high-contrast .card-title,
+html.a11y-high-contrast .detail-title,
+html.a11y-high-contrast .cost,
+html.a11y-high-contrast strong {
+  color: #ffff00 !important;
+}
+
+html.a11y-high-contrast p,
+html.a11y-high-contrast span:not(.btn):not(.bitblox-link),
+html.a11y-high-contrast li,
+html.a11y-high-contrast label,
+html.a11y-high-contrast .section-subtitle,
+html.a11y-high-contrast .hero-lead,
+html.a11y-high-contrast .page-lead,
+html.a11y-high-contrast .card-desc,
+html.a11y-high-contrast .detail-text,
+html.a11y-high-contrast .faq-answer {
+  color: #ffffff !important;
+}
+
+html.a11y-high-contrast a:not(.btn) {
+  color: #ffff00 !important;
+  text-decoration: underline !important;
+}
+
+html.a11y-high-contrast .btn,
+html.a11y-high-contrast .btn-primary,
+html.a11y-high-contrast .btn-secondary,
+html.a11y-high-contrast .btn-white {
   background-color: #ffff00 !important;
   color: #000000 !important;
+  border: 2px solid #ffffff !important;
+  font-weight: 800 !important;
+  text-decoration: none !important;
 }
 
-html.a11y-dyslexic {
-  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+html.a11y-high-contrast .btn:hover {
+  background-color: #ffffff !important;
+  color: #000000 !important;
+  border-color: #ffff00 !important;
+}
+
+html.a11y-high-contrast .section-badge,
+html.a11y-high-contrast .card-pill,
+html.a11y-high-contrast .summary-badge,
+html.a11y-high-contrast .duration-tag,
+html.a11y-high-contrast .custom-tag,
+html.a11y-high-contrast .detail-duration,
+html.a11y-high-contrast .detail-reimbursement {
+  background-color: #000000 !important;
+  color: #ffff00 !important;
+  border: 1.5px solid #ffff00 !important;
+}
+
+html.a11y-high-contrast input,
+html.a11y-high-contrast textarea,
+html.a11y-high-contrast select {
+  background-color: #1a1a1a !important;
+  color: #ffffff !important;
+  border: 2px solid #ffff00 !important;
+}
+
+/* 2. Dyslexie-vriendelijk Lettertype (conform wetenschappelijke richtlijnen: schreefloos, ruim gezet) */
+html.a11y-dyslexic,
+html.a11y-dyslexic *,
+html.a11y-dyslexic body,
+html.a11y-dyslexic h1,
+html.a11y-dyslexic h2,
+html.a11y-dyslexic h3,
+html.a11y-dyslexic h4,
+html.a11y-dyslexic h5,
+html.a11y-dyslexic h6,
+html.a11y-dyslexic p,
+html.a11y-dyslexic span,
+html.a11y-dyslexic li,
+html.a11y-dyslexic a,
+html.a11y-dyslexic button,
+html.a11y-dyslexic input,
+html.a11y-dyslexic textarea {
+  font-family: Verdana, Tahoma, 'Open Sans', Calibri, sans-serif !important;
+  font-style: normal !important;
+  letter-spacing: 0.05em !important;
+  word-spacing: 0.1em !important;
+  line-height: 1.8 !important;
 }
