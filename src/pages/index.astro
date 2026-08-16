@@ -17,7 +17,7 @@ const treatments = [
     image: "/images/DSC_1450.jpg",
     slug: "/behandelingen#shiatsu",
     description: "Japanse drukpunttherapie langs de energiebanen (meridianen). Brengt diepe rust, heft blokkades op en herstelt de balans bij stress, hoofdpijn en fysieke klachten.",
-    tags: ["BATC Vergoedbaar", "Meridianen"]
+    tags: ["Deels Vergoedbaar", "Meridianen"]
   },
   {
     title: "Dorn-Methode",
@@ -26,7 +26,7 @@ const treatments = [
     image: "/images/DSC_1502.1.jpg",
     slug: "/behandelingen#dorn",
     description: "Een milde en zachte wervelkolom- en gewrichtscorrectie in dynamische beweging. Zeer effectief bij bekkenscheefstand, beenlengteverschil en rug-/nekpijn.",
-    tags: ["BATC Vergoedbaar", "Wervelkolom"]
+    tags: ["Deels Vergoedbaar", "Wervelkolom"]
   },
   {
     title: "Voetreflextherapie",
@@ -35,7 +35,7 @@ const treatments = [
     image: "/images/DSC_1465.jpg",
     slug: "/behandelingen#voetreflex",
     description: "Stimulatie van reflexzones op de voeten die corresponderen met alle organen en weefsels. Activeert het zelfhelend vermogen en verbetert drainage en doorbloeding.",
-    tags: ["BATC Vergoedbaar", "Reflexzones"]
+    tags: ["Deels Vergoedbaar", "Reflexzones"]
   },
   {
     title: "Littekenbehandeling",
@@ -44,7 +44,7 @@ const treatments = [
     image: "/images/Handenbeen.jpg",
     slug: "/behandelingen#litteken",
     description: "Specifieke weefsel- en reflextechnieken om stugge, verkleefde littekens te versoepelen, de doorstroming te herstellen en energetische blokkades op te heffen.",
-    tags: ["Herstelweefsel", "Doorstroming"]
+    tags: ["Deels Vergoedbaar", "Herstelweefsel"]
   },
   {
     title: "Oorreflexologie",
@@ -53,7 +53,25 @@ const treatments = [
     image: "/images/Oorreflexologie.png",
     slug: "/behandelingen#oorreflexologie",
     description: "Gerichte behandelmethode via reflexpunten op de oorschelp. Uitermate krachtig bij acute pijndemping, ontspanning en ondersteuning van het zenuwstelsel.",
-    tags: ["Pijndemping", "Zenuwstelsel"]
+    tags: ["Deels Vergoedbaar", "Zenuwstelsel"]
+  },
+  {
+    title: "Zwangerschapsmassage",
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/belloost.webp",
+    slug: "/behandelingen#zwangerschap",
+    description: "Veilige, koesterende ontspanning en doelgerichte klachtenverlichting (zoals bekken- en rugpijn) voor aanstaande moeders.",
+    tags: ["Klachtgericht vergoedbaar", "Zacht & Veilig"]
+  },
+  {
+    title: "Klassieke Ontspanningsmassage",
+    duration: "50 of 75 min",
+    price: "Vanaf €80,-",
+    image: "/images/massage-betaalde-stockfoto.jpg",
+    slug: "/behandelingen#klassiek",
+    description: "Verzorgende en losmakende massage van strakke spiergroepen. Verbetert de circulatie, voert afvalstoffen af en geeft pure ontspanning voor lichaam en geest.",
+    tags: ["Niet-vergoed (Wellness)", "Totale Rust"]
   },
   {
     title: "BIOSLIMMING Eelde",
@@ -61,15 +79,15 @@ const treatments = [
     price: "Vanaf €108,-",
     image: "/images/Bioslimming.jpg",
     slug: "/behandelingen#bioslimming",
-    description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging en cellulitisvermindering. (Niet-vergoed).",
-    tags: ["100% Natuurlijk", "Niet-vergoed"]
+    description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging en cellulitisvermindering.",
+    tags: ["Niet-vergoed (Cosmetisch)", "100% Natuurlijk"]
   }
 ];
 ---
 
 <Layout 
   title="Massage Studio Eelde | BATC Complementair Therapeut Alianne Zuidhof-Hoiting"
-  description="Professionele massage en natuurgeneeskunde in Eelde-Paterswolde. Shiatsu, Voetreflexologie, Dorn methode, Littekenbehandeling & Bioslimming door Alianne Zuidhof-Hoiting."
+  description="Professionele massage en natuurgeneeskunde in Eelde-Paterswolde. Shiatsu, Voetreflexologie, Dorn methode, Littekenbehandeling, Oorreflexologie & Bioslimming."
 >
   <!-- Hero Section -->
   <section class="hero-section">
@@ -199,7 +217,7 @@ const treatments = [
         </p>
       </div>
 
-      <div class="grid-3">
+      <div class="grid-4">
         {treatments.map((item) => (
           <TreatmentCard {...item} />
         ))}
@@ -207,7 +225,7 @@ const treatments = [
 
       <div class="text-center mt-4">
         <a href="/behandelingen" class="btn btn-secondary">
-          Bekijk Alle Behandelingen & Details
+          Bekijk Alle Behandelingen & Uitgebreide Informatie
         </a>
       </div>
     </div>

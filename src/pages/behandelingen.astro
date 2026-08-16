@@ -11,7 +11,8 @@ const allTreatments = [
     tagline: "Traditionele Japanse drukpuntmassage voor diepe ontspanning en energieherstel",
     duration: "50 of 75 minuten",
     price: "€80,- (50 min) / €125,- (75 min)",
-    reimbursement: "Deels vergoed via aanvullende zorgverzekering",
+    reimbursement: "Deels vergoedbaar (aanvullende verzekering)",
+    reimbursementType: "covered",
     image: "/images/DSC_1450.jpg",
     content: `Shiatsu (letterlijk 'vingerdruk') is een eeuwenoude Japanse behandelwijze die uitgaat van het meridiaanstelsel: de energiebanen die door het gehele lichaam lopen. Door met duimen, handpalmen en vingers gedoseerde druk uit te oefenen op specifieke acupressuurpunten, worden energetische blokkades opgeheven en de natuurlijke energiestroom gestimuleerd.
 
@@ -29,7 +30,8 @@ Shiatsu brengt het zenuwstelsel tot rust en activeert de zelfhelende vermogens v
     tagline: "Milde en dynamische correctie van wervelkolom en gewrichten",
     duration: "50 minuten",
     price: "€80,-",
-    reimbursement: "Deels vergoed via aanvullende zorgverzekering",
+    reimbursement: "Deels vergoedbaar (aanvullende verzekering)",
+    reimbursementType: "covered",
     image: "/images/DSC_1502.1.jpg",
     content: `De Dorn-methode is een zachte, handmatige techniek ter correctie van beenlengteverschillen, bekkenscheefstand en subluxaties (kleine wervelverschuivingen) in de wervelkolom. In tegenstelling tot kraken of manipulatie gebeurt de correctie altijd in een dynamische, natuurlijke beweging van de cliënt (zoals zwaaien met het been of arm).
 
@@ -47,7 +49,8 @@ Hierdoor spannen de spieren zich niet reflexmatig aan en kan de wervelkolom op e
     tagline: "Natuurlijke stimulatie van de zelfhelende vermogens via de voeten",
     duration: "50 minuten",
     price: "€80,-",
-    reimbursement: "Deels vergoed via aanvullende zorgverzekering",
+    reimbursement: "Deels vergoedbaar (aanvullende verzekering)",
+    reimbursementType: "covered",
     image: "/images/DSC_1465.jpg",
     content: `Op de voeten bevinden zich reflexzones die via zenuw- en energiebanen direct in verbinding staan met alle organen, klieren, spieren en weefsels in het lichaam. Door gerichte massagetechnieken en druk op deze zones uit te oefenen, wordt de doorbloeding en lymfestroom in de corresponderende lichaamsdelen geactiveerd.
 
@@ -65,7 +68,8 @@ Voetreflextherapie ondersteunt de afvoer van opgestapelde afvalstoffen (drainage
     tagline: "Zachte weefsel- en reflextechnieken om verkleefde littekens te versoepelen",
     duration: "50 minuten",
     price: "€80,-",
-    reimbursement: "Deels vergoed via aanvullende zorgverzekering",
+    reimbursement: "Deels vergoedbaar (aanvullende verzekering)",
+    reimbursementType: "covered",
     image: "/images/Handenbeen.jpg",
     content: `Littekens ontstaan na operaties (zoals keizersnede, buikoperaties of oncologische ingrepen) of blessures. Onderhuids kan littekenweefsel gaan verkleven met spieren, fascie en zenuwen. Dit kan leiden tot bewegingsbeperkingen, pijn, stijfheid of een verstoorde energie- en lymfestroom.
 
@@ -83,7 +87,8 @@ Met specifieke milde bindweefseltechnieken, reflexzonebehandeling en zachte grep
     tagline: "Krachtige reflexzonetherapie via de oorschelp voor snelle pijnstilling",
     duration: "50 minuten",
     price: "€80,-",
-    reimbursement: "Therapeutisch consult",
+    reimbursement: "Deels vergoedbaar (aanvullende verzekering)",
+    reimbursementType: "covered",
     image: "/images/Oorreflexologie.png",
     content: `De oorschelp is een uiterst fijnmazig microsysteem van het menselijk lichaam, waarin alle anatomische structuren en functies gereflecteerd worden. Prikkeling van specifieke oorpunten via massage, precisiedruk of zachte stimulatie heeft een directe invloed op het centrale zenuwstelsel.
 
@@ -96,12 +101,51 @@ Oorreflexologie is bijzonder doeltreffend bij acute en chronische pijnklachten, 
     ]
   },
   {
+    id: "zwangerschap",
+    title: "Zwangerschapsmassage",
+    tagline: "Veilige, koesterende ontspanning en klachtenverlichting voor aanstaande moeders",
+    duration: "50 minuten",
+    price: "€80,-",
+    reimbursement: "Als klachtgericht: deels vergoedbaar",
+    reimbursementType: "conditional",
+    image: "/images/belloost.webp",
+    content: `Tijdens de zwangerschap ondergaat het lichaam grote veranderingen. Extra belasting op de onderrug, bekken, benen en schouders kan voor ongemak zorgen. Onze zwangerschapsmassage is speciaal ontworpen om de aanstaande moeder op een veilige, comfortabele en ontspannen wijze te ondersteunen.
+
+Wanneer de behandeling gericht is op het verlichten van specifieke fysieke klachten (zoals bekkenpijn, rugpijn of kramp) valt dit onder een curatief therapeutisch consult en is het veelal deels vergoedbaar via de aanvullende zorgverzekering.`,
+    benefits: [
+      "Verlichting bij bekken- en rugklachten",
+      "Vermindering van vochtophoping in benen en enkels",
+      "Diepe ontspanning voor zowel moeder als baby",
+      "Veilige en gecertificeerde toepassing door BATC therapeut"
+    ]
+  },
+  {
+    id: "klassiek",
+    title: "Klassieke Ontspanningsmassage",
+    tagline: "Intensieve verzorging van strakke spieren en rust voor lichaam en geest",
+    duration: "50 of 75 minuten",
+    price: "€80,- (50 min) / €125,- (75 min)",
+    reimbursement: "Niet vergoedbaar (Wellness)",
+    reimbursementType: "not-covered",
+    image: "/images/massage-betaalde-stockfoto.jpg",
+    content: `De klassieke ontspanningsmassage is gericht op het soepel maken van gespannen spiergroepen, het verbeteren van de doorbloeding en het wegnemen van opgebouwde fysieke spanning. Met vloeiende effleurages, knedingen en fricties worden knopen en stijfheid in rug, nek, schouders en benen vakkundig losgemasserd.
+
+Een heerlijk moment van rust en herstel, waarbij u even helemaal afstand kunt nemen van de hectiek van alledag. Let op: pure ontspanningsmassages vallen niet onder vergoede zorg.`,
+    benefits: [
+      "Ontspanning van stijve spieren en gewrichten",
+      "Verbetering van de bloedsomloop en zuurstoftoevoer naar weefsels",
+      "Afvoer van melkzuur en opgebouwde spanning",
+      "Gecombineerd met warme olie in een rustgevende atmosfeer"
+    ]
+  },
+  {
     id: "bioslimming",
     title: "BIOSLIMMING Eelde",
     tagline: "Multi-Award winnende 100% natuurlijke body wrap & detox",
     duration: "60 of 90 minuten",
     price: "Kennismaking €108,- / Kuur (6x) €648,-",
-    reimbursement: "Let op: Cosmetisch / Niet vergoed door zorgverzekeraar",
+    reimbursement: "Niet vergoedbaar (Cosmetisch)",
+    reimbursementType: "not-covered",
     image: "/images/Bioslimming.jpg",
     content: `BIOSLIMMING is een revolutionaire, wetenschappelijk onderzochte behandelmethode voor figuurcorrectie, vetverbranding, huidversteviging en de bestrijding van cellulitis. De behandeling maakt gebruik van 100% natuurlijke etherische oliën, algenextracten, cafeïne en thermo-actieve ingrediënten zonder parabenen of minerale oliën.
 
@@ -114,56 +158,20 @@ LET OP: BIOSLIMMING behandelingen zijn puur wellness/lichaamsverzorging en valle
       "Vrij van parabenen, minerale oliën en dierproeven",
       "Zichtbare vermindering van cellulitis en verbetering van huidelasticiteit"
     ]
-  },
-  {
-    id: "klassiek",
-    title: "Klassieke & Ontspanningsmassage",
-    tagline: "Intensieve verzorging van strakke spieren en rust voor lichaam en geest",
-    duration: "50 of 75 minuten",
-    price: "€80,- (50 min) / €125,- (75 min)",
-    reimbursement: "Ontspanningsbehandeling",
-    image: "/images/massage-betaalde-stockfoto.jpg",
-    content: `De klassieke ontspanningsmassage is gericht op het soepel maken van gespannen spiergroepen, het verbeteren van de doorbloeding en het wegnemen van opgebouwde fysieke spanning. Met vloeiende effleurages, knedingen en fricties worden knopen en stijfheid in rug, nek, schouders en benen vakkundig losgemasserd.
-
-Een heerlijk moment van rust en herstel, waarbij u even helemaal afstand kunt nemen van de hectiek van alledag.`,
-    benefits: [
-      "Ontspanning van stijve spieren en gewrichten",
-      "Verbetering van de bloedsomloop en zuurstoftoevoer naar weefsels",
-      "Afvoer van melkzuur en opgebouwde spanning",
-      "Gecombineerd met warme olie in een rustgevende atmosfeer"
-    ]
-  },
-  {
-    id: "zwangerschap",
-    title: "Zwangerschapsmassage",
-    tagline: "Veilige, koesterende ontspanning voor aanstaande moeders",
-    duration: "50 minuten",
-    price: "€80,-",
-    reimbursement: "Verzorgende massage",
-    image: "/images/belloost.webp",
-    content: `Tijdens de zwangerschap ondergaat het lichaam grote veranderingen. Extra belasting op de onderrug, bekken, benen en schouders kan voor ongemak zorgen. Onze zwangerschapsmassage is speciaal ontworpen om de aanstaande moeder op een veilige, comfortabele en ontspannen wijze te ondersteunen.
-
-Met zachte, verzorgende technieken en aangepaste lighoudingen worden spanningen verlicht, de bloedsomloop gestimuleerd en komt het hele lichaam tot weldadige rust.`,
-    benefits: [
-      "Verlichting bij bekken- en rugklachten",
-      "Vermindering van vochtophoping in benen en enkels",
-      "Diepe ontspanning voor zowel moeder als baby",
-      "Veilige en gecertificeerde toepassing"
-    ]
   }
 ];
 ---
 
 <Layout 
   title="Behandelingen & Massages | Massage Studio Eelde"
-  description="Overzicht van behandelingen bij Massage Studio Eelde: Shiatsu therapie, Dorn methode, Voetreflexologie, Littekenbehandeling, Oorreflexologie en Bioslimming."
+  description="Overzicht van behandelingen bij Massage Studio Eelde: Shiatsu, Dorn methode, Voetreflexologie, Littekenbehandeling, Oorreflexologie, Zwangerschapsmassage en Bioslimming."
 >
   <div class="page-hero">
     <div class="container text-center">
       <span class="section-badge">Gespecialiseerd Vakmanschap</span>
       <h1 class="page-title">Onze Behandelingen</h1>
       <p class="page-lead">
-        Ontdek ons brede aanbod aan therapeutische en ontspannende behandelvormen, altijd op maat afgestemd op uw lichaam en behoeften.
+        Ontdek ons brede aanbod aan therapeutische en ontspannende behandelvormen door erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting.
       </p>
     </div>
   </div>
@@ -182,7 +190,9 @@ Met zachte, verzorgende technieken en aangepaste lighoudingen worden spanningen 
               <div class="detail-header">
                 <div class="detail-meta-tags">
                   <span class="detail-duration">{t.duration}</span>
-                  <span class={`detail-reimbursement ${t.id === 'bioslimming' ? 'non-reimbursed-tag' : ''}`}>{t.reimbursement}</span>
+                  <span class={`detail-reimbursement ${t.reimbursementType}`}>
+                    {t.reimbursement}
+                  </span>
                 </div>
                 <h2 class="detail-title">{t.title}</h2>
                 <p class="detail-tagline">{t.tagline}</p>
@@ -225,7 +235,7 @@ Met zachte, verzorgende technieken en aangepaste lighoudingen worden spanningen 
       <div class="cta-inner">
         <h2 class="section-title">Twijfelt u welke behandeling het beste bij u past?</h2>
         <p class="section-subtitle">
-          Tijdens een eerste intakegesprek kijken we samen naar uw klachten en stellen we een op maat gemaakt behandelplan op.
+          Tijdens een eerste intakegesprek kijken we samen naar uw klachten en behoeften om een passend behandelplan op te stellen.
         </p>
         <div class="cta-btns">
           <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">WhatsApp Sturen</a>
@@ -350,15 +360,23 @@ Met zachte, verzorgende technieken en aangepaste lighoudingen worden spanningen 
   .detail-reimbursement {
     font-size: 0.75rem;
     font-weight: 600;
-    color: #15803d;
-    background: #dcfce7;
     padding: 0.25rem 0.65rem;
     border-radius: var(--radius-full);
   }
 
-  .non-reimbursed-tag {
-    color: #991b1b !important;
-    background: #fee2e2 !important;
+  .detail-reimbursement.covered {
+    color: #15803d;
+    background: #dcfce7;
+  }
+
+  .detail-reimbursement.conditional {
+    color: #0369a1;
+    background: #e0f2fe;
+  }
+
+  .detail-reimbursement.not-covered {
+    color: #991b1b;
+    background: #fee2e2;
   }
 
   .detail-title {

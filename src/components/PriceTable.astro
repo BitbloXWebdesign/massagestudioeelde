@@ -12,14 +12,14 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
       <div class="card-head">
         <span class="card-pill">Deels vergoed via aanvullende zorgverzekering</span>
         <h4 class="table-title">Therapeutische Consulten & Massages</h4>
-        <p class="table-sub">Shiatsu therapie, Voetreflexologie, Dorn methode, Littekenbehandeling & Massage</p>
+        <p class="table-sub">Shiatsu therapie, Voetreflexologie, Dorn methode, Littekenbehandeling & Oorreflexologie</p>
       </div>
 
       <div class="price-rows">
         <div class="price-row">
           <div class="row-info">
-            <strong>Intake + Consult Reflextherapie of Shiatsu</strong>
-            <span>Eerste consult inclusief uitgebreide anamnese & behandeling</span>
+            <strong>Intake + Eerste Consult (Reflex / Shiatsu / Dorn)</strong>
+            <span>Eerste consult inclusief uitgebreide anamnese & gerichte behandeling</span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;125,-</span>
@@ -30,7 +30,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
         <div class="price-row">
           <div class="row-info">
             <strong>Behandeling Shiatsu Therapie / Massage</strong>
-            <span>Gerichte behandeling van klachten en meridiaanbanen</span>
+            <span>Drukpuntbehandeling en meridianen &bull; <em class="reimb-note">Deels vergoed</em></span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;80,-</span>
@@ -52,7 +52,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
         <div class="price-row">
           <div class="row-info">
             <strong>Behandeling Voetreflextherapie</strong>
-            <span>Reflexzonebehandeling ter stimulatie van orgaanfuncties en drainage</span>
+            <span>Reflexzones ter stimulatie van organen & drainage &bull; <em class="reimb-note">Deels vergoed</em></span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;80,-</span>
@@ -63,7 +63,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
         <div class="price-row">
           <div class="row-info">
             <strong>Behandeling Dorn-Methode</strong>
-            <span>Milde, dynamische correctie van wervelkolom en bekken</span>
+            <span>Milde correctie van wervelkolom en bekken &bull; <em class="reimb-note">Deels vergoed</em></span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;80,-</span>
@@ -74,7 +74,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
         <div class="price-row">
           <div class="row-info">
             <strong>Littekenbehandeling</strong>
-            <span>Zachte weefseltechnieken ter versoepeling van verkleefde littekens</span>
+            <span>Zachte weefseltechnieken ter versoepeling &bull; <em class="reimb-note">Deels vergoed</em></span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;80,-</span>
@@ -85,7 +85,29 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
         <div class="price-row">
           <div class="row-info">
             <strong>Behandeling Oorreflexologie</strong>
-            <span>Oorzonebehandeling gericht op pijndemping en stressreductie</span>
+            <span>Oorzonebehandeling voor pijndemping & zenuwstelsel &bull; <em class="reimb-note">Deels vergoed</em></span>
+          </div>
+          <div class="row-cost">
+            <span class="cost">&euro;80,-</span>
+            <span class="time">50 min</span>
+          </div>
+        </div>
+
+        <div class="price-row">
+          <div class="row-info">
+            <strong>Zwangerschapsmassage</strong>
+            <span>Verzorgend en klachtgericht &bull; <em class="reimb-cond">Als klachtgericht: deels vergoed</em></span>
+          </div>
+          <div class="row-cost">
+            <span class="cost">&euro;80,-</span>
+            <span class="time">50 min</span>
+          </div>
+        </div>
+
+        <div class="price-row">
+          <div class="row-info">
+            <strong>Klassieke Ontspanningsmassage</strong>
+            <span>Intensieve spierontspanning &bull; <em class="non-reimb-sub">Niet-vergoed (Wellness)</em></span>
           </div>
           <div class="row-cost">
             <span class="cost">&euro;80,-</span>
@@ -243,7 +265,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
   .price-rows {
     display: flex;
     flex-direction: column;
-    gap: 1.25rem;
+    gap: 1.15rem;
     margin-bottom: 2rem;
   }
 
@@ -252,7 +274,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    padding-bottom: 1.15rem;
+    padding-bottom: 1rem;
     border-bottom: 1px dashed var(--border-color);
   }
 
@@ -282,6 +304,24 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
   .row-info span {
     font-size: 0.825rem;
     color: var(--text-muted);
+  }
+
+  .reimb-note {
+    color: #15803d;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .reimb-cond {
+    color: #0369a1;
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .non-reimb-sub {
+    color: #991b1b;
+    font-weight: 600;
+    font-style: normal;
   }
 
   .row-cost {

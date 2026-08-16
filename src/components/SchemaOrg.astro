@@ -10,7 +10,7 @@ interface Props {
 
 const {
   title = `${siteConfig.clientName} | ${siteConfig.tagline}`,
-  description = "Professionele praktijk voor therapeutische massages, Shiatsu, Voetreflexologie, Dorn methode en Bioslimming in Eelde-Paterswolde door erkend BATC therapeut Alianne Zuidhof.",
+  description = "Professionele praktijk voor therapeutische massages, Shiatsu, Voetreflexologie, Dorn methode, Littekenbehandeling en Bioslimming in Eelde-Paterswolde door erkend BATC therapeut Alianne Zuidhof-Hoiting.",
   canonicalUrl = Astro.url.href,
   image = "/images/MSE.png"
 } = Astro.props;
@@ -22,7 +22,7 @@ const schemaData = {
       "@type": "HealthAndBeautyBusiness",
       "@id": "https://www.massagestudioeelde.nl/#business",
       "name": siteConfig.clientName,
-      "alternateName": "Massage Studio Eelde - Alianne Zuidhof",
+      "alternateName": "Massage Studio Eelde - Alianne Zuidhof-Hoiting",
       "url": "https://www.massagestudioeelde.nl",
       "logo": "https://www.massagestudioeelde.nl/images/MSE.png",
       "image": "https://www.massagestudioeelde.nl/images/Alianne.webp",
@@ -46,31 +46,97 @@ const schemaData = {
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Wednesday"],
+          "dayOfWeek": ["Monday", "Wednesday", "Friday"],
           "opens": "09:00",
           "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Thursday",
-          "opens": "09:00",
-          "closes": "21:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Friday",
-          "opens": "09:00",
-          "closes": "17:00"
         }
       ],
       "founder": {
         "@type": "Person",
         "name": siteConfig.therapistName,
-        "jobTitle": "BATC Complementair Therapeut & Masseur"
+        "jobTitle": "BATC Complementair Therapeut & Masseur",
+        "memberOf": [
+          {
+            "@type": "Organization",
+            "name": "BATC Beroepsorganisatie"
+          },
+          {
+            "@type": "Organization",
+            "name": "NAP Koepelorganisatie"
+          }
+        ]
       },
-      "areaServed": [
-        "Eelde", "Paterswolde", "Haren", "Groningen", "Vries", "Yde", "Zuidlaren", "Eelderwolde", "Assen"
-      ]
+      "areaServed": siteConfig.regions.map(r => r.name).concat(["Assen", "Noord-Drenthe", "Groningen-Zuid"]),
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Massages en Complementaire Therapieën",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Shiatsu Therapie & Massage",
+              "description": "Japanse drukpuntmassage voor het herstellen van de natuurlijke energiestroom en vermindering van spanningsklachten."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Dorn-Methode",
+              "description": "Zachte, milde correctie van wervelkolom, bekken en beenlengteverschil in dynamische beweging."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Voetreflextherapie",
+              "description": "Reflexzonebehandeling op de voeten voor orgaanstimulatie, lymfedrainage en diepe ontspanning."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Littekenbehandeling",
+              "description": "Zachte bindweefseltechnieken om verkleefde littekens te versoepelen en doorbloeding te herstellen."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Oorreflexologie",
+              "description": "Acupressuur op de oorschelp voor doelgerichte pijndemping en zenuwstelselregulatie."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Zwangerschapsmassage",
+              "description": "Veilige en verzorgende massage voor aanstaande moeders, gericht op ontspanning of klachtenverlichting."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Klassieke Ontspanningsmassage",
+              "description": "Intensieve spierontspanning en circulatieverbetering met warme olie."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "BIOSLIMMING Body Wrap Eelde",
+              "description": "100% natuurlijke body wrap voor vetverbranding, cellulitisreductie en huidversteviging."
+            }
+          }
+        ]
+      }
     },
     {
       "@type": "WebSite",
