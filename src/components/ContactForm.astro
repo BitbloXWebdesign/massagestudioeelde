@@ -180,24 +180,29 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
 
   .form-status {
     display: none;
-    padding: 1rem;
-    border-radius: var(--radius-sm);
-    font-size: 0.9rem;
-    text-align: center;
+    padding: 1.25rem 1.5rem;
+    border-radius: var(--radius-md);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-top: 1rem;
+    text-align: left;
+  }
+
+  .form-status.is-visible {
+    display: block !important;
   }
 
   .form-status.success {
-    display: block;
-    background: #dcfce7;
-    color: #15803d;
-    border: 1px solid #bbf7d0;
+    background: #f0fdf4;
+    color: #166534;
+    border: 1.5px solid #86efac;
+    box-shadow: 0 4px 12px rgba(22, 101, 52, 0.08);
   }
 
   .form-status.error {
-    display: block;
-    background: #fee2e2;
-    color: #b91c1c;
-    border: 1px solid #fecaca;
+    background: #fef2f2;
+    color: #991b1b;
+    border: 1.5px solid #fca5a5;
   }
 </style>
 
@@ -213,18 +218,19 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
 
       btnText.textContent = 'Verzenden...';
       submitBtn.disabled = true;
+      status.className = 'form-status';
       status.style.display = 'none';
 
       const formData = new FormData(form);
       const data: Record<string, string> = {
-        _subject: `Nieuw bericht via website van ${formData.get('name')}`,
+        _subject: `Nieuw contactformulier bericht van ${formData.get('name')}`,
         _template: 'table',
         _captcha: 'false',
-        naam: formData.get('name') as string,
-        email: formData.get('email') as string,
+        naam: (formData.get('name') as string) || '',
+        email: (formData.get('email') as string) || '',
         telefoon: (formData.get('phone') as string) || 'Niet opgegeven',
-        behandeling: formData.get('service') as string,
-        bericht: formData.get('message') as string
+        behandeling: (formData.get('service') as string) || 'Algemeen',
+        bericht: (formData.get('message') as string) || ''
       };
 
       try {
@@ -237,16 +243,19 @@ const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
           body: JSON.stringify(data)
         });
 
+        status.style.display = 'block';
         if (response.ok) {
-          status.className = 'form-status success';
-          status.textContent = 'Hartelijk dank voor uw bericht! Uw e-mail is succesvol verzonden naar Alianne. U ontvangt binnen 1 werkdag een reactie.';
+          status.className = 'form-status success is-visible';
+          status.innerHTML = '<strong>✓ Hartelijk dank voor uw bericht!</strong><br />Uw e-mail is succesvol verzonden naar Alianne (info@massagestudioeelde.nl). U ontvangt binnen 1 werkdag een reactie.';
           form.reset();
+          status.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         } else {
           throw new Error('Verzending mislukt');
         }
       } catch (err) {
-        status.className = 'form-status error';
-        status.innerHTML = 'Er ging helaas iets mis bij het verzenden. U kunt ook direct mailen naar <a href="mailto:info@massagestudioeelde.nl" style="color: #b91c1c; font-weight: 700; text-decoration: underline;">info@massagestudioeelde.nl</a> of appen via WhatsApp.';
+        status.style.display = 'block';
+        status.className = 'form-status error is-visible';
+        status.innerHTML = 'Er ging helaas iets mis bij het automatisch verzenden. U kunt ook direct mailen naar <a href="mailto:info@massagestudioeelde.nl" style="color: #991b1b; font-weight: 700; text-decoration: underline;">info@massagestudioeelde.nl</a> of appen via WhatsApp.';
       } finally {
         btnText.textContent = 'Verstuur Bericht';
         submitBtn.disabled = false;
