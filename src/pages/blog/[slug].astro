@@ -1,0 +1,419 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import siteConfig from '../../../public/site-config.json';
+import AiSummaryBox from '../../components/AiSummaryBox.astro';
+import { articles, type Article } from '../../data/articles';
+
+export function getStaticPaths() {
+  return articles.map((art) => ({
+    params: { slug: art.slug },
+    props: { article: art }
+  }));
+}
+
+interface Props {
+  article: Article;
+}
+
+const { article } = Astro.props;
+
+const waMessage = encodeURIComponent(`Hallo Alianne, ik las zojuist het artikel "${article.title}" en wil graag een afspraak maken.`);
+
+const schemaArticle = {
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": article.title,
+  "description": article.excerpt,
+  "image": new URL(article.image, Astro.site || 'https://www.massagestudioeelde.nl').href,
+  "datePublished": "2026-08-12",
+  "dateModified": "2026-08-16",
+  "author": {
+    "@type": "Person",
+    "name": article.author.name,
+    "jobTitle": article.author.role
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": siteConfig.clientName,
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.massagestudioeelde.nl/images/MSE.png"
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": Astro.url.href
+  }
+};
+---
+
+<Layout 
+  title={`${article.title} | Massage Studio Eelde`}
+  description={article.excerpt}
+  image={article.image}
+>
+  <!-- Article Header -->
+  <header class="article-header">
+    <div class="container text-center">
+      <div class="header-badge-row">
+        <a href="/blog" class="back-link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5"></path><path d="M12 19l-7-7 7-7"></path></svg>
+          Terug naar Kennisbank
+        </a>
+        <span class="category-pill">{article.category}</span>
+      </div>
+
+      <h1 class="single-article-title">{article.title}</h1>
+
+      <div class="single-article-meta">
+        <div class="author-block">
+          <img src={article.author.avatar} alt={article.author.name} class="author-avatar-lg" />
+          <div class="author-meta-text">
+            <strong>{article.author.name}</strong>
+            <span>{article.author.role}</span>
+          </div>
+        </div>
+        <span class="meta-separator">&bull;</span>
+        <span class="publish-date">{article.date}</span>
+        <span class="meta-separator">&bull;</span>
+        <span class="read-time">{article.readTime}</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Featured Image -->
+  <div class="featured-image-section">
+    <div class="container">
+      <div class="featured-img-wrap">
+        <img src={article.image} alt={article.title} class="featured-img" />
+      </div>
+    </div>
+  </div>
+
+  <!-- Article Main Content -->
+  <article class="section-py article-content-section">
+    <div class="container content-container">
+      <!-- AI Summary Box (GEO Module) -->
+      {siteConfig.modules.geo && (
+        <AiSummaryBox 
+          points={article.summaryPoints} 
+          title="In het kort: Kernpunten van dit artikel" 
+          badge="Overzicht"
+        />
+      )}
+
+      <!-- Body Content -->
+      <div class="prose-content">
+        <p class="lead-paragraph">{article.excerpt}</p>
+
+        {article.content.map((section) => (
+          <div class="content-block">
+            <h2>{section.heading}</h2>
+            {section.paragraphs.map((p) => {
+              if (p.startsWith('•')) {
+                return (
+                  <ul class="article-bullet-list">
+                    {p.split('\n').map((li) => <li>{li.replace('•', '').trim()}</li>)}
+                  </ul>
+                );
+              }
+              return <p>{p}</p>;
+            })}
+          </div>
+        ))}
+      </div>
+
+      <!-- Author Bio Box -->
+      <div class="author-bio-card">
+        <img src={article.author.avatar} alt={article.author.name} class="bio-avatar" />
+        <div class="bio-text">
+          <span class="bio-label">Geschreven door:</span>
+          <h3 class="bio-name">{article.author.name}</h3>
+          <p class="bio-role">{article.author.role} &bull; Eigenaresse Massage Studio Eelde</p>
+          <p class="bio-desc">
+            Alianne is gediplomeerd BATC Complementair Therapeut en gespecialiseerd in Shiatsu, Dorn-methode, Voetreflexologie, Littekenbehandeling en de 5 natuurgerichte principes. Vanuit haar praktijk in het voormalig kerkje in Eelde helpt ze cliënten met vakkennis, rust en oprechte persoonlijke aandacht.
+          </p>
+        </div>
+      </div>
+
+      <!-- Direct Booking Call to Action -->
+      <div class="article-cta-box text-center">
+        <h2 class="cta-heading">Wilt u een behandeling ervaren?</h2>
+        <p class="cta-desc">
+          Plan eenvoudig uw consult via WhatsApp of neem contact op voor een vrijblijvende vraag.
+        </p>
+        <div class="cta-actions">
+          <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Afspraak via WhatsApp
+          </a>
+          <a href="/contact" class="btn btn-secondary">
+            Contactformulier
+          </a>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- Schema.org BlogPosting JSON-LD -->
+  <script type="application/ld+json" set:html={JSON.stringify(schemaArticle)} />
+</Layout>
+
+<style>
+  .article-header {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .header-badge-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+  }
+
+  .category-pill {
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-size: 0.775rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+  }
+
+  .single-article-title {
+    max-width: 880px;
+    margin: 0 auto 1.5rem;
+    font-size: clamp(2rem, 3.5vw, 2.75rem);
+    line-height: 1.25;
+  }
+
+  .single-article-meta {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    flex-wrap: wrap;
+  }
+
+  .author-block {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .author-avatar-lg {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-light);
+  }
+
+  .author-meta-text {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .author-meta-text strong {
+    font-size: 0.875rem;
+    color: var(--text-color);
+  }
+
+  .author-meta-text span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .featured-image-section {
+    margin-top: -20px;
+    margin-bottom: 2rem;
+  }
+
+  .featured-img-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    height: 420px;
+    background: var(--surface);
+  }
+
+  @media (max-width: 680px) {
+    .featured-img-wrap {
+      height: 260px;
+    }
+  }
+
+  .featured-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .content-container {
+    max-width: 860px;
+    margin: 0 auto;
+  }
+
+  .prose-content {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    color: var(--text-color);
+  }
+
+  .lead-paragraph {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: var(--text-color);
+    line-height: 1.7;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .content-block {
+    margin-bottom: 2.5rem;
+  }
+
+  .content-block h2 {
+    font-size: 1.65rem;
+    color: var(--text-color);
+    margin: 2rem 0 1rem;
+  }
+
+  .content-block p {
+    margin-bottom: 1.25rem;
+    color: #4a3e46;
+  }
+
+  .article-bullet-list {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .article-bullet-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 1rem;
+    color: var(--text-color);
+  }
+
+  .article-bullet-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .author-bio-card {
+    margin-top: 4rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.25rem;
+    display: flex;
+    gap: 1.75rem;
+    align-items: center;
+  }
+
+  @media (max-width: 680px) {
+    .author-bio-card {
+      flex-direction: column;
+      text-align: center;
+      padding: 1.75rem;
+    }
+  }
+
+  .bio-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #ffffff;
+    box-shadow: var(--shadow-sm);
+    flex-shrink: 0;
+  }
+
+  .bio-label {
+    font-size: 0.775rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary-dark);
+  }
+
+  .bio-name {
+    font-size: 1.35rem;
+    color: var(--text-color);
+    margin: 0.2rem 0;
+  }
+
+  .bio-role {
+    font-size: 0.85rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+    margin-bottom: 0.65rem;
+  }
+
+  .bio-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .article-cta-box {
+    margin-top: 4rem;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta-heading {
+    font-size: 1.85rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .cta-desc {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    max-width: 600px;
+    margin: 0 auto 1.75rem;
+  }
+
+  .cta-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

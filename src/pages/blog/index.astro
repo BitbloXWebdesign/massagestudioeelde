@@ -1,0 +1,279 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import siteConfig from '../../../public/site-config.json';
+import { articles } from '../../data/articles';
+
+const waMessage = encodeURIComponent("Hallo Alianne, ik heb een vraag naar aanleiding van een artikel op jullie blog.");
+---
+
+<Layout 
+  title="Kennisbank & Blog | Massage Studio Eelde"
+  description="Lees artikelen en waardevolle inzichten over Shiatsu, de Dorn-methode, Voetreflexologie en de 5 natuurgerichte principes door BATC therapeut Alianne Zuidhof-Hoiting."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Kennis & Inzicht</span>
+      <h1 class="page-title">Kennisbank & Artikelen</h1>
+      <p class="page-lead">
+        Ontdek waardevolle artikelen over complementaire geneeskunde, zelfhelend vermogen, reflexologie en de 5 natuurgerichte principes van de BATC.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <div class="articles-grid">
+        {articles.map((art) => (
+          <article class="article-card">
+            <a href={`/blog/${art.slug}`} class="article-img-link">
+              <img src={art.image} alt={art.title} class="article-img" loading="lazy" />
+              <span class="category-badge">{art.category}</span>
+            </a>
+            
+            <div class="article-body">
+              <div class="article-meta">
+                <span class="meta-date">{art.date}</span>
+                <span class="meta-dot">&bull;</span>
+                <span class="meta-time">{art.readTime}</span>
+              </div>
+
+              <h2 class="article-title">
+                <a href={`/blog/${art.slug}`}>{art.title}</a>
+              </h2>
+
+              <p class="article-excerpt">{art.excerpt}</p>
+
+              <div class="article-footer">
+                <div class="author-info">
+                  <img src={art.author.avatar} alt={art.author.name} class="author-avatar" />
+                  <div class="author-text">
+                    <strong>{art.author.name}</strong>
+                    <span>{art.author.role}</span>
+                  </div>
+                </div>
+
+                <a href={`/blog/${art.slug}`} class="read-more-link" aria-label={`Lees artikel: ${art.title}`}>
+                  <span>Lees meer</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section-py bg-surface text-center">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="section-title">Wilt u ervaren wat deze therapieën voor u kunnen doen?</h2>
+        <p class="section-subtitle">
+          Maak eenvoudig een afspraak via WhatsApp of stuur een bericht voor meer informatie.
+        </p>
+        <div class="cta-btns">
+          <a href={`https://wa.me/${siteConfig.whatsapp}?text=${waMessage}`} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Afspraak via WhatsApp
+          </a>
+          <a href="/contact" class="btn btn-secondary">
+            Contact & E-mail
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .articles-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2.5rem;
+  }
+
+  @media (max-width: 1024px) {
+    .articles-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 680px) {
+    .articles-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .article-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+  }
+
+  .article-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+  }
+
+  .article-img-link {
+    position: relative;
+    height: 220px;
+    display: block;
+    overflow: hidden;
+    background: var(--surface);
+  }
+
+  .article-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .article-card:hover .article-img {
+    transform: scale(1.05);
+  }
+
+  .category-badge {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(36, 28, 34, 0.88);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.3rem 0.75rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .article-body {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .article-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.75rem;
+  }
+
+  .article-title {
+    font-size: 1.3rem;
+    line-height: 1.35;
+    margin-bottom: 0.75rem;
+  }
+
+  .article-title a {
+    color: var(--text-color);
+  }
+
+  .article-title a:hover {
+    color: var(--primary);
+  }
+
+  .article-excerpt {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.75rem;
+    flex: 1;
+  }
+
+  .article-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+    gap: 1rem;
+  }
+
+  .author-info {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+  }
+
+  .author-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1.5px solid var(--primary-light);
+  }
+
+  .author-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-text strong {
+    font-size: 0.8rem;
+    color: var(--text-color);
+  }
+
+  .author-text span {
+    font-size: 0.7rem;
+    color: var(--text-muted);
+  }
+
+  .read-more-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--primary-dark);
+    flex-shrink: 0;
+  }
+
+  .read-more-link:hover {
+    color: var(--primary);
+    gap: 0.55rem;
+  }
+
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+</style>

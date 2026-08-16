@@ -13,6 +13,7 @@ const navItems = [
   { name: '5 Principes', href: '/5-natuurgerichte-principes' },
   { name: 'Tarieven', href: '/tarieven' },
   { name: 'Over Mij', href: '/over-mij' },
+  ...(siteConfig.modules.blog ? [{ name: 'Blog', href: '/blog' }] : []),
   { name: 'Contact', href: '/contact' },
 ];
 
