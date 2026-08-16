@@ -26,7 +26,10 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je
         <!-- Contact Information Block -->
         <div class="contact-info-col">
           <div class="info-card">
-            <h2 class="info-title">Praktijkgegevens</h2>
+            <div class="info-card-header">
+              <img src="/images/MSE.png" alt="Massage Studio Eelde Logo" class="contact-card-logo" />
+              <h2 class="info-title">Praktijkgegevens</h2>
+            </div>
             
             <div class="info-items-list">
               <div class="info-item">
@@ -174,10 +177,26 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je
     padding: 2.75rem;
   }
 
-  .info-title {
-    font-size: 1.75rem;
-    color: var(--text-color);
+  .info-card-header {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
     margin-bottom: 1.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .contact-card-logo {
+    height: 44px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .info-title {
+    font-size: 1.6rem;
+    color: var(--text-color);
+    margin: 0;
   }
 
   .info-items-list {

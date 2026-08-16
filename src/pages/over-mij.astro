@@ -43,7 +43,10 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je
         </div>
 
         <div class="about-content">
-          <span class="section-badge">Mijn Filosofie</span>
+          <div class="about-brand-header">
+            <img src="/images/MSE.png" alt="Massage Studio Eelde Logo" class="about-brand-logo" />
+            <span class="section-badge">Mijn Filosofie</span>
+          </div>
           <h2 class="about-title">&ldquo;Waar kwaliteit en gevoel voorop staan&rdquo;</h2>
           <p>
             Mijn naam is <strong>Alianne Zuidhof-Hoiting</strong>. In mijn praktijk in Eelde begeleid ik al vele jaren mensen die op zoek zijn naar diepe fysieke en mentale ontspanning, herstel van chronische klachten of ondersteuning bij het terugvinden van hun energetische balans.
@@ -178,6 +181,20 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag contact met je
   .badge-row svg {
     color: var(--primary);
     flex-shrink: 0;
+  }
+
+  .about-brand-header {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+
+  .about-brand-logo {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
   }
 
   .about-title {
