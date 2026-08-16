@@ -1,0 +1,331 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const navItems = [
+  { name: 'Home', href: '/' },
+  { name: 'Behandelingen', href: '/behandelingen' },
+  { name: '5 Principes', href: '/5-natuurgerichte-principes' },
+  { name: 'Tarieven', href: '/tarieven' },
+  { name: 'Over Mij', href: '/over-mij' },
+  { name: 'Contact', href: '/contact' },
+];
+---
+
+<header class="site-header">
+  <!-- Top bar info -->
+  <div class="header-topbar">
+    <div class="container header-topbar-inner">
+      <div class="topbar-info">
+        <span class="topbar-item">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          {siteConfig.address.street}, {siteConfig.address.city}
+        </span>
+        <span class="topbar-item hide-mobile">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          BATC HBO-conform gecertificeerd
+        </span>
+      </div>
+      <div class="topbar-actions">
+        <a href={`tel:${siteConfig.phone}`} class="topbar-link">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+          {siteConfig.phoneFormatted}
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <div class="header-main">
+    <div class="container header-main-inner">
+      <a href="/" class="brand-logo" aria-label="Massage Studio Eelde Home">
+        <img src="/images/MSE.png" alt="Massage Studio Eelde Logo" width="180" height="60" class="logo-img" />
+      </a>
+
+      <!-- Desktop Nav -->
+      <nav class="desktop-nav" aria-label="Hoofdnavigatie">
+        <ul class="nav-list">
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li class="nav-item">
+                <a href={item.href} class={`nav-link ${isActive ? 'active' : ''}`}>
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+
+      <!-- Action Button -->
+      <div class="header-cta hide-mobile">
+        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">
+          Afspraak Maken
+        </a>
+      </div>
+
+      <!-- Mobile Hamburger Button -->
+      <button id="mobileMenuBtn" class="mobile-toggle" aria-label="Menu openen" aria-expanded="false">
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+        <span class="hamburger-bar"></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer -->
+  <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+    <div class="drawer-content">
+      <nav aria-label="Mobiele navigatie">
+        <ul class="mobile-nav-list">
+          {navItems.map((item) => {
+            const isActive = currentPath === item.href || (item.href !== '/' && currentPath.startsWith(item.href));
+            return (
+              <li>
+                <a href={item.href} class={`mobile-nav-link ${isActive ? 'active' : ''}`}>
+                  {item.name}
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+      <div class="mobile-drawer-footer">
+        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full">
+          Afspraak Maken
+        </a>
+        <div class="mobile-contact-block">
+          <p><strong>Direct contact:</strong></p>
+          <a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a>
+          <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+  }
+
+  .header-topbar {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border-color);
+    font-size: 0.825rem;
+    padding: 0.4rem 0;
+  }
+
+  .header-topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .topbar-info, .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .topbar-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-muted);
+  }
+
+  .topbar-item svg {
+    color: var(--primary);
+  }
+
+  .topbar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--primary-dark);
+    font-weight: 600;
+  }
+
+  .topbar-link:hover {
+    color: var(--primary);
+  }
+
+  .header-main {
+    padding: 0.75rem 0;
+    background: #ffffff;
+  }
+
+  .header-main-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .brand-logo {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+  }
+
+  .desktop-nav {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-list {
+    display: flex;
+    list-style: none;
+    gap: 1.75rem;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-link {
+    color: var(--text-color);
+    font-weight: 500;
+    font-size: 0.975rem;
+    padding: 0.5rem 0;
+    position: relative;
+    transition: color 0.2s ease;
+  }
+
+  .nav-link:hover, .nav-link.active {
+    color: var(--primary);
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: width 0.25s ease;
+  }
+
+  .nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+  }
+
+  .btn-sm {
+    padding: 0.6rem 1.35rem;
+    font-size: 0.875rem;
+  }
+
+  .mobile-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 32px;
+    height: 24px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .hamburger-bar {
+    width: 100%;
+    height: 2.5px;
+    background-color: var(--text-color);
+    border-radius: 2px;
+    transition: all 0.3s ease;
+  }
+
+  .mobile-drawer {
+    display: none;
+    background: #ffffff;
+    border-top: 1px solid var(--border-color);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+  }
+
+  .mobile-drawer.is-open {
+    max-height: 500px;
+    padding: 1.5rem 1.5rem 2rem;
+  }
+
+  .mobile-nav-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-nav-link {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: block;
+    padding: 0.4rem 0;
+  }
+
+  .mobile-nav-link.active {
+    color: var(--primary);
+  }
+
+  .mobile-drawer-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .mobile-contact-block {
+    font-size: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  @media (max-width: 960px) {
+    .desktop-nav, .header-cta, .hide-mobile {
+      display: none;
+    }
+    .mobile-toggle {
+      display: flex;
+    }
+    .mobile-drawer {
+      display: block;
+    }
+  }
+</style>
+
+<script>
+  const btn = document.getElementById('mobileMenuBtn');
+  const drawer = document.getElementById('mobileDrawer');
+
+  if (btn && drawer) {
+    btn.addEventListener('click', () => {
+      const isExpanded = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', (!isExpanded).toString());
+      drawer.classList.toggle('is-open');
+    });
+  }
+</script>

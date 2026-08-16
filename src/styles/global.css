@@ -1,0 +1,348 @@
+/* BitbloX Master V7 Global Stylesheet - Massage Studio Eelde */
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..800;1,9..40,300..800&family=Unna:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+:root {
+  --primary: #9d467e;
+  --primary-hover: #863f6d;
+  --primary-dark: #6f2a58;
+  --primary-light: #fbf4f8;
+  --primary-subtle: #f3e5ee;
+  --secondary: #c78ca8;
+  --gold: #dec148;
+  --bg-color: #ffffff;
+  --surface: #faf7f5;
+  --surface-alt: #f5eff2;
+  --surface-card: #ffffff;
+  --border-color: #ebdde5;
+  --text-color: #2d232a;
+  --text-muted: #6b5f67;
+  --shadow-sm: 0 2px 8px rgba(157, 70, 126, 0.06);
+  --shadow-md: 0 8px 24px rgba(157, 70, 126, 0.09);
+  --shadow-lg: 0 16px 40px rgba(157, 70, 126, 0.12);
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-full: 9999px;
+  --radius-blob: 40% 60% 70% 30% / 40% 50% 60% 50%;
+  --container-max: 1200px;
+}
+
+/* Base reset */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.65;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+main {
+  flex: 1;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Unna', Georgia, serif;
+  color: var(--text-color);
+  line-height: 1.25;
+  font-weight: 400;
+}
+
+h1 {
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  letter-spacing: -0.01em;
+}
+
+h2 {
+  font-size: clamp(1.9rem, 3.5vw, 2.75rem);
+}
+
+h3 {
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem);
+}
+
+h4 {
+  font-size: 1.35rem;
+}
+
+p {
+  margin-bottom: 1.25rem;
+  color: var(--text-muted);
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--primary);
+  text-decoration: none;
+  transition: all 0.25s ease;
+}
+
+a:hover {
+  color: var(--primary-hover);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Layout Utilities */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+.section-py {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+@media (max-width: 768px) {
+  .section-py {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+.bg-surface {
+  background-color: var(--surface);
+}
+
+.bg-subtle {
+  background-color: var(--primary-light);
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Section Headers */
+.section-header {
+  margin-bottom: 3.5rem;
+}
+
+.section-badge {
+  display: inline-block;
+  padding: 0.35rem 1.1rem;
+  background-color: var(--primary-subtle);
+  color: var(--primary-dark);
+  font-size: 0.825rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-full);
+  margin-bottom: 1rem;
+}
+
+.section-title {
+  margin-bottom: 1rem;
+  color: var(--text-color);
+}
+
+.section-subtitle {
+  max-width: 680px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 1.1rem;
+  color: var(--text-muted);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 1.85rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+  color: #ffffff !important;
+  box-shadow: 0 4px 14px rgba(157, 70, 126, 0.3);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(157, 70, 126, 0.4);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--primary);
+  color: var(--primary) !important;
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary-subtle);
+  transform: translateY(-2px);
+}
+
+.btn-white {
+  background-color: #ffffff;
+  color: var(--primary-dark) !important;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-white:hover {
+  background-color: var(--primary-light);
+  transform: translateY(-2px);
+}
+
+/* Organic Blob Frame */
+.blob-frame {
+  border-radius: var(--radius-blob);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+  border: 4px solid #ffffff;
+  transition: all 0.5s ease;
+}
+
+.blob-frame:hover {
+  border-radius: 60% 40% 30% 70% / 50% 60% 40% 50%;
+}
+
+/* Cards */
+.clean-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.clean-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary);
+}
+
+/* Grids */
+.grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.grid-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .grid-4, .grid-3, .grid-2 {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* BitbloX Footer Onderbalk Spec */
+.footer-bottom {
+  background-color: #1a1418;
+  color: #a89ba3;
+  padding: 1.5rem 0;
+  font-size: 0.875rem;
+  border-top: 1px solid #2e2329;
+}
+
+.footer-bottom-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-bottom-inner p {
+  color: #a89ba3;
+  margin: 0;
+}
+
+.bitblox-link {
+  color: #dec148 !important;
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.bitblox-link:hover {
+  color: #ffffff !important;
+  text-decoration: underline;
+}
+
+/* Accessibility (A11y) States */
+html.a11y-text-large {
+  font-size: 115%;
+}
+
+html.a11y-text-larger {
+  font-size: 130%;
+}
+
+html.a11y-high-contrast {
+  --bg-color: #000000 !important;
+  --surface: #121212 !important;
+  --surface-card: #1e1e1e !important;
+  --text-color: #ffffff !important;
+  --text-muted: #e0e0e0 !important;
+  --border-color: #ffff00 !important;
+  --primary: #ffff00 !important;
+  --primary-hover: #ffd700 !important;
+}
+
+html.a11y-high-contrast .btn-primary {
+  background-color: #ffff00 !important;
+  color: #000000 !important;
+}
+
+html.a11y-dyslexic {
+  font-family: 'OpenDyslexic', 'Comic Sans MS', sans-serif !important;
+}

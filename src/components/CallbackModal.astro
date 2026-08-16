@@ -1,0 +1,234 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.callback || siteConfig.modules.callBack;
+---
+
+{isEnabled && (
+  <div id="callbackModal" class="modal-overlay" aria-hidden="true" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <button id="closeCallbackModal" class="modal-close" aria-label="Sluiten">&times;</button>
+      
+      <div class="modal-header">
+        <div class="modal-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        </div>
+        <h3 class="modal-title">Bel Mij Terug</h3>
+        <p class="modal-sub">Laat uw naam en telefoonnummer achter, dan neem ik z.s.m. persoonlijk contact met u op.</p>
+      </div>
+
+      <form id="callbackForm" class="modal-form">
+        <div class="form-group">
+          <label for="cbName">Uw Naam *</label>
+          <input type="text" id="cbName" name="name" required placeholder="Bijv. Marieke Jansen" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="cbPhone">Telefoonnummer *</label>
+          <input type="tel" id="cbPhone" name="phone" required placeholder="Bijv. 06 12345678" class="form-input" />
+        </div>
+
+        <div class="form-group">
+          <label for="cbSubject">Onderwerp / Vraag (optioneel)</label>
+          <select id="cbSubject" name="subject" class="form-input form-select">
+            <option value="Algemene vraag">Algemene vraag</option>
+            <option value="Shiatsu therapie">Shiatsu therapie</option>
+            <option value="Voetreflexologie">Voetreflexologie</option>
+            <option value="Dorn methode">Dorn methode</option>
+            <option value="Bioslimming behandeling">Bioslimming behandeling</option>
+            <option value="Massage Membership">Massage Membership</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-full">
+          <span>Verstuur Terugbelverzoek</span>
+        </button>
+
+        <div id="callbackFeedback" class="form-feedback"></div>
+      </form>
+    </div>
+  </div>
+)}
+
+<style>
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(4px);
+    z-index: 10000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+
+  .modal-overlay.is-active {
+    display: flex;
+    animation: modalIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  @keyframes modalIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  .modal-box {
+    background: #ffffff;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    width: 100%;
+    max-width: 440px;
+    padding: 2.25rem;
+    position: relative;
+    border: 1px solid var(--border-color);
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 1.25rem;
+    right: 1.25rem;
+    background: transparent;
+    border: none;
+    font-size: 1.75rem;
+    color: var(--text-muted);
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal-close:hover {
+    color: var(--primary);
+  }
+
+  .modal-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  .modal-icon {
+    width: 56px;
+    height: 56px;
+    background: var(--primary-light);
+    color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin-bottom: 0.5rem;
+  }
+
+  .modal-sub {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .modal-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .form-group label {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    font-family: inherit;
+    transition: all 0.2s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(157, 70, 126, 0.15);
+  }
+
+  .form-select {
+    cursor: pointer;
+    background-color: #ffffff;
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .form-feedback {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    text-align: center;
+    display: none;
+  }
+
+  .form-feedback.success {
+    display: block;
+    color: #15803d;
+    background: #dcfce7;
+    padding: 0.75rem;
+    border-radius: var(--radius-sm);
+  }
+</style>
+
+<script>
+  const openBtn = document.getElementById('openCallbackBtn');
+  const modal = document.getElementById('callbackModal');
+  const closeBtn = document.getElementById('closeCallbackModal');
+  const form = document.getElementById('callbackForm');
+  const feedback = document.getElementById('callbackFeedback');
+
+  if (modal) {
+    openBtn?.addEventListener('click', () => {
+      modal.classList.add('is-active');
+      modal.setAttribute('aria-hidden', 'false');
+    });
+
+    const closeModal = () => {
+      modal.classList.remove('is-active');
+      modal.setAttribute('aria-hidden', 'true');
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-active')) {
+        closeModal();
+      }
+    });
+
+    form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      if (feedback) {
+        feedback.className = 'form-feedback success';
+        feedback.textContent = 'Hartelijk dank! Uw terugbelverzoek is ontvangen. Alianne belt u zo snel mogelijk terug.';
+        if (form instanceof HTMLFormElement) form.reset();
+        setTimeout(closeModal, 4000);
+      }
+    });
+  }
+</script>

@@ -1,0 +1,198 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.reviews || siteConfig.modules.googleReviews;
+
+const reviews = [
+  {
+    name: "Karin van der Veen",
+    location: "Eelde",
+    treatment: "Shiatsu & Massagetherapie",
+    rating: 5,
+    text: "Alianne heeft gouden handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!",
+    date: "1 maand geleden"
+  },
+  {
+    name: "Jeroen de Vries",
+    location: "Groningen",
+    treatment: "Dorn Methode & Massage",
+    rating: 5,
+    text: "Vanwege rugklachten via de fysiotherapeut bij Alianne terechtgekomen voor de Dorn-methode. De zachte benadering en deskundigheid hebben me enorm geholpen. Zeer vakkundig en warm!",
+    date: "2 maanden geleden"
+  },
+  {
+    name: "Sandra Meijer",
+    location: "Haren",
+    treatment: "Voetreflexologie",
+    rating: 5,
+    text: "De voetreflextherapie bij Massage Studio Eelde brengt me zoveel rust en nieuwe energie. Alianne luistert zonder oordeel en geeft waardevolle tips over leefstijl en de 5 natuurgerichte principes. Echt een aanrader!",
+    date: "3 maanden geleden"
+  },
+  {
+    name: "Monique Bouwman",
+    location: "Paterswolde",
+    treatment: "Bioslimming Kuur",
+    rating: 5,
+    text: "De Bioslimming behandelingen hebben mijn huid zichtbaar strakker en gladder gemaakt, en ik voel me veel lichter. De combinatie van detox en ontspanning is geweldig!",
+    date: "Recent"
+  }
+];
+---
+
+{isEnabled && (
+  <section class="section-py bg-surface" id="reviews" aria-label="Klantervaringen">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">5-Sterren Ervaringen</span>
+        <h2 class="section-title">Wat Cliënten Zeggen</h2>
+        <p class="section-subtitle">
+          Persoonlijke aandacht, rust en vakkennis staan centraal bij elke ontmoeting in onze studio.
+        </p>
+      </div>
+
+      <div class="reviews-grid">
+        {reviews.map((rev) => (
+          <div class="review-card">
+            <div class="review-top">
+              <div class="stars" aria-label={`${rev.rating} van 5 sterren`}>
+                {[...Array(rev.rating)].map(() => (
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="#dec148">
+                    <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                  </svg>
+                ))}
+              </div>
+              <span class="google-badge">
+                <svg width="14" height="14" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.06H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.94l2.85-2.22.81-.63z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.06l3.66 2.84c.87-2.6 3.3-4.52 6.16-4.52z"/></svg>
+                Google Review
+              </span>
+            </div>
+            
+            <p class="review-quote">&ldquo;{rev.text}&rdquo;</p>
+            
+            <div class="review-author">
+              <div class="author-avatar">{rev.name.charAt(0)}</div>
+              <div class="author-info">
+                <strong class="author-name">{rev.name}</strong>
+                <span class="author-treatment">{rev.treatment} &bull; {rev.location}</span>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="reviews-cta text-center">
+        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+          Ervaar Zelf de Rust &ndash; Boek een Consult
+        </a>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    margin-bottom: 3rem;
+  }
+
+  @media (max-width: 768px) {
+    .reviews-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .review-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2.25rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+  }
+
+  .review-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+  }
+
+  .review-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.25rem;
+  }
+
+  .stars {
+    display: flex;
+    gap: 2px;
+  }
+
+  .google-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: var(--surface);
+    padding: 0.25rem 0.6rem;
+    border-radius: var(--radius-full);
+    border: 1px solid var(--border-color);
+  }
+
+  .review-quote {
+    font-style: italic;
+    font-size: 1.025rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .review-author {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+  }
+
+  .author-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    border: 1px solid var(--primary-subtle);
+  }
+
+  .author-info {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .author-name {
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .author-treatment {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .reviews-cta {
+    margin-top: 1rem;
+  }
+</style>

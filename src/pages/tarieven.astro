@@ -1,0 +1,161 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+import PriceTable from '../components/PriceTable.astro';
+---
+
+<Layout 
+  title="Tarieven & Massage Membership | Massage Studio Eelde"
+  description="Overzicht van tarieven voor consulten, Shiatsu, Voetreflextherapie, Dorn methode, Bioslimming en het voordelige Massage Membership in Eelde."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Tarieven & Vergoedingen</span>
+      <h1 class="page-title">Prijzen & Investeringen in Uw Welzijn</h1>
+      <p class="page-lead">
+        Duidelijke en transparante tarieven voor consulten, behandelingen, kuren en ons exclusieve Massage Membership.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <PriceTable />
+
+      <!-- Important Policy & Tax Notice -->
+      <div class="price-info-notice">
+        <div class="notice-card">
+          <div class="notice-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+          </div>
+          <div class="notice-content">
+            <h3 class="notice-title">Belangrijke Informatie over Betaling & Vergoeding</h3>
+            <ul class="notice-list">
+              <li>
+                <strong>Zorgverzekering:</strong> Individuele curatieve consulten (zoals Shiatsu therapie en reflexologie) komen bij een aanvullende verzekering veelal in aanmerking voor een (gedeeltelijke) vergoeding door uw zorgverzekeraar. Dit valt buiten het verplichte eigen risico.
+              </li>
+              <li>
+                <strong>Vrijstelling van BTW:</strong> Als erkend BATC Complementair Therapeut zijn onze therapeutische gezondheidsbehandelingen vrijgesteld van BTW conform artikel 11 van de Wet op de Omzetbelasting.
+              </li>
+              <li>
+                <strong>Betaalmethoden:</strong> U kunt in de praktijk eenvoudig betalen via PIN, contant, iDEAL of bankoverschrijving.
+              </li>
+              <li>
+                <strong>Annulering:</strong> Afspraken kunnen tot 24 uur van tevoren kosteloos worden geannuleerd. Bij latere annuleringen of no-show wordt het behandeltarief conform de huisregels in rekening gebracht.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <!-- Booking Direct Action -->
+      <div class="booking-cta-box text-center">
+        <h2 class="section-title">Direct een afspraak inplannen?</h2>
+        <p class="section-subtitle">
+          Kies eenvoudig een datum en tijdstip die u schikken via ons beveiligde cliëntenportaal.
+        </p>
+        <div class="cta-btns">
+          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg">
+            Online Afspraak Plannen
+          </a>
+          <a href="/contact" class="btn btn-secondary btn-lg">
+            Vraag Stellen via Contact
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .price-info-notice {
+    margin-top: 4rem;
+  }
+
+  .notice-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    display: flex;
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 680px) {
+    .notice-card {
+      flex-direction: column;
+      padding: 1.75rem;
+    }
+  }
+
+  .notice-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .notice-title {
+    font-size: 1.35rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+  }
+
+  .notice-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    font-size: 0.95rem;
+    line-height: 1.65;
+  }
+
+  .notice-list li strong {
+    color: var(--text-color);
+  }
+
+  .booking-cta-box {
+    margin-top: 4.5rem;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+  }
+
+  .btn-lg {
+    padding: 0.95rem 2.25rem;
+  }
+</style>

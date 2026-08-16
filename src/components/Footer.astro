@@ -1,0 +1,375 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const currentYear = new Date().getFullYear();
+const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.stedenMicrosites;
+---
+
+<footer class="site-footer">
+  <!-- Accreditaties & Keurmerken strip -->
+  <div class="footer-badges-strip">
+    <div class="container">
+      <div class="badges-flex">
+        {siteConfig.accreditations.map((badge) => (
+          <div class="badge-item">
+            <img src={badge.logo} alt={badge.name} class="badge-img" />
+            <div class="badge-text">
+              <span class="badge-title">{badge.name}</span>
+              <span class="badge-sub">{badge.code}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Footer Content -->
+  <div class="footer-main">
+    <div class="container">
+      <div class={`footer-grid ${isMicrositesEnabled ? 'cols-4' : 'cols-3'}`}>
+        <!-- Col 1: Over de praktijk -->
+        <div class="footer-col">
+          <div class="footer-brand">
+            <img src="/images/MSE.png" alt="Massage Studio Eelde" class="footer-logo" />
+            <p class="brand-desc">
+              Waar kwaliteit en gevoel voorop staan. Erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting biedt therapeutische massages, Shiatsu, Voetreflexologie, Dorn en Bioslimming in Eelde-Paterswolde.
+            </p>
+            <div class="footer-meta-info">
+              <p><strong>KvK:</strong> {siteConfig.kvk}</p>
+              <p><strong>IBAN:</strong> {siteConfig.iban}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Col 2: Snelle links -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Navigatie</h4>
+          <ul class="footer-links">
+            <li><a href="/">Home</a></li>
+            <li><a href="/behandelingen">Behandelingen & Massages</a></li>
+            <li><a href="/5-natuurgerichte-principes">5 Natuurgerichte Principes</a></li>
+            <li><a href="/tarieven">Tarieven & Prijzen</a></li>
+            <li><a href="/over-mij">Over Alianne Zuidhof</a></li>
+            <li><a href="/contact">Contact & Locatie</a></li>
+            <li><a href="/huisregels">Huisregels</a></li>
+            <li><a href="/privacyverklaring">Privacyverklaring (AVG)</a></li>
+          </ul>
+        </div>
+
+        <!-- Col 3: Contact & Openingstijden -->
+        <div class="footer-col">
+          <h4 class="footer-heading">Contact & Tijden</h4>
+          <div class="contact-details">
+            <p class="contact-line">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>{siteConfig.address.street}<br />{siteConfig.address.postalCode} {siteConfig.address.city}<br /><em>({siteConfig.address.locationNote})</em></span>
+            </p>
+            <p class="contact-line">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+              <a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a>
+            </p>
+            <p class="contact-line">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+              <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
+            </p>
+          </div>
+          <div class="opening-hours-block">
+            <h5 class="hours-subheading">Praktijkdagen Alianne:</h5>
+            <ul class="hours-list">
+              {siteConfig.openingHours.map((item) => (
+                <li><span>{item.day}:</span> <span>{item.hours}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <!-- Col 4: Regio's (indien microsites true) -->
+        {isMicrositesEnabled && (
+          <div class="footer-col">
+            <h4 class="footer-heading">Werkgebied & Regio</h4>
+            <p class="region-intro">Centraal gelegen en uitstekend bereikbaar vanuit:</p>
+            <ul class="footer-links region-links">
+              {siteConfig.regions.map((reg) => (
+                <li>
+                  <a href={`/regio/${reg.slug}`}>
+                    Massage {reg.name} <span class="dist-tag">({reg.distance})</span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+
+      <!-- Wettelijke Beroepsvereniging & Klachten Disclaimer -->
+      <div class="footer-disclaimer">
+        <p>
+          <strong>Kwaliteit & Vergoedingen:</strong> Alianne Zuidhof-Hoiting is als gekwalificeerd BATC Complementair Therapeut aangesloten bij de beroepsorganisatie BATC en de KAB-koepel. Behandelingen zijn vrijgesteld van BTW (artikel 11 Wet OB). Therapeutische consulten komen bij een aanvullende zorgverzekering veelal in aanmerking voor gedeeltelijke vergoeding. Informeer hiervoor altijd bij uw zorgverzekeraar. In het kader van de Wkkgz is de praktijk aangesloten bij een erkende geschillencommissie via de koepelorganisatie.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Universele BitbloX Onderbalk -->
+  <div class="footer-bottom">
+    <div class="container footer-bottom-inner">
+      <p>
+        Copyright &copy; {currentYear} {siteConfig.clientName} | Webdesign & Hosting door <a href="https://bitblox.nl" target="_blank" rel="noopener noreferrer" class="bitblox-link">BitbloX</a>
+      </p>
+      <p class="footer-bottom-links">
+        <a href="/privacyverklaring">Privacyverklaring</a>
+        <span>&bull;</span>
+        <a href="/huisregels">Huisregels</a>
+        <span>&bull;</span>
+        <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer">MijnDiad Portaal</a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    background-color: #241c22;
+    color: #e4dce2;
+    border-top: 1px solid #3d2f39;
+    font-size: 0.925rem;
+  }
+
+  .footer-badges-strip {
+    background-color: #1a1418;
+    padding: 1.75rem 0;
+    border-bottom: 1px solid #33252f;
+  }
+
+  .badges-flex {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .badge-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .badge-img {
+    height: 38px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    background: #ffffff;
+    padding: 2px;
+  }
+
+  .badge-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .badge-title {
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #ffffff;
+  }
+
+  .badge-sub {
+    font-size: 0.75rem;
+    color: var(--secondary);
+  }
+
+  .footer-main {
+    padding: 4rem 0 2.5rem;
+  }
+
+  .footer-grid {
+    display: grid;
+    gap: 3rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .footer-grid.cols-4 {
+    grid-template-columns: 1.2fr 0.8fr 1.1fr 1fr;
+  }
+
+  .footer-grid.cols-3 {
+    grid-template-columns: 1.3fr 0.9fr 1.2fr;
+  }
+
+  @media (max-width: 1024px) {
+    .footer-grid.cols-4, .footer-grid.cols-3 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .footer-grid.cols-4, .footer-grid.cols-3 {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .footer-logo {
+    height: 48px;
+    width: auto;
+    margin-bottom: 1.25rem;
+    filter: brightness(0) invert(1);
+    opacity: 0.9;
+  }
+
+  .brand-desc {
+    color: #b8aab3;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+  }
+
+  .footer-meta-info p {
+    font-size: 0.825rem;
+    color: #9d8e98;
+    margin-bottom: 0.25rem;
+  }
+
+  .footer-heading {
+    color: #ffffff;
+    font-size: 1.25rem;
+    margin-bottom: 1.25rem;
+    position: relative;
+    padding-bottom: 0.5rem;
+  }
+
+  .footer-heading::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 32px;
+    height: 2px;
+    background-color: var(--primary);
+  }
+
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .footer-links a {
+    color: #c9bec6;
+    font-size: 0.9rem;
+  }
+
+  .footer-links a:hover {
+    color: #ffffff;
+    padding-left: 4px;
+  }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .contact-line {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    color: #c9bec6;
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  .contact-line svg {
+    color: var(--secondary);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+
+  .contact-line a {
+    color: #c9bec6;
+  }
+
+  .contact-line a:hover {
+    color: #ffffff;
+  }
+
+  .opening-hours-block {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: var(--radius-sm);
+    padding: 0.85rem;
+  }
+
+  .hours-subheading {
+    font-size: 0.85rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-family: inherit;
+    font-weight: 600;
+  }
+
+  .hours-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    font-size: 0.825rem;
+  }
+
+  .hours-list li {
+    display: flex;
+    justify-content: space-between;
+    color: #b8aab3;
+  }
+
+  .region-intro {
+    font-size: 0.85rem;
+    color: #b8aab3;
+    margin-bottom: 0.75rem;
+  }
+
+  .region-links a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .dist-tag {
+    font-size: 0.75rem;
+    color: #9d8e98;
+  }
+
+  .footer-disclaimer {
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;
+    font-size: 0.8rem;
+    color: #8c7d87;
+    line-height: 1.6;
+  }
+
+  .footer-bottom-links {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .footer-bottom-links a {
+    color: #a89ba3;
+  }
+
+  .footer-bottom-links a:hover {
+    color: #ffffff;
+  }
+</style>

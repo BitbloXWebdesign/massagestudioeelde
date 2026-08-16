@@ -1,0 +1,831 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+import TreatmentCard from '../components/TreatmentCard.astro';
+import PriceTable from '../components/PriceTable.astro';
+import ReviewsCarousel from '../components/ReviewsCarousel.astro';
+import FAQSection from '../components/FAQSection.astro';
+import ContactForm from '../components/ContactForm.astro';
+
+const treatments = [
+  {
+    title: "Shiatsu Therapie & Massage",
+    duration: "50 of 75 min",
+    price: "Vanaf €80,-",
+    image: "/images/DSC_1450.jpg",
+    slug: "/behandelingen#shiatsu",
+    description: "Japanse drukpunttherapie langs de energiebanen (meridianen). Brengt diepe rust, heft blokkades op en herstelt de balans bij stress, hoofdpijn en fysieke klachten.",
+    tags: ["BATC Vergoedbaar", "Meridianen"]
+  },
+  {
+    title: "Dorn-Methode",
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/DSC_1502.1.jpg",
+    slug: "/behandelingen#dorn",
+    description: "Een milde en zachte wervelkolom- en gewrichtscorrectie in dynamische beweging. Zeer effectief bij bekkenscheefstand, beenlengteverschil en rug-/nekpijn.",
+    tags: ["Wervelkolom", "Zacht & Veilig"]
+  },
+  {
+    title: "Voetreflextherapie",
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/DSC_1465.jpg",
+    slug: "/behandelingen#voetreflex",
+    description: "Stimulatie van reflexzones op de voeten die corresponderen met alle organen en weefsels. Activeert het zelfhelend vermogen en verbetert drainage en doorbloeding.",
+    tags: ["Natuurlijk Herstel", "Reflexzones"]
+  },
+  {
+    title: "Oorreflexologie",
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/oorreflexologie--150x150.jpg",
+    slug: "/behandelingen#oorreflexologie",
+    description: "Gerichte behandelmethode via reflexpunten op de oorschelp. Uitermate krachtig bij acute pijndemping, ontspanning en ondersteuning van het zenuwstelsel.",
+    tags: ["Pijndemping", "Zenuwstelsel"]
+  },
+  {
+    title: "BIOSLIMMING Eelde",
+    duration: "60 of 90 min",
+    price: "Vanaf €108,-",
+    image: "/images/Bioslimming.jpg",
+    slug: "/behandelingen#bioslimming",
+    description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging, lymfedrainage en cellulitisvermindering.",
+    tags: ["100% Natuurlijk", "Detox & Strak"]
+  },
+  {
+    title: "Klassieke Ontspanningsmassage",
+    duration: "50 of 75 min",
+    price: "Vanaf €80,-",
+    image: "/images/massage-betaalde-stockfoto.jpg",
+    slug: "/behandelingen#klassiek",
+    description: "Verzorgende en losmakende massage van strakke spiergroepen. Verbetert de circulatie, voert afvalstoffen af en geeft pure ontspanning voor lichaam en geest.",
+    tags: ["Spierherstel", "Totale Rust"]
+  }
+];
+---
+
+<Layout 
+  title="Massage Studio Eelde | BATC Complementair Therapeut Alianne Zuidhof"
+  description="Professionele massage en natuurgeneeskunde in Eelde-Paterswolde. Shiatsu, Voetreflexologie, Dorn methode & Bioslimming. Waar kwaliteit en gevoel voorop staan."
+>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container hero-inner">
+      <div class="hero-content">
+        <div class="hero-badge">
+          <span class="pulse-dot"></span>
+          <span>BATC Complementair Therapeut &bull; HBO-Conform</span>
+        </div>
+        
+        <h1 class="hero-title">
+          Waar kwaliteit en <span class="highlight">gevoel</span> voorop staan
+        </h1>
+        
+        <p class="hero-lead">
+          Welkom bij Massage Studio Eelde. Onder begeleiding van erkend therapeut Alianne Zuidhof-Hoiting vindt u een veilige haven voor diepe ontspanning, energetische balans en gerichte ondersteuning bij chronische of vage klachten.
+        </p>
+
+        <div class="hero-actions">
+          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            <span>Afspraak Maken</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+          </a>
+          <a href="/behandelingen" class="btn btn-secondary">
+            Bekijk Behandelingen
+          </a>
+        </div>
+
+        <div class="hero-trust-strip">
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Vergoeding via aanvullende zorgverzekering</span>
+          </div>
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Op basis van de 5 natuurgerichte principes</span>
+          </div>
+          <div class="trust-item">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span>Gevestigd in pand Movere Fysiotherapie Eelde</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="hero-image-wrapper">
+          <div class="blob-frame hero-blob">
+            <img 
+              src="/images/Alianne.webp" 
+              alt="Alianne Zuidhof-Hoiting - Massage Studio Eelde" 
+              width="460" 
+              height="550" 
+              class="hero-img"
+            />
+          </div>
+          <div class="hero-floating-card">
+            <div class="card-icon-wrap">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+            </div>
+            <div>
+              <strong>Alianne Zuidhof</strong>
+              <span>Gediplomeerd Therapeut</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Filosofie & Introductie Section -->
+  <section class="section-py bg-surface" id="intro">
+    <div class="container">
+      <div class="intro-grid">
+        <div class="intro-text">
+          <span class="section-badge">Persoonlijke Zorg & Aandacht</span>
+          <h2 class="section-title">Aandacht voor uw gezondheid en natuurlijk herstel</h2>
+          <p>
+            Shiatsu, massagetherapie en voetreflextherapie zijn veilige en effectieve behandelvormen bij uiteenlopende gezondheidsproblemen. Met vakkennis, empathie en zorgzame aandacht bent u bij Massage Studio Eelde in vertrouwde handen.
+          </p>
+          <p>
+            Luisteren zonder oordeel en aanraken met respect vormen het fundament van elke ontmoeting. Een consult is een waardevolle aanvulling wanneer u een arts bezoekt, last heeft van chronische of vage klachten, herstellend bent van een zware periode (zoals oncologische trajecten), of simpelweg behoefte heeft aan diepe ontspanning.
+          </p>
+          
+          <div class="benefit-points">
+            <div class="benefit-col">
+              <ul class="clean-list">
+                <li>Beter slapen & meer innerlijke rust</li>
+                <li>Verlichting bij hoofdpijn & nek-/rugklachten</li>
+                <li>Ondersteuning bij darm- en spijsverteringsklachten</li>
+              </ul>
+            </div>
+            <div class="benefit-col">
+              <ul class="clean-list">
+                <li>Opheffen van energetische blokkades</li>
+                <li>Meer energie in plaats van geleefd worden</li>
+                <li>Persoonlijk behandelplan op maat</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="intro-btn-wrap">
+            <a href="/over-mij" class="btn btn-secondary">Lees meer over Alianne</a>
+          </div>
+        </div>
+
+        <div class="intro-media">
+          <div class="media-collage">
+            <img src="/images/DSC_1469.jpg" alt="Rustgevende massagebehandeling" class="collage-main" />
+            <div class="collage-badge">
+              <span class="number">100%</span>
+              <span class="desc">Aandacht & Maatwerk</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Behandelingen Overzicht -->
+  <section class="section-py" id="behandelingen">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Gespecialiseerd Aanbod</span>
+        <h2 class="section-title">Onze Behandelingen</h2>
+        <p class="section-subtitle">
+          Ieder consult wordt persoonlijk afgestemd op basis van de 5 natuurgerichte principes, lichamelijk onderzoek en een zorgvuldige anamnese.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        {treatments.map((item) => (
+          <TreatmentCard {...item} />
+        ))}
+      </div>
+
+      <div class="text-center mt-4">
+        <a href="/behandelingen" class="btn btn-secondary">
+          Bekijk Alle Behandelingen & Details
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- De 5 Principes Spotlight Banner -->
+  <section class="section-py bg-subtle">
+    <div class="container">
+      <div class="principles-banner">
+        <div class="banner-text">
+          <span class="section-badge">BATC Behandelmethode</span>
+          <h2 class="banner-title">De 5 Natuurgerichte Principes</h2>
+          <p>
+            Als BATC Complementair Therapeut werk ik holistisch. De 5 principes vormen de schakels naar duurzame vitaliteit en welbevinden:
+          </p>
+          
+          <div class="principles-pills">
+            <div class="principle-pill">
+              <span class="num">1</span>
+              <div>
+                <strong>Energie</strong>
+                <span>De bron van herstel & vitaliteit</span>
+              </div>
+            </div>
+            <div class="principle-pill">
+              <span class="num">2</span>
+              <div>
+                <strong>Prikkeloverdracht</strong>
+                <span>Zenuwstelsel en communicatie</span>
+              </div>
+            </div>
+            <div class="principle-pill">
+              <span class="num">3</span>
+              <div>
+                <strong>Drainage</strong>
+                <span>Afvoer van toxines & afvalstoffen</span>
+              </div>
+            </div>
+            <div class="principle-pill">
+              <span class="num">4</span>
+              <div>
+                <strong>Voeding</strong>
+                <span>Zuivere brandstof voor elke cel</span>
+              </div>
+            </div>
+            <div class="principle-pill">
+              <span class="num">5</span>
+              <div>
+                <strong>Psyche & Welzijn</strong>
+                <span>Inzicht in belemmerende patronen</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="banner-actions">
+            <a href="/5-natuurgerichte-principes" class="btn btn-primary">
+              Ontdek de 5 Principes
+            </a>
+          </div>
+        </div>
+
+        <div class="banner-visual hide-tablet">
+          <img src="/images/DSC_1480.jpg" alt="Therapeutische aanraking en energie" class="banner-img" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BIOSLIMMING Spotlight Section -->
+  <section class="section-py" id="bioslimming">
+    <div class="container">
+      <div class="bioslimming-grid">
+        <div class="bioslimming-media">
+          <div class="bioslimming-img-wrap">
+            <img src="/images/Bioslimming.jpg" alt="Bioslimming Body Wrap Eelde" class="bioslimming-img" />
+            <img src="/images/Bioslimming Eelde billen.png" alt="Bioslimming Resultaten" class="bioslimming-sub-img" />
+          </div>
+        </div>
+        <div class="bioslimming-text">
+          <span class="section-badge">Wetenschappelijk Bewezen</span>
+          <h2 class="section-title">BIOSLIMMING Eelde</h2>
+          <h3 class="bioslimming-subtitle">Multi-Award winnende behandeling voor een slank & strak figuur</h3>
+          <p>
+            Droomt u van een strakker lichaam via een methode die écht werkt en tegelijkertijd een ontspannend verwenmoment is? BIOSLIMMING stimuleert de vetverbranding, verbetert de lymfe-afvoer en vermindert cellulitis met 100% natuurlijke actieve werkstoffen.
+          </p>
+          <ul class="stats-list">
+            <li><strong>93%</strong> gladdere huid</li>
+            <li><strong>86%</strong> stevigere huid</li>
+            <li><strong>97%</strong> verbeterde vochtafvoer</li>
+            <li><strong>74%</strong> zichtbaar slanker & strakker</li>
+          </ul>
+          <div class="bioslimming-cta">
+            <a href="/tarieven#bioslimming" class="btn btn-primary">Bekijk Bioslimming Tarieven</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Tarieven & Membership Highlight -->
+  <section class="section-py bg-surface" id="tarieven">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Transparante Tarieven</span>
+        <h2 class="section-title">Prijzen & Massage Membership</h2>
+        <p class="section-subtitle">
+          Helderheid over consulten, memberships en behandelingen. Vrijgesteld van BTW conform art. 11 Wet OB.
+        </p>
+      </div>
+
+      <PriceTable />
+    </div>
+  </section>
+
+  <!-- Reviews Section -->
+  <ReviewsCarousel />
+
+  <!-- FAQ Section -->
+  <FAQSection />
+
+  <!-- Regio & Locatie Section -->
+  <section class="section-py bg-surface" id="locatie">
+    <div class="container">
+      <div class="location-grid">
+        <div class="location-info">
+          <span class="section-badge">Centraal in Eelde</span>
+          <h2 class="section-title">Praktijklocatie & Bereikbaarheid</h2>
+          <p>
+            Massage Studio Eelde is gevestigd aan de <strong>Nieuwe Akkers 18a in Eelde</strong>, in hetzelfde pand als Fysiotherapie Movere. De praktijk beschikt over gratis parkeergelegenheid direct voor de deur en is gelijkvloers toegankelijk.
+          </p>
+          
+          <div class="travel-times">
+            <div class="travel-badge">
+              <strong>Groningen-Zuid</strong>
+              <span>ca. 8 - 12 min</span>
+            </div>
+            <div class="travel-badge">
+              <strong>Haren</strong>
+              <span>ca. 8 min</span>
+            </div>
+            <div class="travel-badge">
+              <strong>Paterswolde</strong>
+              <span>ca. 2 min</span>
+            </div>
+            <div class="travel-badge">
+              <strong>Vries / Yde</strong>
+              <span>ca. 6 - 9 min</span>
+            </div>
+          </div>
+
+          <div class="location-contact-box">
+            <p><strong>Adres:</strong> Nieuwe Akkers 18a, 9765 GC Eelde-Paterswolde</p>
+            <p><strong>Telefoon:</strong> <a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a></p>
+            <p><strong>E-mail:</strong> <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+          </div>
+        </div>
+
+        <div class="location-form-wrap">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Hero */
+  .hero-section {
+    background: linear-gradient(180deg, #ffffff 0%, var(--surface) 100%);
+    padding: 4.5rem 0 5.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.65rem;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    padding: 0.4rem 1.1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--primary-subtle);
+  }
+
+  .pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    box-shadow: 0 0 0 0 rgba(157, 70, 126, 0.7);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 70, 126, 0.7); }
+    70% { transform: scale(1); box-shadow: 0 0 0 8px rgba(157, 70, 126, 0); }
+    100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(157, 70, 126, 0); }
+  }
+
+  .hero-title {
+    margin-bottom: 1.25rem;
+  }
+
+  .highlight {
+    color: var(--primary);
+    font-style: italic;
+  }
+
+  .hero-lead {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-trust-strip {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+  }
+
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+  }
+
+  .trust-item svg {
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .hero-visual {
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-image-wrapper {
+    position: relative;
+    max-width: 420px;
+    width: 100%;
+  }
+
+  .hero-blob {
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    background: var(--primary-light);
+  }
+
+  .hero-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero-floating-card {
+    position: absolute;
+    bottom: -20px;
+    left: -20px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.25rem;
+    box-shadow: var(--shadow-md);
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    animation: floatCard 4s ease-in-out infinite;
+  }
+
+  @keyframes floatCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .card-icon-wrap {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-floating-card strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  .hero-floating-card span {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  /* Intro */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .intro-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .benefit-points {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+
+  @media (max-width: 640px) {
+    .benefit-points {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .clean-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .clean-list li {
+    position: relative;
+    padding-left: 1.4rem;
+    font-size: 0.925rem;
+    color: var(--text-color);
+  }
+
+  .clean-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .intro-btn-wrap {
+    margin-top: 1.5rem;
+  }
+
+  .media-collage {
+    position: relative;
+  }
+
+  .collage-main {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+  }
+
+  .collage-badge {
+    position: absolute;
+    bottom: -20px;
+    right: 20px;
+    background: var(--primary);
+    color: #ffffff;
+    padding: 1.25rem 1.75rem;
+    border-radius: var(--radius-md);
+    text-align: center;
+    box-shadow: var(--shadow-md);
+  }
+
+  .collage-badge .number {
+    display: block;
+    font-family: 'Unna', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .collage-badge .desc {
+    font-size: 0.8rem;
+    opacity: 0.9;
+  }
+
+  /* Principles Banner */
+  .principles-banner {
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .principles-banner {
+      grid-template-columns: 1fr;
+    }
+    .hide-tablet {
+      display: none;
+    }
+  }
+
+  .banner-title {
+    margin-bottom: 1rem;
+  }
+
+  .principles-pills {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    margin: 2rem 0;
+  }
+
+  .principle-pill {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .principle-pill .num {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary-light);
+    color: var(--primary-dark);
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .principle-pill strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .principle-pill span {
+    font-size: 0.775rem;
+    color: var(--text-muted);
+  }
+
+  .banner-img {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+  }
+
+  /* BIOSLIMMING */
+  .bioslimming-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .bioslimming-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .bioslimming-img-wrap {
+    position: relative;
+  }
+
+  .bioslimming-img {
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+  }
+
+  .bioslimming-sub-img {
+    position: absolute;
+    bottom: -25px;
+    right: -25px;
+    width: 180px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-lg);
+    border: 4px solid #ffffff;
+    background: #ffffff;
+  }
+
+  @media (max-width: 640px) {
+    .bioslimming-sub-img {
+      display: none;
+    }
+  }
+
+  .bioslimming-subtitle {
+    font-size: 1.35rem;
+    color: var(--primary-dark);
+    margin-bottom: 1.25rem;
+  }
+
+  .stats-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0;
+  }
+
+  .stats-list li {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    padding: 0.85rem 1.1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  .stats-list strong {
+    color: var(--primary);
+    font-size: 1.25rem;
+    display: block;
+  }
+
+  /* Location */
+  .location-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  @media (max-width: 960px) {
+    .location-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .travel-times {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.85rem;
+    margin: 2rem 0;
+  }
+
+  .travel-badge {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: var(--radius-sm);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .travel-badge strong {
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  .travel-badge span {
+    font-size: 0.75rem;
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  .location-contact-box {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+  }
+
+  .location-contact-box p {
+    margin: 0;
+  }
+
+  .mt-4 {
+    margin-top: 2.5rem;
+  }
+</style>

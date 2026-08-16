@@ -1,0 +1,287 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.accessibility;
+---
+
+{isEnabled && (
+  <div class="a11y-container">
+    <button 
+      id="a11yToggleBtn" 
+      class="a11y-trigger" 
+      aria-label="Toegankelijkheidsopties openen"
+      title="Toegankelijkheid & Weergave opties"
+    >
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="4" r="2"></circle>
+        <path d="M18 9h-4l-1 11"></path>
+        <path d="M6 9h4l1 11"></path>
+        <path d="M12 9v5"></path>
+        <path d="M9 20h6"></path>
+      </svg>
+    </button>
+
+    <div id="a11yMenu" class="a11y-menu" aria-hidden="true">
+      <div class="a11y-header">
+        <span class="a11y-title">Toegankelijkheid</span>
+        <button id="a11yCloseBtn" class="a11y-close" aria-label="Sluiten">&times;</button>
+      </div>
+
+      <div class="a11y-controls">
+        <div class="a11y-group">
+          <span class="control-label">Tekstgrootte:</span>
+          <div class="btn-group">
+            <button id="btnTextNormal" class="a11y-btn active" title="Normale tekstgrootte">A</button>
+            <button id="btnTextLarge" class="a11y-btn" title="Grote tekst">A+</button>
+            <button id="btnTextLarger" class="a11y-btn" title="Extra grote tekst">A++</button>
+          </div>
+        </div>
+
+        <div class="a11y-group">
+          <span class="control-label">Hoog Contrast:</span>
+          <button id="btnContrast" class="a11y-action-btn">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18V4c4.41 0 8 3.59 8 8s-3.59 8-8 8z"/></svg>
+            <span>Hoog Contrast Inschakelen</span>
+          </button>
+        </div>
+
+        <div class="a11y-group">
+          <span class="control-label">Lettertype:</span>
+          <button id="btnDyslexia" class="a11y-action-btn">
+            <span>Dyslexie-vriendelijk Font</span>
+          </button>
+        </div>
+
+        <button id="btnResetA11y" class="a11y-reset-btn">Standaard herstellen</button>
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  .a11y-container {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 1.5rem;
+    z-index: 990;
+  }
+
+  .a11y-trigger {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #2d232a;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+
+  .a11y-trigger:hover {
+    transform: scale(1.08);
+    background: var(--primary);
+  }
+
+  .a11y-menu {
+    position: absolute;
+    bottom: 56px;
+    left: 0;
+    width: 280px;
+    background: #ffffff;
+    border-radius: var(--radius-md);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-color);
+    padding: 1.25rem;
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .a11y-menu.is-active {
+    display: flex;
+    animation: fadeIn 0.2s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .a11y-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+  }
+
+  .a11y-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .a11y-close {
+    background: transparent;
+    border: none;
+    font-size: 1.25rem;
+    cursor: pointer;
+    color: var(--text-muted);
+  }
+
+  .a11y-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .a11y-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .control-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+  }
+
+  .btn-group {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  .a11y-btn {
+    flex: 1;
+    padding: 0.4rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+  }
+
+  .a11y-btn.active, .a11y-btn:hover {
+    background: var(--primary);
+    color: #ffffff;
+    border-color: var(--primary);
+  }
+
+  .a11y-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-size: 0.825rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s ease;
+  }
+
+  .a11y-action-btn:hover {
+    background: var(--primary-subtle);
+    border-color: var(--primary);
+  }
+
+  .a11y-action-btn.active {
+    background: var(--primary);
+    color: #ffffff;
+  }
+
+  .a11y-reset-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    text-decoration: underline;
+    cursor: pointer;
+    margin-top: 0.25rem;
+    text-align: center;
+  }
+
+  @media (max-width: 640px) {
+    .a11y-container {
+      bottom: 1rem;
+      left: 1rem;
+    }
+  }
+</style>
+
+<script>
+  const toggleBtn = document.getElementById('a11yToggleBtn');
+  const closeBtn = document.getElementById('a11yCloseBtn');
+  const menu = document.getElementById('a11yMenu');
+
+  const btnNormal = document.getElementById('btnTextNormal');
+  const btnLarge = document.getElementById('btnTextLarge');
+  const btnLarger = document.getElementById('btnTextLarger');
+  const btnContrast = document.getElementById('btnContrast');
+  const btnDyslexia = document.getElementById('btnDyslexia');
+  const btnReset = document.getElementById('btnResetA11y');
+
+  if (toggleBtn && menu) {
+    toggleBtn.addEventListener('click', () => {
+      menu.classList.toggle('is-active');
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        menu.classList.remove('is-active');
+      });
+    }
+
+    const html = document.documentElement;
+
+    btnNormal?.addEventListener('click', () => {
+      html.classList.remove('a11y-text-large', 'a11y-text-larger');
+      updateTextBtns(btnNormal);
+    });
+
+    btnLarge?.addEventListener('click', () => {
+      html.classList.remove('a11y-text-larger');
+      html.classList.add('a11y-text-large');
+      updateTextBtns(btnLarge);
+    });
+
+    btnLarger?.addEventListener('click', () => {
+      html.classList.remove('a11y-text-large');
+      html.classList.add('a11y-text-larger');
+      updateTextBtns(btnLarger);
+    });
+
+    btnContrast?.addEventListener('click', () => {
+      html.classList.toggle('a11y-high-contrast');
+      btnContrast.classList.toggle('active');
+    });
+
+    btnDyslexia?.addEventListener('click', () => {
+      html.classList.toggle('a11y-dyslexic');
+      btnDyslexia.classList.toggle('active');
+    });
+
+    btnReset?.addEventListener('click', () => {
+      html.classList.remove('a11y-text-large', 'a11y-text-larger', 'a11y-high-contrast', 'a11y-dyslexic');
+      btnContrast?.classList.remove('active');
+      btnDyslexia?.classList.remove('active');
+      updateTextBtns(btnNormal);
+    });
+
+    function updateTextBtns(activeBtn: HTMLElement | null) {
+      [btnNormal, btnLarge, btnLarger].forEach(b => b?.classList.remove('active'));
+      activeBtn?.classList.add('active');
+    }
+  }
+</script>

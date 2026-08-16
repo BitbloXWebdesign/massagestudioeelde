@@ -1,0 +1,286 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+
+const principles = [
+  {
+    number: "1",
+    title: "Energie",
+    tagline: "De basis van alle leven en natuurlijk herstel",
+    content: `Alles in en om ons heen bestaat uit energie. Wereldwijd wordt energie gezien als de absolute basis van het leven. Bij een BATC Complementair Therapeut vormt energie dan ook het eerste uitgangspunt. 
+    
+    Er kan pas succesvol gewerkt worden aan prikkeloverdracht, drainage, voeding en geestelijk welzijn wanneer de energiehuishouding op orde is. Zonder voldoende energie functioneert het lichaam niet optimaal en stagneert het zelfgenezend vermogen. Onze eerste prioriteit is dan ook zorgen dat er een evenwichtige energiestroom ontstaat en eventuele energetische blokkades worden opgeheven.`
+  },
+  {
+    number: "2",
+    title: "Prikkeloverdracht",
+    tagline: "Het fijnmazige communicatienetwerk van uw zenuwstelsel",
+    content: `De prikkeloverdracht komt tot stand via het centrale en perifere zenuwstelsel. Vanuit de hersenen worden signalen via het zenuwstelsel naar alle organen, spieren en weefsels gestuurd – en omgekeerd.
+    
+    Het zenuwstelsel fungeert als de vitale 'telefoonlijn' van uw lichaam. Pijnprikkels hebben bijvoorbeeld een waarschuwingsfunctie om snel te reageren. Een intacte en onbelemmerde prikkeloverdracht is onmisbaar om herstelsignalen door te geven en het lichaam weer in balans te brengen.`
+  },
+  {
+    number: "3",
+    title: "Drainage",
+    tagline: "Doeltreffende afvoer van opgestapelde afvalstoffen",
+    content: `In het dagelijks leven krijgt ons lichaam continu te maken met belasting door afvalstoffen. Denk aan externe factoren zoals luchtverontreiniging, pesticiden of toevoegingen in voeding, maar ook interne afvalstoffen door stress, vertraagde bloedcirculatie of een traag lymfesysteem.
+    
+    Onder gunstige omstandigheden scheidt het lichaam toxines uit via lever, nieren, darmen, huid en longen. Wanneer dit stagneert, raken weefsels overbelast. Door therapeutische drainage (zoals reflexologie, lymfemassage en BIOSLIMMING) stimuleren we de natuurlijke uitscheidingsorganen.`
+  },
+  {
+    number: "4",
+    title: "Voeding",
+    tagline: "Hoogwaardige bouwstoffen en brandstof voor uw cellen",
+    content: `Voeding onderhoudt uw cellen en levert de noodzakelijke brandstof voor het dagelijks functioneren. Gezonde en passende voeding is een van de belangrijkste pijlers voor een fit lichaam en een heldere geest.
+    
+    Niet elk voedingsmiddel wordt door ieder mens even goed verdragen. Door gerichte leefstijl- en voedingsadviezen leert u welke voedingsstoffen uw constitutie versterken en hoe u de opnamecapaciteit van uw darmen optimaal ondersteunt.`
+  },
+  {
+    number: "5",
+    title: "Geestelijk Welzijn & Psyche",
+    tagline: "Inzicht in emoties, gedachten en belemmerende patronen",
+    content: `Lichaam en geest zijn onlosmakelijk met elkaar verbonden. Emotionele, mentale en spirituele spanningen hebben een directe weerslag op uw fysieke gezondheid. Zorgen, stress of onverwerkte emoties kunnen leiden tot spierspanning, maagklachten, migraine en vermoeidheid.
+    
+    Tijdens de behandelingen ontstaat ruimte voor bewustwording. U leert belemmerende denk- en gedragspatronen te herkennen, te doorbreken en los te laten, zodat u ook op de lange termijn stevig in uw kracht blijft staan.`
+  }
+];
+---
+
+<Layout 
+  title="De 5 Natuurgerichte Principes | Massage Studio Eelde"
+  description="Uitleg over de 5 natuurgerichte principes van de BATC: Energie, Prikkeloverdracht, Drainage, Voeding en Geestelijk Welzijn bij Massage Studio Eelde."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Holistische Filosofie</span>
+      <h1 class="page-title">De 5 Natuurgerichte Principes</h1>
+      <p class="page-lead">
+        Het fundament van de BATC complementaire natuurgeneeskunde. Een integrale benadering van de mens op fysiek, emotioneel, mentaal en energetisch niveau.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <div class="principles-flow">
+        {principles.map((p) => (
+          <div class="principle-card">
+            <div class="card-num-wrap">
+              <span class="principle-number">{p.number}</span>
+            </div>
+            <div class="card-main">
+              <span class="principle-label">Principe {p.number}</span>
+              <h2 class="principle-heading">{p.title}</h2>
+              <p class="principle-tagline">{p.tagline}</p>
+              <div class="principle-body">
+                {p.content.split('\n\n').map(par => <p>{par}</p>)}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Kwaliteitsgarantie Block -->
+  <section class="section-py bg-surface">
+    <div class="container">
+      <div class="quality-box">
+        <div class="quality-content">
+          <span class="section-badge">BATC Beroepsorganisatie</span>
+          <h2 class="section-title">Wat mag u van een BATC Therapeut verwachten?</h2>
+          <p>
+            Een BATC Complementair Therapeut helpt u bij het herstellen en behouden van uw natuurlijke gezondheid. Daarbij wordt altijd naar de gehele mens gekeken, met de 5 principes als leidraad.
+          </p>
+          <ul class="quality-list">
+            <li><strong>Minimaal HBO-niveau:</strong> Medische en psychosociale basiskennis conform de strenge Plato-eisen.</li>
+            <li><strong>Jaarlijkse bijscholing:</strong> Verplichte nascholing om de hoogste kwaliteit en vakkennis te garanderen.</li>
+            <li><strong>Erkende accreditaties:</strong> Opleidingen getoetst door instanties zoals KTNO, SNRO, SHO en CPION.</li>
+            <li><strong>Wkkgz en klachtenregeling:</strong> Zorgvuldige aansluiting bij de koepelorganisatie en geschillencommissie.</li>
+          </ul>
+          
+          <div class="quality-actions">
+            <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Maak een Afspraak
+            </a>
+            <a href="/tarieven" class="btn btn-secondary">
+              Bekijk Vergoedingen & Tarieven
+            </a>
+          </div>
+        </div>
+
+        <div class="quality-logos">
+          <img src="/images/msebatc.png" alt="BATC Complementair Therapeut" class="batc-badge" />
+          <img src="/images/kiwa.png" alt="KIWA Keurmerk" class="sub-badge" />
+          <img src="/images/Logo Koepel KAB.png" alt="KAB Koepel" class="sub-badge" />
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .principles-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .principle-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 2.5rem;
+    align-items: start;
+    transition: all 0.3s ease;
+  }
+
+  .principle-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+    transform: translateY(-3px);
+  }
+
+  @media (max-width: 680px) {
+    .principle-card {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.75rem;
+    }
+  }
+
+  .card-num-wrap {
+    display: flex;
+    justify-content: center;
+  }
+
+  .principle-number {
+    font-family: 'Unna', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--primary);
+    background: var(--primary-light);
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--primary-subtle);
+  }
+
+  .principle-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--primary-dark);
+  }
+
+  .principle-heading {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin: 0.25rem 0 0.4rem;
+  }
+
+  .principle-tagline {
+    font-size: 1.05rem;
+    color: var(--primary-dark);
+    font-style: italic;
+    margin-bottom: 1.25rem;
+  }
+
+  .principle-body p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.85rem;
+  }
+
+  .quality-box {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem;
+    display: grid;
+    grid-template-columns: 1.3fr 0.7fr;
+    gap: 3.5rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .quality-box {
+      grid-template-columns: 1fr;
+      padding: 2rem;
+    }
+  }
+
+  .quality-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.75rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .quality-list li {
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .quality-list li::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--primary);
+    font-weight: 700;
+  }
+
+  .quality-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .quality-logos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .batc-badge {
+    max-width: 220px;
+    height: auto;
+  }
+
+  .sub-badge {
+    height: 48px;
+    width: auto;
+    object-fit: contain;
+  }
+</style>

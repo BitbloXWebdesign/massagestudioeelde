@@ -1,0 +1,206 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
+---
+
+{isEnabled && (
+  <div class="contact-form-card">
+    <div class="card-header">
+      <h3 class="card-title">Stuur een Bericht of Stel een Vraag</h3>
+      <p class="card-sub">Vul het formulier in en Alianne neemt binnen 1 werkdag contact met u op.</p>
+    </div>
+
+    <form id="mainContactForm" class="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contactName">Uw Naam *</label>
+          <input type="text" id="contactName" name="name" required placeholder="Bijv. Sanne de Jong" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="contactEmail">E-mailadres *</label>
+          <input type="email" id="contactEmail" name="email" required placeholder="sanne@voorbeeld.nl" class="form-input" />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="contactPhone">Telefoonnummer</label>
+          <input type="tel" id="contactPhone" name="phone" placeholder="06 - 12 34 56 78" class="form-input" />
+        </div>
+        <div class="form-group">
+          <label for="contactService">Gewenste Behandeling</label>
+          <select id="contactService" name="service" class="form-input form-select">
+            <option value="Algemeen / Overig">Algemeen / Overig</option>
+            <option value="Intake + Consult (75 min)">Intake + Consult (75 min)</option>
+            <option value="Shiatsu therapie / massage (50 min)">Shiatsu therapie / massage (50 min)</option>
+            <option value="Shiatsu therapie / massage (75 min)">Shiatsu therapie / massage (75 min)</option>
+            <option value="Voetreflextherapie (50 min)">Voetreflextherapie (50 min)</option>
+            <option value="Dorn-methode">Dorn-methode</option>
+            <option value="Oorreflexologie">Oorreflexologie</option>
+            <option value="Bioslimming behandeling">Bioslimming behandeling</option>
+            <option value="Zwangerschapsmassage">Zwangerschapsmassage</option>
+            <option value="Massage Membership (6x 60 min)">Massage Membership (6x 60 min)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="contactMessage">Uw Bericht of Toelichting *</label>
+        <textarea id="contactMessage" name="message" rows="5" required placeholder="Beschrijf eventuele klachten of geef uw voorkeursdagen aan..." class="form-input form-textarea"></textarea>
+      </div>
+
+      <div class="form-privacy-note">
+        <label class="checkbox-label">
+          <input type="checkbox" required />
+          <span>Ik ga akkoord met de verwerking van mijn gegevens conform de <a href="/privacyverklaring">privacyverklaring</a> van Massage Studio Eelde.</span>
+        </label>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-submit">
+        <span>Verstuur Bericht</span>
+      </button>
+
+      <div id="contactFormStatus" class="form-status"></div>
+    </form>
+  </div>
+)}
+
+<style>
+  .contact-form-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.75rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 640px) {
+    .contact-form-card {
+      padding: 1.75rem;
+    }
+  }
+
+  .card-header {
+    margin-bottom: 2rem;
+  }
+
+  .card-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .card-sub {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+  }
+
+  .contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.35rem;
+  }
+
+  .form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.35rem;
+  }
+
+  @media (max-width: 640px) {
+    .form-row {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-color);
+  }
+
+  .form-input {
+    width: 100%;
+    padding: 0.85rem 1.1rem;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    font-family: inherit;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    background: #ffffff;
+    transition: all 0.2s ease;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(157, 70, 126, 0.15);
+  }
+
+  .form-textarea {
+    resize: vertical;
+  }
+
+  .checkbox-label {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.825rem;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  .checkbox-label input {
+    margin-top: 3px;
+    accent-color: var(--primary);
+  }
+
+  .checkbox-label a {
+    text-decoration: underline;
+  }
+
+  .btn-submit {
+    align-self: flex-start;
+    padding: 0.9rem 2.25rem;
+  }
+
+  @media (max-width: 640px) {
+    .btn-submit {
+      width: 100%;
+    }
+  }
+
+  .form-status {
+    display: none;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  .form-status.success {
+    display: block;
+    background: #dcfce7;
+    color: #15803d;
+  }
+</style>
+
+<script>
+  const form = document.getElementById('mainContactForm');
+  const status = document.getElementById('contactFormStatus');
+
+  if (form && status) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      status.className = 'form-status success';
+      status.textContent = 'Hartelijk dank voor uw bericht! Alianne heeft uw bericht ontvangen en neemt spoedig contact met u op.';
+      if (form instanceof HTMLFormElement) form.reset();
+    });
+  }
+</script>

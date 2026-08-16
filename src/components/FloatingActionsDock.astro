@@ -1,0 +1,107 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const showWhatsApp = siteConfig.modules.whatsapp || siteConfig.modules.whatsappWidget;
+const showCallback = siteConfig.modules.callback || siteConfig.modules.callBack;
+const waNumber = siteConfig.whatsapp;
+const defaultMsg = encodeURIComponent("Hallo Alianne, ik heb een vraag over een behandeling bij Massage Studio Eelde.");
+---
+
+{(showWhatsApp || showCallback) && (
+  <div class="floating-actions-dock" aria-label="Snelle contactopties">
+    {showCallback && (
+      <button 
+        id="openCallbackBtn" 
+        class="floating-btn callback-btn" 
+        aria-label="Bel mij terug" 
+        title="Bel mij terug"
+      >
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+        <span class="btn-label hide-mobile">Bel mij terug</span>
+      </button>
+    )}
+
+    {showWhatsApp && (
+      <a 
+        href={`https://wa.me/${waNumber}?text=${defaultMsg}`} 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        class="floating-btn whatsapp-btn" 
+        aria-label="Chat via WhatsApp" 
+        title="Stel een vraag via WhatsApp"
+      >
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.976.532 1.961.805 3.149.806 3.182 0 5.768-2.587 5.768-5.766-.001-3.181-2.588-5.648-5.768-5.648zm3.383 8.364c-.146.411-.75.763-1.042.809-.276.044-.633.078-1.808-.41-1.503-.623-2.463-2.155-2.538-2.255-.075-.1-1.206-1.605-1.206-3.06 0-1.455.765-2.171 1.036-2.463.271-.292.593-.365.792-.365.198 0 .396.002.569.012.183.01.428-.069.668.511.246.594.84 2.054.914 2.203.075.149.124.323.024.521-.099.198-.149.322-.297.496-.149.173-.313.387-.447.52-.148.148-.303.31-.13.608.173.297.771 1.272 1.654 2.058 1.135 1.012 2.091 1.325 2.388 1.474.298.149.471.124.644-.075.174-.198.743-.866.941-1.163.198-.297.396-.248.668-.149.272.099 1.733.817 2.031.965.297.149.495.223.569.347.075.124.075.719-.071 1.13z"/>
+        </svg>
+        <span class="btn-label hide-mobile">WhatsApp</span>
+      </a>
+    )}
+  </div>
+)}
+
+<style>
+  .floating-actions-dock {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    z-index: 990;
+  }
+
+  .floating-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.1rem;
+    border-radius: var(--radius-full);
+    border: none;
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 600;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    color: #ffffff;
+    text-decoration: none;
+  }
+
+  .floating-btn:hover {
+    transform: translateY(-3px) scale(1.03);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.22);
+  }
+
+  .whatsapp-btn {
+    background-color: #25d366;
+  }
+
+  .whatsapp-btn:hover {
+    background-color: #20ba5a;
+  }
+
+  .callback-btn {
+    background-color: var(--primary);
+  }
+
+  .callback-btn:hover {
+    background-color: var(--primary-hover);
+  }
+
+  @media (max-width: 640px) {
+    .floating-actions-dock {
+      bottom: 1rem;
+      right: 1rem;
+      gap: 0.5rem;
+    }
+    .floating-btn {
+      padding: 0.75rem;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      justify-content: center;
+    }
+    .hide-mobile {
+      display: none;
+    }
+  }
+</style>

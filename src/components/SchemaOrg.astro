@@ -1,0 +1,86 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+interface Props {
+  title?: string;
+  description?: string;
+  canonicalUrl?: string;
+  image?: string;
+}
+
+const {
+  title = `${siteConfig.clientName} | ${siteConfig.tagline}`,
+  description = "Professionele praktijk voor therapeutische massages, Shiatsu, Voetreflexologie, Dorn methode en Bioslimming in Eelde-Paterswolde door erkend BATC therapeut Alianne Zuidhof.",
+  canonicalUrl = Astro.url.href,
+  image = "/images/MSE.png"
+} = Astro.props;
+
+const schemaData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "HealthAndBeautyBusiness",
+      "@id": "https://www.massagestudioeelde.nl/#business",
+      "name": siteConfig.clientName,
+      "alternateName": "Massage Studio Eelde - Alianne Zuidhof",
+      "url": "https://www.massagestudioeelde.nl",
+      "logo": "https://www.massagestudioeelde.nl/images/MSE.png",
+      "image": "https://www.massagestudioeelde.nl/images/Alianne.webp",
+      "description": description,
+      "telephone": siteConfig.phone,
+      "email": siteConfig.email,
+      "priceRange": "€€",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": siteConfig.address.street,
+        "addressLocality": "Eelde",
+        "addressRegion": "Drenthe",
+        "postalCode": siteConfig.address.postalCode,
+        "addressCountry": "NL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 53.1364,
+        "longitude": 6.5658
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Wednesday"],
+          "opens": "09:00",
+          "closes": "18:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Thursday",
+          "opens": "09:00",
+          "closes": "21:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Friday",
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "founder": {
+        "@type": "Person",
+        "name": siteConfig.therapistName,
+        "jobTitle": "BATC Complementair Therapeut & Masseur"
+      },
+      "areaServed": [
+        "Eelde", "Paterswolde", "Haren", "Groningen", "Vries", "Yde", "Zuidlaren", "Eelderwolde", "Assen"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.massagestudioeelde.nl/#website",
+      "url": "https://www.massagestudioeelde.nl",
+      "name": siteConfig.clientName,
+      "inLanguage": "nl-NL"
+    }
+  ]
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schemaData)} />

@@ -1,0 +1,228 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import siteConfig from '../../../public/site-config.json';
+import TreatmentCard from '../../components/TreatmentCard.astro';
+import ReviewsCarousel from '../../components/ReviewsCarousel.astro';
+import FAQSection from '../../components/FAQSection.astro';
+import ContactForm from '../../components/ContactForm.astro';
+
+export function getStaticPaths() {
+  return siteConfig.regions.map((reg) => ({
+    params: { stad: reg.slug },
+    props: { region: reg }
+  }));
+}
+
+const { region } = Astro.props;
+
+const regionTreatments = [
+  {
+    title: `Shiatsu Therapie & Massage voor inwoners van ${region.name}`,
+    duration: "50 of 75 min",
+    price: "Vanaf €80,-",
+    image: "/images/DSC_1450.jpg",
+    slug: "/behandelingen#shiatsu",
+    description: `Japanse drukpunttherapie en meridiaanbehandeling voor diepe ontspanning en verlichting van spierspanning, hoofdpijn en stress.`,
+    tags: ["BATC Vergoedbaar", "Meridianen"]
+  },
+  {
+    title: `Dorn Methode & Wervelkolomcorrectie regio ${region.name}`,
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/DSC_1502.1.jpg",
+    slug: "/behandelingen#dorn",
+    description: `Zachte correctie van beenlengteverschil, bekkenscheefstand en rugklachten zonder kraken.`,
+    tags: ["Zacht & Veilig", "Houdingsherstel"]
+  },
+  {
+    title: `Voetreflexologie & Lymfedrainage ${region.name}`,
+    duration: "50 min",
+    price: "€80,-",
+    image: "/images/DSC_1465.jpg",
+    slug: "/behandelingen#voetreflex",
+    description: `Reflexzonebehandeling op de voeten ter stimulatie van orgaanfuncties, spijsvertering en afvoer van afvalstoffen.`,
+    tags: ["Detox", "Reflexzones"]
+  },
+  {
+    title: `BIOSLIMMING Body Wrap Eelde (nabij ${region.name})`,
+    duration: "60 of 90 min",
+    price: "Vanaf €108,-",
+    image: "/images/Bioslimming.jpg",
+    slug: "/behandelingen#bioslimming",
+    description: `100% natuurlijke Multi-Award winnende body wrap voor vetverbranding, huidversteviging en cellulitisvermindering.`,
+    tags: ["100% Natuurlijk", "Bewezen Effectief"]
+  }
+];
+---
+
+<Layout 
+  title={`Massage ${region.name} | Shiatsu, Dorn & Reflextherapie | Massage Studio Eelde`}
+  description={`Zoekt u een professionele massagetherapeut in ${region.name}? Massage Studio Eelde ligt op slechts ${region.distance}. Erkend BATC therapeut Alianne Zuidhof.`}
+>
+  <!-- Hero Section -->
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Werkgebied & Regio</span>
+      <h1 class="page-title">Massage & Natuurgeneeskunde voor {region.name}</h1>
+      <p class="page-lead">
+        Op zoek naar een deskundige massage of therapeutisch consult in de omgeving van <strong>{region.name}</strong>? Onze sfeervolle praktijk in Eelde ligt op slechts <strong>{region.distance}</strong> en biedt volop gratis parkeergelegenheid.
+      </p>
+    </div>
+  </div>
+
+  <!-- Introductie & Nabijheid -->
+  <section class="section-py">
+    <div class="container">
+      <div class="region-intro-grid">
+        <div class="region-text">
+          <span class="section-badge">Dichtbij & Persoonlijk</span>
+          <h2 class="section-title">Persoonlijke Massagetherapie Nabij {region.name}</h2>
+          <p>
+            Voor inwoners van <strong>{region.name}</strong> is Massage Studio Eelde dé aangewezen praktijk voor diepe ontspanning en gerichte klachtenbehandeling. Of u nu kampt met spanning in nek en schouders, rugklachten, vermoeidheid of simpelweg verlangt naar een oase van rust: bij erkend BATC Complementair Therapeut Alianne Zuidhof-Hoiting bent u in deskundige handen.
+          </p>
+          <p>
+            Dankzij de centrale ligging aan de Nieuwe Akkers 18a in Eelde (in hetzelfde pand als Fysiotherapie Movere) is de praktijk vanuit {region.name} snel enFile link file:///file-preview/c:/Users/hzuid/OneDrive%20-%20BitbloX/BitbloX/WebDesign/Sites/MSE/MassageStudioEelde/src/pages/regio/%5Bstad%5D.astro file-preview eenvoudig bereikbaar via de doorgaande wegen of de A28.
+          </p>
+
+          <div class="region-perks">
+            <div class="perk-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Korte reistijd:</strong> Slechts {region.distance} vanaf {region.name}</span>
+            </div>
+            <div class="perk-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Vergoeding:</strong> Consulten veelal vergoed via aanvullende verzekering</span>
+            </div>
+            <div class="perk-item">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Parkeren:</strong> Gratis en gemakkelijk parkeren voor de deur</span>
+            </div>
+          </div>
+
+          <div class="region-cta-btns">
+            <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+              Afspraak Inboeken
+            </a>
+            <a href="/contact" class="btn btn-secondary">
+              Route & Contact
+            </a>
+          </div>
+        </div>
+
+        <div class="region-visual">
+          <div class="blob-frame">
+            <img src="/images/Alianne.webp" alt={`Alianne Zuidhof - Massage Studio Eelde voor cliënten uit ${region.name}`} />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Behandelingen Grid -->
+  <section class="section-py bg-surface">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Behandelingen voor {region.name}</span>
+        <h2 class="section-title">Populaire Behandelingen in Onze Praktijk</h2>
+        <p class="section-subtitle">
+          Al onze behandelingen worden afgestemd op basis van de 5 natuurgerichte principes en een persoonlijke intake.
+        </p>
+      </div>
+
+      <div class="grid-2">
+        {regionTreatments.map((t) => (
+          <TreatmentCard {...t} />
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <ReviewsCarousel />
+
+  <!-- FAQ -->
+  <FAQSection />
+
+  <!-- Contact & Locatie -->
+  <section class="section-py" id="contact">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Kom Langs</span>
+        <h2 class="section-title">Maak een Afspraak vanuit {region.name}</h2>
+        <p class="section-subtitle">
+          Heeft u een vraag of wilt u een behandeling bespreken? Neem gerust contact op.
+        </p>
+      </div>
+
+      <ContactForm />
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 740px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .region-intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  @media (max-width: 960px) {
+    .region-intro-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .region-perks {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin: 2rem 0;
+    background: var(--surface);
+    padding: 1.5rem;
+    border-radius: var(--radius-md);
+    border: 1px solid var(--border-color);
+  }
+
+  .perk-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.95rem;
+    color: var(--text-color);
+  }
+
+  .perk-item svg {
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+
+  .region-cta-btns {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .region-visual {
+    max-width: 400px;
+    margin: 0 auto;
+  }
+</style>

@@ -1,0 +1,292 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+import ContactForm from '../components/ContactForm.astro';
+---
+
+<Layout 
+  title="Contact & Locatie | Massage Studio Eelde"
+  description="Neem contact op met Massage Studio Eelde. Adres: Nieuwe Akkers 18a, Eelde. Telefoon: 06-23560803. Boek eenvoudig online via MijnDiad."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Contact & Route</span>
+      <h1 class="page-title">Contact & Praktijklocatie</h1>
+      <p class="page-lead">
+        Heeft u een vraag over een behandeling of wilt u een afspraak maken? Neem gerust contact op of plan direct online in.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <div class="contact-page-grid">
+        <!-- Contact Information Block -->
+        <div class="contact-info-col">
+          <div class="info-card">
+            <h2 class="info-title">Praktijkgegevens</h2>
+            
+            <div class="info-items-list">
+              <div class="info-item">
+                <div class="item-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                </div>
+                <div>
+                  <strong>Bezoekadres</strong>
+                  <p>{siteConfig.address.street}<br />{siteConfig.address.postalCode} {siteConfig.address.city}<br /><span class="loc-sub">({siteConfig.address.locationNote})</span></p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="item-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                </div>
+                <div>
+                  <strong>Telefoon & WhatsApp</strong>
+                  <p><a href={`tel:${siteConfig.phone}`}>{siteConfig.phoneFormatted}</a></p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="item-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                </div>
+                <div>
+                  <strong>E-mailadres</strong>
+                  <p><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></p>
+                </div>
+              </div>
+
+              <div class="info-item">
+                <div class="item-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                </div>
+                <div>
+                  <strong>Registratie & Financiën</strong>
+                  <p><strong>KvK:</strong> {siteConfig.kvk}<br /><strong>IBAN:</strong> {siteConfig.iban}</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Opening hours -->
+            <div class="opening-block">
+              <h3 class="opening-title">Praktijktijden Alianne:</h3>
+              <ul class="opening-list">
+                {siteConfig.openingHours.map((h) => (
+                  <li>
+                    <span class="day">{h.day}</span>
+                    <span class="hours">{h.hours}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <!-- Direct Booking Button -->
+            <div class="direct-booking-action">
+              <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary w-full">
+                Direct Afspraak Boeken in Portaal
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form Column -->
+        <div class="contact-form-col">
+          <ContactForm />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Route & Map Section -->
+  <section class="section-py bg-surface">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Bereikbaarheid</span>
+        <h2 class="section-title">Eenvoudig Bereikbaar in de Regio</h2>
+        <p class="section-subtitle">
+          De praktijk ligt in een rustige woonomgeving in Eelde, vlakbij de N372 en A28. Ruime gratis parkeergelegenheid direct voor de deur.
+        </p>
+      </div>
+
+      <div class="route-directions-grid">
+        <div class="route-card">
+          <h3 class="route-title">Vanaf Groningen / Haren</h3>
+          <p>Binnen 8 tot 12 minuten via de Paterswoldseweg of via de A28 (afrit Eelde/Groningen Airport). Volg de borden Eelde Centrum en sla af naar de Nieuwe Akkers.</p>
+        </div>
+        <div class="route-card">
+          <h3 class="route-title">Vanaf Vries / Tynaarlo / Assen</h3>
+          <p>Binnen 8 tot 15 minuten via de Groningerstraatweg / N372. De praktijk bevindt zich in het gezondheidscentrum van Movere.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .contact-page-grid {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 3.5rem;
+    align-items: start;
+  }
+
+  @media (max-width: 960px) {
+    .contact-page-grid {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+  }
+
+  .info-card {
+    background: var(--surface);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.75rem;
+  }
+
+  .info-title {
+    font-size: 1.75rem;
+    color: var(--text-color);
+    margin-bottom: 1.75rem;
+  }
+
+  .info-items-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .info-item {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .item-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #ffffff;
+    color: var(--primary);
+    border: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .info-item strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-color);
+    margin-bottom: 0.15rem;
+  }
+
+  .info-item p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .loc-sub {
+    font-style: italic;
+    font-size: 0.825rem;
+  }
+
+  .opening-block {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .opening-title {
+    font-size: 1.1rem;
+    color: var(--text-color);
+    margin-bottom: 1rem;
+    font-family: inherit;
+    font-weight: 700;
+  }
+
+  .opening-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+  }
+
+  .opening-list li {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .opening-list .day {
+    color: var(--text-color);
+    font-weight: 500;
+  }
+
+  .opening-list .hours {
+    color: var(--text-muted);
+  }
+
+  .w-full {
+    width: 100%;
+  }
+
+  .route-directions-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 680px) {
+    .route-directions-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .route-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .route-title {
+    font-size: 1.25rem;
+    color: var(--primary-dark);
+    margin-bottom: 0.75rem;
+  }
+
+  .route-card p {
+    font-size: 0.925rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

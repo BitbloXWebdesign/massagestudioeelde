@@ -1,0 +1,54 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout 
+  title="Pagina Niet Gevonden (404) | Massage Studio Eelde"
+  description="De opgevraagde pagina kan helaas niet gevonden worden op de website van Massage Studio Eelde."
+>
+  <div class="not-found-section">
+    <div class="container text-center">
+      <span class="section-badge">404 Foutmelding</span>
+      <h1 class="not-found-title">Pagina Niet Gevonden</h1>
+      <p class="not-found-lead">
+        De pagina die u zoekt bestaat helaas niet meer of is verplaatst. Keer gerust terug naar de startpagina of bekijk onze behandelingen.
+      </p>
+      
+      <div class="not-found-btns">
+        <a href="/" class="btn btn-primary">Terug naar Home</a>
+        <a href="/behandelingen" class="btn btn-secondary">Bekijk Behandelingen</a>
+        <a href="/contact" class="btn btn-secondary">Contact Opnemen</a>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .not-found-section {
+    padding: 7rem 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--surface);
+  }
+
+  .not-found-title {
+    font-size: clamp(2.5rem, 6vw, 4rem);
+    margin: 1rem 0;
+  }
+
+  .not-found-lead {
+    max-width: 600px;
+    margin: 0 auto 2.5rem;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .not-found-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+</style>

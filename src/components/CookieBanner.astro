@@ -1,0 +1,141 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.cookies || siteConfig.modules.cookieBanner;
+---
+
+{isEnabled && (
+  <div id="cookieBanner" class="cookie-banner" aria-hidden="true">
+    <div class="container cookie-banner-inner">
+      <div class="cookie-content">
+        <div class="cookie-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 1 0 10 10 4 4 0 0 1-5-5 4 4 0 0 1-5-5z"></path>
+            <path d="M8.5 8.5v.01"></path>
+            <path d="M7.5 15.5v.01"></path>
+            <path d="M15.5 15.5v.01"></path>
+            <path d="M11.5 12.5v.01"></path>
+          </svg>
+        </div>
+        <p class="cookie-text">
+          Massage Studio Eelde gebruikt uitsluitend functionele en privacyvriendelijke analytische cookies om uw bezoek soepel te laten verlopen. Meer informatie vindt u in onze <a href="/privacyverklaring">privacyverklaring</a>.
+        </p>
+      </div>
+      <div class="cookie-actions">
+        <button id="btnAcceptCookies" class="btn btn-primary btn-sm">Akkoord</button>
+        <button id="btnDeclineCookies" class="btn btn-secondary btn-sm">Alleen Noodzakelijk</button>
+      </div>
+    </div>
+  </div>
+)}
+
+<style>
+  .cookie-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(36, 28, 34, 0.94);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #ffffff;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    padding: 1.25rem 0;
+    z-index: 9999;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2);
+    display: none;
+  }
+
+  .cookie-banner.is-visible {
+    display: block;
+    animation: slideUp 0.35s ease-out;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+  }
+
+  .cookie-banner-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .cookie-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  .cookie-icon {
+    color: var(--secondary);
+    flex-shrink: 0;
+  }
+
+  .cookie-text {
+    font-size: 0.875rem;
+    color: #e0d6dc;
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .cookie-text a {
+    color: #ffffff;
+    text-decoration: underline;
+  }
+
+  .cookie-actions {
+    display: flex;
+    gap: 0.75rem;
+    flex-shrink: 0;
+  }
+
+  .cookie-actions .btn-secondary {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff !important;
+  }
+
+  .cookie-actions .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  @media (max-width: 640px) {
+    .cookie-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+    .cookie-actions .btn {
+      width: 100%;
+    }
+  }
+</style>
+
+<script>
+  const banner = document.getElementById('cookieBanner');
+  const acceptBtn = document.getElementById('btnAcceptCookies');
+  const declineBtn = document.getElementById('btnDeclineCookies');
+
+  if (banner) {
+    const hasConsent = localStorage.getItem('mse_cookie_consent');
+    if (!hasConsent) {
+      setTimeout(() => {
+        banner.classList.add('is-visible');
+        banner.setAttribute('aria-hidden', 'false');
+      }, 600);
+    }
+
+    const closeBanner = (status: string) => {
+      localStorage.setItem('mse_cookie_consent', status);
+      banner.classList.remove('is-visible');
+      banner.setAttribute('aria-hidden', 'true');
+    };
+
+    acceptBtn?.addEventListener('click', () => closeBanner('accepted'));
+    declineBtn?.addEventListener('click', () => closeBanner('essential'));
+  }
+</script>

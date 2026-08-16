@@ -1,0 +1,105 @@
+{
+  "clientName": "Massage Studio Eelde",
+  "therapistName": "Alianne Zuidhof-Hoiting",
+  "tagline": "Waar kwaliteit en gevoel voorop staan",
+  "domain": "massagestudioeelde.nl",
+  "email": "info@massagestudioeelde.nl",
+  "phone": "+31623560803",
+  "phoneFormatted": "06 - 23 56 08 03",
+  "whatsapp": "31623560803",
+  "address": {
+    "street": "Nieuwe Akkers 18a",
+    "postalCode": "9765 GC",
+    "city": "Eelde-Paterswolde",
+    "province": "Drenthe",
+    "country": "Nederland",
+    "locationNote": "Gevestigd in het pand van Movere Fysiotherapie"
+  },
+  "kvk": "56086113",
+  "iban": "NL63 INGB 0007 3295 64",
+  "bookingUrl": "https://massageeelde.clientomgeving.nl/afspraak-maken",
+  "openingHours": [
+    { "day": "Maandag", "hours": "09:00 - 18:00" },
+    { "day": "Dinsdag", "hours": "Gesloten" },
+    { "day": "Woensdag", "hours": "09:00 - 18:00" },
+    { "day": "Donderdag", "hours": "09:00 - 21:00" },
+    { "day": "Vrijdag", "hours": "09:00 - 17:00" },
+    { "day": "Zaterdag & Zondag", "hours": "Gesloten" }
+  ],
+  "theme": {
+    "primary": "#9d467e",
+    "primaryDark": "#7a2b60",
+    "primaryLight": "#fbf4f8",
+    "secondary": "#c78ca8",
+    "gold": "#dec148",
+    "background": "#ffffff",
+    "surface": "#fcf9f7",
+    "text": "#2d232a",
+    "textMuted": "#685b63"
+  },
+  "modules": {
+    "blog": false,
+    "seo": true,
+    "geo": true,
+    "geoAiVindbaarheid": true,
+    "whatsapp": true,
+    "whatsappWidget": true,
+    "microsites": true,
+    "stedenMicrosites": true,
+    "reviews": true,
+    "googleReviews": true,
+    "faq": true,
+    "faqSection": true,
+    "form": true,
+    "contactForm": true,
+    "cookies": true,
+    "cookieBanner": true,
+    "announcement": false,
+    "announcementBar": false,
+    "accessibility": true,
+    "callback": true,
+    "callBack": true
+  },
+  "accreditations": [
+    {
+      "name": "BATC Complementair Therapeut",
+      "code": "BATC HBO-conform",
+      "logo": "/images/logobatc.jpg",
+      "url": "https://batc.nl/"
+    },
+    {
+      "name": "KIWA gecertificeerd",
+      "code": "MijnDiad ECD Keurmerk",
+      "logo": "/images/kiwa.png",
+      "url": "https://www.kiwa.com"
+    },
+    {
+      "name": "PBEP Aantoonbaar Beter",
+      "code": "Practice Based Evidence",
+      "logo": "/images/pbep-aantoonbaar-beter-logo.svg",
+      "url": "https://www.aantoonbaar-beter.nl/"
+    },
+    {
+      "name": "Koepel KAB / NAP",
+      "code": "Aansluiting KAB",
+      "logo": "/images/Logo Koepel KAB.png",
+      "url": "https://nap-koepel.nl/"
+    },
+    {
+      "name": "AVG Compliant",
+      "code": "Privacy Gewaarborgd",
+      "logo": "/images/avg.jpeg",
+      "url": "/privacyverklaring"
+    }
+  ],
+  "regions": [
+    { "slug": "eelde", "name": "Eelde", "distance": "0 km", "type": "Centrum & Hoofdlocatie", "postalCodes": "9761, 9765" },
+    { "slug": "paterswolde", "name": "Paterswolde", "distance": "1 km", "type": "Aangrenzend", "postalCodes": "9765" },
+    { "slug": "haren", "name": "Haren", "distance": "6 km (ca. 8 min)", "type": "Regio Groningen", "postalCodes": "9751, 9752, 9753" },
+    { "slug": "groningen", "name": "Groningen", "distance": "9 km (ca. 10 min)", "type": "Grootstedelijk", "postalCodes": "9711 t/m 9747" },
+    { "slug": "vries", "name": "Vries", "distance": "8 km (ca. 9 min)", "type": "Noord-Drenthe", "postalCodes": "9481, 9482" },
+    { "slug": "yde", "name": "Yde", "distance": "5 km (ca. 6 min)", "type": "Noord-Drenthe", "postalCodes": "9494" },
+    { "slug": "zuidlaren", "name": "Zuidlaren", "distance": "12 km (ca. 14 min)", "type": "Regio Tynaarlo", "postalCodes": "9471, 9472" },
+    { "slug": "eelderwolde", "name": "Eelderwolde", "distance": "4 km (ca. 5 min)", "type": "Paterswoldsemeer", "postalCodes": "9766" }
+  ]
+}

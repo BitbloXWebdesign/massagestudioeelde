@@ -1,0 +1,144 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.faq || siteConfig.modules.faqSection;
+
+const faqs = [
+  {
+    question: "Worden de massage- en therapiebehandelingen vergoed door mijn zorgverzekering?",
+    answer: "Als erkend BATC Complementair Therapeut worden individuele curatieve consulten (zoals Shiatsu en reflextherapie) door veel zorgverzekeraars gedeeltelijk vergoed vanuit het aanvullende pakket voor alternatieve geneeswijzen. Dit valt niet onder het eigen risico. Raadpleeg altijd vooraf uw polis of zorgverzekeraar."
+  },
+  {
+    question: "Wat zijn de 5 natuurgerichte principes?",
+    answer: "De 5 natuurgerichte principes vormen het fundament van de BATC behandelwijze: 1. Energie (de basis voor herstel), 2. Prikkeloverdracht (zenuwstelsel communicatie), 3. Drainage (afvoer van toxines via lymfe/organen), 4. Voeding (juiste brandstof voor de cellen) en 5. Geestelijk welzijn (mentale en emotionele patronen doorbreken)."
+  },
+  {
+    question: "Wat is het Massage Membership?",
+    answer: "Met het Massage Membership geniet u van 6 ontspannende behandelingen van een vol uur voor slechts €425,-. Dit biedt flexibiliteit, prioriteit bij het reserveren en een aantrekkelijk voordeeltarief ten opzichte van losse sessies."
+  },
+  {
+    question: "Wat kan ik verwachten van een BIOSLIMMING behandeling?",
+    answer: "BIOSLIMMING is een wetenschappelijk onderzochte, 100% natuurlijke body wrap behandeling. Het stimuleert de vetverbranding, verbetert de lymfedrainage, vermindert cellulitis en verstevigt de huid van buik, benen, billen en armen."
+  },
+  {
+    question: "Wat zijn de annuleringsvoorwaarden?",
+    answer: "U kunt een afspraak tot 24 uur van tevoren kosteloos annuleren of verplaatsen. Bij annuleringen binnen 24 uur of no-show wordt het volledige behandeltarief in rekening gebracht, omdat deze tijd speciaal voor u gereserveerd is."
+  },
+  {
+    question: "Hoe bereik ik de praktijk vanuit Groningen of Drenthe?",
+    answer: "Massage Studio Eelde is gevestigd aan de Nieuwe Akkers 18a in Eelde (in het pand van Fysiotherapie Movere). Vanaf Groningen-Zuid en Haren rijdt u er in circa 8 tot 12 minuten naartoe via de A28 of de Groningerweg. Er is gratis parkeergelegenheid direct voor de deur."
+  }
+];
+
+const schemaFaq = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqs.map((f) => ({
+    "@type": "Question",
+    "name": f.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": f.answer
+    }
+  }))
+};
+---
+
+{isEnabled && (
+  <section class="section-py bg-surface-alt" id="faq" aria-label="Veelgestelde vragen">
+    <div class="container">
+      <div class="section-header text-center">
+        <span class="section-badge">Vragen & Antwoorden</span>
+        <h2 class="section-title">Veelgestelde Vragen</h2>
+        <p class="section-subtitle">
+          Alles wat u wilt weten over vergoedingen, behandelingen, werkwijze en afspraken.
+        </p>
+      </div>
+
+      <div class="faq-list">
+        {faqs.map((faq, index) => (
+          <details class="faq-item" open={index === 0}>
+            <summary class="faq-question">
+              <span>{faq.question}</span>
+              <span class="faq-toggle-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
+            </summary>
+            <div class="faq-answer">
+              <p>{faq.answer}</p>
+            </div>
+          </details>
+        ))}
+      </div>
+    </div>
+
+    <!-- Schema.org FAQ JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaFaq)} />
+  </section>
+)}
+
+<style>
+  .faq-list {
+    max-width: 820px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .faq-item {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    transition: all 0.25s ease;
+  }
+
+  .faq-item[open] {
+    box-shadow: var(--shadow-sm);
+    border-color: var(--secondary);
+  }
+
+  .faq-question {
+    padding: 1.35rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-color);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    list-style: none;
+    user-select: none;
+  }
+
+  .faq-question::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-toggle-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    transition: transform 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .faq-item[open] .faq-toggle-icon {
+    transform: rotate(180deg);
+  }
+
+  .faq-answer {
+    padding: 0 1.5rem 1.35rem 1.5rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    line-height: 1.65;
+    border-top: 1px solid transparent;
+  }
+
+  .faq-item[open] .faq-answer {
+    border-top-color: var(--primary-light);
+  }
+</style>

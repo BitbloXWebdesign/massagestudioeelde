@@ -1,0 +1,87 @@
+---
+import '../styles/global.css';
+import siteConfig from '../../public/site-config.json';
+import AnnouncementBar from '../components/AnnouncementBar.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FloatingActionsDock from '../components/FloatingActionsDock.astro';
+import AccessibilityToolbar from '../components/AccessibilityToolbar.astro';
+import CallbackModal from '../components/CallbackModal.astro';
+import CookieBanner from '../components/CookieBanner.astro';
+import SchemaOrg from '../components/SchemaOrg.astro';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+
+const {
+  title = `${siteConfig.clientName} | ${siteConfig.tagline}`,
+  description = "Professionele massage- en natuurgeneeskundige praktijk in Eelde-Paterswolde door erkend BATC therapeut Alianne Zuidhof. Shiatsu, Voetreflexologie, Dorn methode & Bioslimming.",
+  image = "/images/MSE.png"
+} = Astro.props;
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site || 'https://www.massagestudioeelde.nl').href;
+const currentPath = Astro.url.pathname;
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={new URL(image, Astro.site || 'https://www.massagestudioeelde.nl').href} />
+    <meta property="og:locale" content="nl_NL" />
+    <meta property="og:site_name" content={siteConfig.clientName} />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={new URL(image, Astro.site || 'https://www.massagestudioeelde.nl').href} />
+
+    <!-- Geo tags for Local SEO & GEO -->
+    <meta name="geo.region" content="NL-DR" />
+    <meta name="geo.placename" content="Eelde" />
+    <meta name="geo.position" content="53.1364;6.5658" />
+    <meta name="ICBM" content="53.1364, 6.5658" />
+
+    <!-- Favicon & Icons -->
+    <link rel="icon" type="image/png" href="/images/ME.png" />
+    <link rel="apple-touch-icon" href="/images/ME.png" />
+
+    <!-- Google Fonts Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Schema.org -->
+    <SchemaOrg title={title} description={description} canonicalUrl={canonicalUrl} image={image} />
+  </head>
+  <body>
+    <AnnouncementBar />
+    <Header currentPath={currentPath} />
+    
+    <main id="main-content">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Floating Utilities & Modals -->
+    <FloatingActionsDock />
+    <AccessibilityToolbar />
+    <CallbackModal />
+    <CookieBanner />
+  </body>
+</html>

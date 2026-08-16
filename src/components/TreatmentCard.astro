@@ -1,0 +1,146 @@
+---
+interface Props {
+  title: string;
+  duration?: string;
+  price?: string;
+  description: string;
+  image?: string;
+  slug?: string;
+  tags?: string[];
+}
+
+const { title, duration, price, description, image, slug = '/behandelingen', tags = [] } = Astro.props;
+---
+
+<div class="treatment-card">
+  {image && (
+    <div class="card-media">
+      <img src={image} alt={title} class="treatment-img" loading="lazy" />
+      {price && <div class="price-badge">{price}</div>}
+    </div>
+  )}
+  
+  <div class="card-body">
+    <div class="card-meta">
+      {duration && <span class="duration-tag">{duration}</span>}
+      {tags.map(t => <span class="custom-tag">{t}</span>)}
+    </div>
+
+    <h3 class="card-title">{title}</h3>
+    <p class="card-desc">{description}</p>
+    
+    <div class="card-footer">
+      <a href={slug} class="card-link">
+        <span>Meer informatie</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="M12 5l7 7-7 7"></path></svg>
+      </a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .treatment-card {
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .treatment-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--secondary);
+  }
+
+  .card-media {
+    position: relative;
+    height: 200px;
+    background: var(--surface);
+    overflow: hidden;
+  }
+
+  .treatment-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .treatment-card:hover .treatment-img {
+    transform: scale(1.05);
+  }
+
+  .price-badge {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: rgba(36, 28, 34, 0.85);
+    backdrop-filter: blur(6px);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.875rem;
+    padding: 0.35rem 0.85rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .card-body {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .card-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.75rem;
+  }
+
+  .duration-tag, .custom-tag {
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: var(--radius-full);
+    background: var(--primary-light);
+    color: var(--primary-dark);
+  }
+
+  .card-title {
+    font-size: 1.45rem;
+    color: var(--text-color);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-desc {
+    font-size: 0.925rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    flex: 1;
+  }
+
+  .card-footer {
+    border-top: 1px solid var(--border-color);
+    padding-top: 1rem;
+  }
+
+  .card-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+  }
+
+  .card-link:hover {
+    color: var(--primary-hover);
+    gap: 0.6rem;
+  }
+</style>

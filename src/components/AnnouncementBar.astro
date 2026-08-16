@@ -1,0 +1,31 @@
+---
+import siteConfig from '../../public/site-config.json';
+
+const isEnabled = siteConfig.modules.announcement || siteConfig.modules.announcementBar;
+---
+
+{isEnabled && (
+  <div class="announcement-bar">
+    <div class="container announcement-inner">
+      <p class="announcement-text">
+        <strong>Mededeling:</strong> Wegens grote belangstelling heeft de praktijk momenteel een beperkte instroom voor nieuwe therapeutische trajecten. Neem gerust contact op voor de mogelijkheden.
+      </p>
+    </div>
+  </div>
+)}
+
+<style>
+  .announcement-bar {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    padding: 0.6rem 0;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+  }
+
+  .announcement-text {
+    margin: 0;
+    color: #ffffff;
+  }
+</style>

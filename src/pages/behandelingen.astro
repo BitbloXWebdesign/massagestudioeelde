@@ -1,0 +1,376 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+
+const allTreatments = [
+  {
+    id: "shiatsu",
+    title: "Shiatsu Therapie & Massage",
+    tagline: "Traditionele Japanse drukpuntmassage voor diepe ontspanning en energieherstel",
+    duration: "50 of 75 minuten",
+    price: "€80,- (50 min) / €125,- (75 min)",
+    image: "/images/DSC_1450.jpg",
+    content: `Shiatsu (letterlijk 'vingerdruk') is een eeuwenoude Japanse behandelwijze die uitgaat van het meridiaanstelsel: de energiebanen die door het gehele lichaam lopen. Door met duimen, handpalmen en vingers gedoseerde druk uit te oefenen op specifieke acupressuurpunten, worden energetische blokkades opgeheven en de natuurlijke energiestroom gestimuleerd.
+
+Shiatsu brengt het zenuwstelsel tot rust en activeert de zelfhelende vermogens van uw lichaam. Het is een veilige, effectieve en diep ontspannende behandeling bij klachten zoals chronische vermoeidheid, spierspanning, hoofdpijn, nek- en rugpijn, slapeloosheid en stress.`,
+    benefits: [
+      "Diepe ontspanning van lichaam en geest",
+      "Stimulatie van de energiestroom via de meridianen",
+      "Pijnverlichting bij hoofdpijn, nek-, schouder- en rugklachten",
+      "Ondersteuning van het immuunsysteem en orgaanfuncties"
+    ]
+  },
+  {
+    id: "dorn",
+    title: "Dorn-Methode",
+    tagline: "Milde en dynamische correctie van wervelkolom en gewrichten",
+    duration: "50 minuten",
+    price: "€80,-",
+    image: "/images/DSC_1502.1.jpg",
+    content: `De Dorn-methode is een zachte, handmatige techniek ter correctie van beenlengteverschillen, bekkenscheefstand en subluxaties (kleine wervelverschuivingen) in de wervelkolom. In tegenstelling tot kraken of manipulatie gebeurt de correctie altijd in een dynamische, natuurlijke beweging van de cliënt (zoals zwaaien met het been of arm).
+
+Hierdoor spannen de spieren zich niet reflexmatig aan en kan de wervelkolom op een veilige en pijnloze manier weer in de ideale positie worden gebracht. Ideaal bij ischias, lumbago, beenlengteverschil en houdingsgerelateerde rug- en nekklachten.`,
+    benefits: [
+      "Zachte en veilige correctie zonder te kraken",
+      "Herstel van de natuurlijke stand van bekken en wervels",
+      "Directe verlichting van zenuwbeklemmingen en spierspanning",
+      "Inclusief praktische zelfhulpoefeningen voor thuis"
+    ]
+  },
+  {
+    id: "voetreflex",
+    title: "Voetreflextherapie",
+    tagline: "Natuurlijke stimulatie van de zelfhelende vermogens via de voeten",
+    duration: "50 minuten",
+    price: "€80,-",
+    image: "/images/DSC_1465.jpg",
+    content: `Op de voeten bevinden zich reflexzones die via zenuw- en energiebanen direct in verbinding staan met alle organen, klieren, spieren en weefsels in het lichaam. Door gerichte massagetechnieken en druk op deze zones uit te oefenen, wordt de doorbloeding en lymfestroom in de corresponderende lichaamsdelen geactiveerd.
+
+Voetreflextherapie ondersteunt de afvoer van opgestapelde afvalstoffen (drainage), herstelt de hormonale en energetische balans en biedt uitstekende verlichting bij spijsverteringsproblemen, hormonale disbalans, vermoeidheid en chronische stress.`,
+    benefits: [
+      "Activering van lymfedrainage en uitscheiding van afvalstoffen",
+      "Verbetering van de orgaanfuncties en spijsvertering",
+      "Diepe fysieke en mentale ontspanning",
+      "Ondersteunend bij burn-out, slaapproblemen en hormonale klachten"
+    ]
+  },
+  {
+    id: "oorreflexologie",
+    title: "Oorreflexologie (Auriculotherapie)",
+    tagline: "Krachtige reflexzonetherapie via de oorschelp voor snelle pijnstilling",
+    duration: "50 minuten",
+    price: "€80,-",
+    image: "/images/oorreflexologie--150x150.jpg",
+    content: `De oorschelp is een uiterst fijnmazig microsysteem van het menselijk lichaam, waarin alle anatomische structuren en functies gereflecteerd worden. Prikkeling van specifieke oorpunten via massage, precisiedruk of zachte stimulatie heeft een directe invloed op het centrale zenuwstelsel.
+
+Oorreflexologie is bijzonder doeltreffend bij acute en chronische pijnklachten, hoofdpijn, gewrichtspijnen, emotionele spanningen en ondersteuning bij het doorbreken van verslavingen of stresspatronen.`,
+    benefits: [
+      "Snelle werking via de directe zenuwverbinding met de hersenen",
+      "Doeltreffend bij acute en chronische pijnklachten",
+      "Stressreductie en emotioneel evenwicht",
+      "Ideale aanvulling op Shiatsu en voetreflextherapie"
+    ]
+  },
+  {
+    id: "bioslimming",
+    title: "BIOSLIMMING Eelde",
+    tagline: "Multi-Award winnende 100% natuurlijke body wrap & detox",
+    duration: "60 of 90 minuten",
+    price: "Kennismaking €108,- / Kuur (6x) €648,-",
+    image: "/images/Bioslimming.jpg",
+    content: `BIOSLIMMING is een revolutionaire, wetenschappelijk onderzochte behandelmethode voor figuurcorrectie, vetverbranding, huidversteviging en de bestrijding van cellulitis. De behandeling maakt gebruik van 100% natuurlijke etherische oliën, algenextracten, cafeïne en thermo-actieve ingrediënten zonder parabenen of minerale oliën.
+
+Tijdens de behandeling worden de zones (buik, billen, dijen, armen) ingewreven met actieve serums en comfortabel gewikkeld. Dit activeert een krachtig thermo-effect dat de bloedcirculatie en lymfedrainage maximaliseert, afvalstoffen afvoert en collageenaanmaak stimuleert.`,
+    benefits: [
+      "Bewezen resultaten: 93% gladder, 86% steviger, 74% slanker",
+      "Krachtige detox en activering van de vetverbranding",
+      "Vrij van parabenen, minerale oliën en dierproeven",
+      "Zichtbare vermindering van cellulitis en verbetering van huidelasticiteit"
+    ]
+  },
+  {
+    id: "klassiek",
+    title: "Klassieke & Ontspanningsmassage",
+    tagline: "Intensieve verzorging van strakke spieren en rust voor lichaam en geest",
+    duration: "50 of 75 minuten",
+    price: "€80,- (50 min) / €125,- (75 min)",
+    image: "/images/massage-betaalde-stockfoto.jpg",
+    content: `De klassieke ontspanningsmassage is gericht op het soepel maken van gespannen spiergroepen, het verbeteren van de doorbloeding en het wegnemen van opgebouwde fysieke spanning. Met vloeiende effleurages, knedingen en fricties worden knopen en stijfheid in rug, nek, schouders en benen vakkundig losgemasserd.
+
+Een heerlijk moment van rust en herstel, waarbij u even helemaal afstand kunt nemen van de hectiek van alledag.`,
+    benefits: [
+      "Ontspanning van stijve spieren en gewrichten",
+      "Verbetering van de bloedsomloop en zuurstoftoevoer naar weefsels",
+      "Afvoer van melkzuur en opgebouwde spanning",
+      "Gecombineerd met warme olie in een rustgevende atmosfeer"
+    ]
+  },
+  {
+    id: "zwangerschap",
+    title: "Zwangerschapsmassage",
+    tagline: "Veilige, koesterende ontspanning voor aanstaande moeders",
+    duration: "50 minuten",
+    price: "€80,-",
+    image: "/images/belloost.webp",
+    content: `Tijdens de zwangerschap ondergaat het lichaam grote veranderingen. Extra belasting op de onderrug, bekken, benen en schouders kan voor ongemak zorgen. Onze zwangerschapsmassage is speciaal ontworpen om de aanstaande moeder op een veilige, comfortabele en ontspannen wijze te ondersteunen.
+
+Met zachte, verzorgende technieken en aangepaste lighoudingen worden spanningen verlicht, de bloedsomloop gestimuleerd en komt het hele lichaam tot weldadige rust.`,
+    benefits: [
+      "Verlichting bij bekken- en rugklachten",
+      "Vermindering van vochtophoping in benen en enkels",
+      "Diepe ontspanning voor zowel moeder als baby",
+      "Veilige en gecertificeerde toepassing"
+    ]
+  }
+];
+---
+
+<Layout 
+  title="Behandelingen & Massages | Massage Studio Eelde"
+  description="Overzicht van behandelingen bij Massage Studio Eelde: Shiatsu therapie, Dorn methode, Voetreflexologie, Oorreflexologie, Bioslimming en Ontspanningsmassage."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Gespecialiseerd Vakmanschap</span>
+      <h1 class="page-title">Onze Behandelingen</h1>
+      <p class="page-lead">
+        Ontdek ons brede aanbod aan therapeutische en ontspannende behandelvormen, altijd op maat afgestemd op uw lichaam en behoeften.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <div class="treatments-detail-list">
+        {allTreatments.map((t, index) => (
+          <article class={`treatment-detail-card ${index % 2 === 1 ? 'reverse' : ''}`} id={t.id}>
+            <div class="detail-media">
+              <img src={t.image} alt={t.title} class="detail-img" loading="lazy" />
+              <div class="detail-price-pill">{t.price}</div>
+            </div>
+            
+            <div class="detail-body">
+              <div class="detail-header">
+                <span class="detail-duration">{t.duration}</span>
+                <h2 class="detail-title">{t.title}</h2>
+                <p class="detail-tagline">{t.tagline}</p>
+              </div>
+
+              <div class="detail-text">
+                {t.content.split('\n\n').map(p => <p>{p}</p>)}
+              </div>
+
+              <div class="detail-benefits">
+                <h3 class="benefits-heading">Belangrijkste voordelen:</h3>
+                <ul class="benefits-list">
+                  {t.benefits.map(b => (
+                    <li>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                      <span>{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div class="detail-actions">
+                <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+                  Boek {t.title.split(' ')[0]}
+                </a>
+                <a href="/tarieven" class="btn btn-secondary">
+                  Bekijk Tarieven
+                </a>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Banner -->
+  <section class="section-py bg-surface text-center">
+    <div class="container">
+      <div class="cta-inner">
+        <h2 class="section-title">Twijfelt u welke behandeling het beste bij u past?</h2>
+        <p class="section-subtitle">
+          Tijdens een intakegesprek kijken we samen naar uw klachten en stellen we een op maat gemaakt behandelplan op.
+        </p>
+        <div class="cta-btns">
+          <a href="/contact" class="btn btn-primary">Neem Vrijblijvend Contact Op</a>
+          <a href={`tel:${siteConfig.phone}`} class="btn btn-secondary">Bel {siteConfig.phoneFormatted}</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .treatments-detail-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4.5rem;
+  }
+
+  .treatment-detail-card {
+    display: grid;
+    grid-template-columns: 0.95fr 1.05fr;
+    gap: 3.5rem;
+    align-items: center;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2.5rem;
+    box-shadow: var(--shadow-sm);
+    scroll-margin-top: 100px;
+  }
+
+  .treatment-detail-card.reverse {
+    grid-template-columns: 1.05fr 0.95fr;
+  }
+
+  .treatment-detail-card.reverse .detail-media {
+    order: 2;
+  }
+
+  @media (max-width: 960px) {
+    .treatment-detail-card, .treatment-detail-card.reverse {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 1.75rem;
+    }
+    .treatment-detail-card.reverse .detail-media {
+      order: 1;
+    }
+  }
+
+  .detail-media {
+    position: relative;
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    height: 100%;
+    min-height: 360px;
+  }
+
+  .detail-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+  }
+
+  .detail-price-pill {
+    position: absolute;
+    bottom: 16px;
+    left: 16px;
+    background: rgba(36, 28, 34, 0.88);
+    backdrop-filter: blur(8px);
+    color: #ffffff;
+    padding: 0.4rem 1rem;
+    border-radius: var(--radius-full);
+    font-size: 0.875rem;
+    font-weight: 700;
+  }
+
+  .detail-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .detail-duration {
+    display: inline-block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary);
+    margin-bottom: 0.35rem;
+  }
+
+  .detail-title {
+    font-size: 2.2rem;
+    color: var(--text-color);
+    margin-bottom: 0.35rem;
+  }
+
+  .detail-tagline {
+    font-size: 1.05rem;
+    color: var(--primary-dark);
+    font-style: italic;
+    margin: 0;
+  }
+
+  .detail-text p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 0.85rem;
+  }
+
+  .benefits-heading {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 0.65rem;
+    font-family: inherit;
+  }
+
+  .benefits-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .benefits-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.65rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+  }
+
+  .benefits-list svg {
+    color: var(--primary);
+    flex-shrink: 0;
+    margin-top: 3px;
+  }
+
+  .detail-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+  }
+
+  .cta-inner {
+    max-width: 680px;
+    margin: 0 auto;
+  }
+
+  .cta-btns {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1.75rem;
+  }
+</style>

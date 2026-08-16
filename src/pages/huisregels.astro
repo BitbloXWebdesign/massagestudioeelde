@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import siteConfig from '../../public/site-config.json';
+---
+
+<Layout 
+  title="Huisregels & Praktijkafspraken | Massage Studio Eelde"
+  description="Overzicht van de huisregels, annuleringsvoorwaarden en hygiënestandaarden bij Massage Studio Eelde."
+>
+  <div class="page-hero">
+    <div class="container text-center">
+      <span class="section-badge">Praktijkbeleid</span>
+      <h1 class="page-title">Onze Huisregels</h1>
+      <p class="page-lead">
+        Duidelijke afspraken zorgen voor een veilige, hygiënische en ontspannen omgeving voor iedere cliënt.
+      </p>
+    </div>
+  </div>
+
+  <section class="section-py">
+    <div class="container">
+      <div class="rules-card">
+        <div class="rules-header">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          <h2>Reglement & Voorwaarden</h2>
+        </div>
+
+        <ul class="rules-list">
+          <li>
+            <strong>Ethiek & Hygiëne:</strong> Ethiek en hygiëne staan binnen Massage Studio Eelde hoog aangeschreven. Wij verwachten van onze cliënten dat zij hier eveneens zorg voor dragen. In verband met de hygiëne worden alle badlakens en textiel na iedere behandeling grondig gewassen en gedesinfecteerd.
+          </li>
+          <li>
+            <strong>Privacy & Medische Gegevens:</strong> Al uw persoonlijke en medische gegevens worden strikt vertrouwelijk behandeld en nooit zonder uw uitdrukkelijke toestemming aan derden verstrekt conform de AVG 2023 wetgeving.
+          </li>
+          <li>
+            <strong>Intake & Gezondheid:</strong> Voorafgaand aan de eerste behandeling nemen we een intakeformulier door met betrekking tot uw medische situatie en voorgeschiedenis. Het is uw eigen verantwoordelijkheid om relevante aandoeningen, blessures, zwangerschap of medicijngebruik te melden.
+          </li>
+          <li>
+            <strong>Doorverwijzing naar Arts of Fysiotherapeut:</strong> Bij twijfel over een bestaande aandoening of blessure behouden wij ons het recht voor om de behandeling te staken of aan te passen en u door te verwijzen naar uw behandelend arts of de fysiotherapeut in ons pand (Movere).
+          </li>
+          <li>
+            <strong>Annuleringsbeleid (24-uurs regeling):</strong> Bent u verhinderd en wilt u uw afspraak afzeggen of verzetten? Laat dit dan minimaal 24 uur van tevoren weten. Er worden dan geen kosten in rekening gebracht. Bij afspraken die niet worden nagekomen of korter dan 24 uur van tevoren worden afgezegd, moet helaas het volledige behandeltarief in rekening worden gebracht.
+          </li>
+          <li>
+            <strong>Geen Erotische Massages:</strong> Massage Studio Eelde is een therapeutische gezondheidspraktijk. Voor erotische massages kunt u pertinent <em>niet</em> bij ons terecht.
+          </li>
+          <li>
+            <strong>Rust in de Praktijk:</strong> In verband met de beoogde diepe ontspanning vragen wij u vriendelijk uw mobiele telefoon uit te schakelen of op stil te zetten tijdens de behandeling.
+          </li>
+          <li>
+            <strong>Rookvrij:</strong> Roken in en rondom het praktijkpand is ten strengste verboden.
+          </li>
+          <li>
+            <strong>Aansprakelijkheid:</strong> Massage Studio Eelde is niet aansprakelijk voor beschadiging, diefstal of verlies van persoonlijke eigendommen, noch voor schade of letsel als gevolg van het verzwijgen van relevante medische informatie.
+          </li>
+        </ul>
+
+        <div class="rules-action text-center">
+          <a href={siteConfig.bookingUrl} target="_blank" rel="noopener noreferrer" class="btn btn-primary">
+            Afspraak Maken in Vertrouwen
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero {
+    background: linear-gradient(180deg, var(--surface) 0%, #ffffff 100%);
+    padding: 4.5rem 0 3.5rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .page-title {
+    margin-bottom: 1rem;
+  }
+
+  .page-lead {
+    max-width: 720px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    color: var(--text-muted);
+  }
+
+  .rules-card {
+    max-width: 860px;
+    margin: 0 auto;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 3.5rem;
+    box-shadow: var(--shadow-sm);
+  }
+
+  @media (max-width: 640px) {
+    .rules-card {
+      padding: 1.75rem;
+    }
+  }
+
+  .rules-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--primary);
+    margin-bottom: 2rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1.25rem;
+  }
+
+  .rules-header h2 {
+    font-size: 1.85rem;
+    color: var(--text-color);
+    margin: 0;
+  }
+
+  .rules-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 3rem 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .rules-list li {
+    position: relative;
+    padding-left: 1.75rem;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+  }
+
+  .rules-list li::before {
+    content: '•';
+    position: absolute;
+    left: 0.25rem;
+    top: -2px;
+    color: var(--primary);
+    font-size: 1.5rem;
+  }
+
+  .rules-list li strong {
+    color: var(--text-color);
+    display: block;
+    margin-bottom: 0.25rem;
+  }
+
+  .rules-action {
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+  }
+</style>
