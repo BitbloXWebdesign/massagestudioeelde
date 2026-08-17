@@ -29,7 +29,7 @@ export const articles: Article[] = [
     category: "Praktijknieuws",
     date: "17 augustus 2026",
     readTime: "3 min leestijd",
-    image: "/images/DSC_1480.jpg",
+    image: "/images/nieuwe-website-massagestudioeelde.png",
     author: {
       name: "Alianne Zuidhof-Hoiting",
       role: "BATC Complementair Therapeut",
