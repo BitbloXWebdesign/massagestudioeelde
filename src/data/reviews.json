@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Monique V.",
+    "location": "Eelde",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "treatment": "Shiatsu & Massage",
+    "date": "Recent",
+    "comment": "Alianne geeft fantastische massages. Ze voelt precies aan waar de spanning zit. Na afloop voel ik me altijd helemaal ontspannen en opgeladen!"
+  },
+  {
+    "id": 2,
+    "name": "Sander de Boer",
+    "location": "Paterswolde",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "treatment": "Sport- & Dorn Massage",
+    "date": "3 weken geleden",
+    "comment": "Professionele praktijk met een hele rustige, fijne sfeer. De sportmassage heeft mijn rugklachten enorm verlicht. Zeker een aanrader!"
+  },
+  {
+    "id": 3,
+    "name": "Ellen K.",
+    "location": "Haren",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "treatment": "Ontspanningsmassage",
+    "date": "1 maand geleden",
+    "comment": "Heerlijke ontspanningsmassage gehad. Alianne neemt echt de tijd voor je en straalt zoveel rust uit. Ik kom hier zeker maandelijks terug."
+  }
+]

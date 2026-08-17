@@ -1,0 +1,121 @@
+[
+  {
+    "category": "Therapeutische Consulten (Vergoedbaar)",
+    "description": "Individuele curatieve consulten die deels vergoed worden vanuit de aanvullende zorgverzekering.",
+    "items": [
+      {
+        "id": "intake-eerste-consult",
+        "name": "Intake + Eerste Consult (Reflex / Shiatsu / Dorn)",
+        "duration": "75 minuten",
+        "price": "125,00",
+        "popular": true,
+        "description": "Eerste consult inclusief uitgebreide anamnese, lichamelijk onderzoek & gerichte behandeling.",
+        "active": true
+      },
+      {
+        "id": "behandeling-shiatsu",
+        "name": "Behandeling Shiatsu Therapie / Massage",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "popular": true,
+        "description": "Drukpuntbehandeling en meridianen ter verlichting van blokkades en chronische spanning.",
+        "active": true
+      },
+      {
+        "id": "uitgebreid-shiatsu",
+        "name": "Uitgebreide Behandeling Shiatsu / Massage",
+        "duration": "75 minuten",
+        "price": "125,00",
+        "description": "Diepgaande behandeling voor intensieve rust, doorstroming en herstel.",
+        "active": true
+      },
+      {
+        "id": "voetreflextherapie",
+        "name": "Behandeling Voetreflextherapie",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Reflexzones ter stimulatie van organen, bloedsomloop en lymfedrainage.",
+        "active": true
+      },
+      {
+        "id": "dorn-methode",
+        "name": "Behandeling Dorn-Methode",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Milde, dynamische correctie van wervelkolom, bekken en gewrichten.",
+        "active": true
+      },
+      {
+        "id": "littekenbehandeling",
+        "name": "Littekenbehandeling",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Zachte weefseltechnieken ter versoepeling van pijnlijk of trekkend littekenweefsel.",
+        "active": true
+      },
+      {
+        "id": "oorreflexologie",
+        "name": "Behandeling Oorreflexologie",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Oorzonebehandeling voor pijndemping, ontspanning en zenuwstelselbalans.",
+        "active": true
+      },
+      {
+        "id": "zwangerschapsmassage",
+        "name": "Zwangerschapsmassage",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Verzorgende en klachtgerichte ontspanning tijdens alle fasen van de zwangerschap.",
+        "active": true
+      },
+      {
+        "id": "klassieke-massage",
+        "name": "Klassieke Ontspanningsmassage",
+        "duration": "50 minuten",
+        "price": "80,00",
+        "description": "Intensieve spierontspanning voor rug, nek, schouders en algehele rust (Wellness).",
+        "active": true
+      }
+    ]
+  },
+  {
+    "category": "BIOSLIMMING Body Wrap (Niet-vergoed)",
+    "description": "100% natuurlijke Multi-Award winnende afslank- en detoxbehandeling.",
+    "items": [
+      {
+        "id": "bioslimming-intake",
+        "name": "Kennismakingsbehandeling Bioslimming",
+        "duration": "90 minuten",
+        "price": "108,00",
+        "description": "Inclusief intake, voormeting, complete body wrap en ontspanningsmoment.",
+        "active": true
+      },
+      {
+        "id": "bioslimming-vervolg",
+        "name": "Vervolgbehandeling Bioslimming",
+        "duration": "60 minuten",
+        "price": "132,00",
+        "description": "Losse vervolgsessie voor continue huidversteviging en omvangsverlies.",
+        "active": true
+      },
+      {
+        "id": "bioslimming-kuur",
+        "name": "Kuur van 6 Behandelingen Bioslimming",
+        "duration": "6 weken",
+        "price": "648,00",
+        "popular": true,
+        "description": "Maximaal resultaat: 1 behandeling per week gedurende 6 aaneengesloten weken.",
+        "active": true
+      },
+      {
+        "id": "bioslimming-meerprijs",
+        "name": "Meerprijs Armen / Kuiten",
+        "duration": "per zone",
+        "price": "25,00",
+        "description": "Aanvullende zones tijdens een Bioslimming sessie.",
+        "active": true
+      }
+    ]
+  }
+]

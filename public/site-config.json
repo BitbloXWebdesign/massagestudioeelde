@@ -58,7 +58,15 @@
     "announcementBar": false,
     "accessibility": true,
     "callback": true,
-    "callBack": true
+    "callBack": true,
+    "shop": false
+  },
+  "announcement": {
+    "enabled": false,
+    "badge": "AFSPRAAK",
+    "text": "💆 Welkom bij Massage Studio Eelde! Boek eenvoudig online je ontspanningsmassage.",
+    "buttonText": "Afspraak Maken",
+    "link": "/contact"
   },
   "accreditations": [
     {
