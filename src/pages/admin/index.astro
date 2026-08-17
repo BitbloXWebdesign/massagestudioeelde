@@ -81,95 +81,107 @@ import reviews from '../../data/reviews.json';
               </div>
             )}
 
-            <div class="module-card">
-              <div class="mod-top">
-                <div class="mod-info">
-                  <strong>💬 WhatsApp Direct Chat</strong>
-                  <span>Zwevende afspraak- en chatknop rechtsonder</span>
+            {siteConfig.modules.whatsapp && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>💬 WhatsApp Direct Chat</strong>
+                    <span>Zwevende afspraak- en chatknop rechtsonder</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-whatsapp" checked={siteConfig.modules.whatsapp} />
+                    <span class="slider"></span>
+                  </label>
                 </div>
-                <label class="switch">
-                  <input type="checkbox" id="mod-whatsapp" checked={siteConfig.modules.whatsapp} />
-                  <span class="slider"></span>
-                </label>
               </div>
-            </div>
+            )}
 
-            <div class="module-card">
-              <div class="mod-top">
-                <div class="mod-info">
-                  <strong>📞 Bel-Me-Terug Widget</strong>
-                  <span>Interactieve terugbel-aanvraag knop</span>
+            {siteConfig.modules.callback && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>📞 Bel-Me-Terug Widget</strong>
+                    <span>Interactieve terugbel-aanvraag knop</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-callback" checked={siteConfig.modules.callback} />
+                    <span class="slider"></span>
+                  </label>
                 </div>
-                <label class="switch">
-                  <input type="checkbox" id="mod-callback" checked={siteConfig.modules.callback} />
-                  <span class="slider"></span>
-                </label>
               </div>
-            </div>
+            )}
 
-            <div class="module-card">
-              <div class="mod-top">
-                <div class="mod-info">
-                  <strong>♿ Toegankelijkheid (A11y)</strong>
-                  <span>Dyslexie-font en hoog contrast modus knop</span>
+            {siteConfig.modules.accessibility && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>♿ Toegankelijkheid (A11y)</strong>
+                    <span>Dyslexie-font en hoog contrast modus knop</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-accessibility" checked={siteConfig.modules.accessibility} />
+                    <span class="slider"></span>
+                  </label>
                 </div>
-                <label class="switch">
-                  <input type="checkbox" id="mod-accessibility" checked={siteConfig.modules.accessibility} />
-                  <span class="slider"></span>
-                </label>
               </div>
-            </div>
+            )}
 
-            <div class="module-card">
-              <div class="mod-top">
-                <div class="mod-info">
-                  <strong>🤖 AI GEO-Vindbaarheid</strong>
-                  <span>Korte samenvattingen voor zoekmachines &amp; AI</span>
+            {siteConfig.modules.geo && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>🤖 AI GEO-Vindbaarheid</strong>
+                    <span>Korte samenvattingen voor zoekmachines &amp; AI</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-geo" checked={siteConfig.modules.geo} />
+                    <span class="slider"></span>
+                  </label>
                 </div>
-                <label class="switch">
-                  <input type="checkbox" id="mod-geo" checked={siteConfig.modules.geo} />
-                  <span class="slider"></span>
-                </label>
               </div>
-            </div>
+            )}
 
-            <div class="module-card">
-              <div class="mod-top">
-                <div class="mod-info">
-                  <strong>📝 Kennisbank &amp; Blog</strong>
-                  <span>Educatieve artikelen &amp; huidadvies pagina</span>
+            {siteConfig.modules.blog && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>📝 Kennisbank &amp; Blog</strong>
+                    <span>Educatieve artikelen &amp; huidadvies pagina</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-blog" checked={siteConfig.modules.blog} />
+                    <span class="slider"></span>
+                  </label>
                 </div>
-                <label class="switch">
-                  <input type="checkbox" id="mod-blog" checked={siteConfig.modules.blog} />
-                  <span class="slider"></span>
-                </label>
               </div>
-            </div>
+            )}
           </div>
 
           <!-- Slimme Meldingenbalk Bewerken Box -->
-          <div class="announcement-edit-box">
-            <div class="ann-top-row">
-              <div class="mod-info">
-                <strong>📣 Slimme Meldingenbalk (Bovenaan de website)</strong>
-                <span>Toon een speciale actie, vakantiemelding of mededeling.</span>
+          {siteConfig.modules.announcement && (
+            <div class="announcement-edit-box">
+              <div class="ann-top-row">
+                <div class="mod-info">
+                  <strong>📣 Slimme Meldingenbalk (Bovenaan de website)</strong>
+                  <span>Toon een speciale actie, vakantiemelding of mededeling.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="mod-announcement" checked={siteConfig.modules.announcement} />
+                  <span class="slider"></span>
+                </label>
               </div>
-              <label class="switch">
-                <input type="checkbox" id="mod-announcement" checked={siteConfig.modules.announcement} />
-                <span class="slider"></span>
-              </label>
+              <div class="ann-inputs-grid">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Meldingstekst:</label>
+                  <input type="text" id="ann-text" value={siteConfig.announcement?.text || ''} placeholder="Bijv. 💆 Boek eenvoudig online je ontspanningsmassage!" />
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Knoptekst (optioneel):</label>
+                  <input type="text" id="ann-btn-text" value={siteConfig.announcement?.buttonText || ''} placeholder="Bijv. Afspraak Maken" />
+                </div>
+              </div>
             </div>
-            <div class="ann-inputs-grid">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label>Meldingstekst:</label>
-                <input type="text" id="ann-text" value={siteConfig.announcement.text} placeholder="Bijv. 🌸 Maak nu een afspraak voor de voorjaarsbehandeling!" />
-              </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label>Knoptekst (optioneel):</label>
-                <input type="text" id="ann-btn-text" value={siteConfig.announcement.buttonText} placeholder="Bijv. Afspraak Maken" />
-              </div>
-            </div>
-          </div>
+          )}
 
           <div class="save-actions-bar">
             <button class="btn btn-primary" id="btn-save-modules">💾 Wijzigingen Opslaan</button>
@@ -1005,6 +1017,60 @@ import reviews from '../../data/reviews.json';
   modalOverlay?.addEventListener('click', (e) => {
     if (e.target === modalOverlay) closeModal();
   });
+
+  async function initDashboard() {
+    renderTreatmentsTable();
+    renderProductsTable();
+    renderReviewsList();
+
+    // Direct Zero-Cache Live Fetch of the actual site-config.json file
+    try {
+      const res = await fetch('/site-config.json?t=' + Date.now(), { cache: 'no-store' });
+      if (res.ok) {
+        const liveCfg = await res.json();
+        const mods = liveCfg.modules || {};
+
+        // 1. Enforce Provisioning: Hide tabs if module is disabled by BitbloX
+        const shopTab = document.querySelector('[data-target="tab-shop"]') as HTMLElement;
+        if (shopTab) shopTab.style.display = (mods.shop === true) ? 'inline-block' : 'none';
+
+        const revTab = document.querySelector('[data-target="tab-reviews"]') as HTMLElement;
+        if (revTab) revTab.style.display = (mods.reviews !== false) ? 'inline-block' : 'none';
+
+        // 2. Enforce Provisioning: Hide module cards in Tab 1 if disabled by BitbloX
+        const shopCard = document.getElementById('mod-shop')?.closest('.module-card') as HTMLElement;
+        if (shopCard) shopCard.style.display = (mods.shop === true) ? 'block' : 'none';
+
+        const waCard = document.getElementById('mod-whatsapp')?.closest('.module-card') as HTMLElement;
+        if (waCard) waCard.style.display = (mods.whatsapp === true) ? 'block' : 'none';
+
+        const cbCard = document.getElementById('mod-callback')?.closest('.module-card') as HTMLElement;
+        if (cbCard) cbCard.style.display = (mods.callback === true) ? 'block' : 'none';
+
+        const a11yCard = document.getElementById('mod-accessibility')?.closest('.module-card') as HTMLElement;
+        if (a11yCard) a11yCard.style.display = (mods.accessibility === true) ? 'block' : 'none';
+
+        const geoCard = document.getElementById('mod-geo')?.closest('.module-card') as HTMLElement;
+        if (geoCard) geoCard.style.display = (mods.geo === true) ? 'block' : 'none';
+
+        const blogCard = document.getElementById('mod-blog')?.closest('.module-card') as HTMLElement;
+        if (blogCard) blogCard.style.display = (mods.blog === true) ? 'block' : 'none';
+
+        const annBox = document.querySelector('.announcement-edit-box') as HTMLElement;
+        if (annBox) annBox.style.display = (mods.announcement === true) ? 'block' : 'none';
+
+        // Update active switch checked states
+        const modShopInput = document.getElementById('mod-shop') as HTMLInputElement;
+        if (modShopInput) modShopInput.checked = mods.shop === true;
+
+        const modWaInput = document.getElementById('mod-whatsapp') as HTMLInputElement;
+        if (modWaInput) modWaInput.checked = mods.whatsapp === true;
+
+        const modCbInput = document.getElementById('mod-callback') as HTMLInputElement;
+        if (modCbInput) modCbInput.checked = mods.callback === true;
+      }
+    } catch(e) {}
+  }
 
   // Save Modules button
   document.getElementById('btn-save-modules')?.addEventListener('click', () => {
