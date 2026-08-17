@@ -24,8 +24,8 @@ export interface Article {
 export const articles: Article[] = [
   {
     slug: "nieuwe-website-live-massagestudio-eelde-bitblox",
-    title: "Onze Nieuwe Website is Live: Sneller, Toegankelijker en Volledig Vernieuwd door BitbloX",
-    excerpt: "Met trots presenteren wij de geheel vernieuwde website van Massage Studio Eelde. Ontwikkeld door BitbloX Webdesign met focus op ultieme snelheid, modern design, toegankelijkheid (A11y) en een optimale mobiele ervaring.",
+    title: "Welkom op Onze Nieuwe Website: Meer Rust, Overzicht en Gemak voor U",
+    excerpt: "Met veel plezier heet ik u welkom op de vernieuwde website van Massage Studio Eelde. Samen met BitbloX Webdesign hebben we een rustige, heldere plek gecreëerd waar u eenvoudig alle behandelingen, vergoedingen en afspraken kunt vinden.",
     category: "Praktijknieuws",
     date: "17 augustus 2026",
     readTime: "3 min leestijd",
@@ -36,32 +36,32 @@ export const articles: Article[] = [
       avatar: "/images/Alianne.webp"
     },
     summaryPoints: [
-      { term: "Volledig Vernieuwd", description: "Een modern, rustgevend en overzichtelijk design dat perfect aansluit bij onze holistische wellnesspraktijk in Eelde." },
-      { term: "Ontwikkeld door BitbloX", description: "Gerealiseerd door <a href='https://bitblox.nl' target='_blank' rel='noopener noreferrer' style='color: #9d467e; font-weight: 700; text-decoration: underline;'>BitbloX Webdesign</a> op basis van de nieuwste Astro & Cloudflare Pages technologie." },
-      { term: "Toegankelijkheid (A11y)", description: "Voorzien van slimme opties voor hoog contrast, tekstvergroting en een wetenschappelijk onderbouwd dyslexie-lettertype." },
-      { term: "Eenvoudig Contact", description: "Direct afspraken maken en vragen stellen via WhatsApp, e-mail of het handige terugbelverzoek." }
+      { term: "Rust & Eenvoud", description: "Een overzichtelijke website waar u snel en helder de juiste informatie over behandelingen en vergoedingen vindt." },
+      { term: "Fijne Hulpmiddelen", description: "Pas de lettergrootte eenvoudig aan, kies voor extra hoog contrast of schakel een speciaal dyslexie-vriendelijk lettertype in." },
+      { term: "Persoonlijk Contact", description: "Met één klik direct een WhatsApp-bericht sturen of een terugbelverzoek achterlaten." },
+      { term: "Dank aan BitbloX", description: "Met zorg en vakkennis gerealiseerd door <a href='https://bitblox.nl' target='_blank' rel='noopener noreferrer' style='color: #9d467e; font-weight: 700; text-decoration: underline;'>BitbloX Webdesign</a>." }
     ],
     content: [
       {
-        heading: "Een frisse digitale start voor Massage Studio Eelde",
+        heading: "Een warme en overzichtelijke plek voor u",
         paragraphs: [
-          "In de afgelopen jaren is Massage Studio Eelde uitgegroeid tot een vertrouwde plek voor therapeutische behandelingen, ontspanning en natuurlijk herstel. Om onze cliënten online dezelfde rust, helderheid en persoonlijke aandacht te bieden als in de praktijk, was het tijd voor een complete metamorfose van onze website.",
-          "Met trots presenteren we vandaag ons nieuwe digitale thuis! De website is van de grond af aan opnieuw ontworpen en gebouwd om u nog beter te informeren over onze behandelvormen zoals Shiatsu, de Dorn-methode, Voetreflexologie, Littekenbehandeling en de 5 natuurgerichte principes van de BATC."
+          "In mijn praktijk in het voormalig kerkje in Eelde staat persoonlijke aandacht, rust en zorgzame begeleiding altijd op de eerste plaats. Ik wilde heel graag dat u ditzelfde vertrouwde gevoel ook ervaart wanneer u mijn website bezoekt.",
+          "De website was toe aan een fijne vernieuwing. We hebben gekeken naar wat voor ú als bezoeker echt belangrijk is: duidelijke uitleg over de behandelingen, helderheid over welke consulten vergoed worden door uw zorgverzekering, en vooral het gemak om snel en eenvoudig contact op te nemen."
         ]
       },
       {
-        heading: "Ontwikkeld in samenwerking met BitbloX Webdesign",
+        heading: "Handige nieuwe mogelijkheden op de website",
         paragraphs: [
-          "Voor het ontwerp en de technische realisatie hebben we gekozen voor de expertise van <a href=\"https://bitblox.nl\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #9d467e; font-weight: 700; text-decoration: underline;\">BitbloX Webdesign</a>. Het team van BitbloX is gespecialiseerd in het bouwen van ultrasnelle, veilige en toekomstbestendige websites op het moderne Astro-framework en Cloudflare netwerk.",
-          "Dankzij deze samenwerking laadt de website razendsnel op zowel smartphones, tablets als computers. Pagina's openen zonder enige vertraging, wat zorgt voor een ontspannen en soepele gebruikerservaring. Daarnaast is de website geoptimaliseerd voor lokale vindbaarheid (GEO en SEO) in de regio Eelde, Paterswolde, Haren, Groningen en Noord-Drenthe."
+          "Om uw bezoek zo prettig en gemakkelijk mogelijk te maken, zijn er een aantal fijne verbeteringen doorgevoerd:",
+          "• Direct contact via WhatsApp: Heeft u een vraag over een behandeling of wilt u een afspraak plannen? U kunt mij nu met één simpele klik direct een WhatsApp-berichtje sturen.\n• Handig terugbelverzoek: Bent u onderweg of belt u liever op een rustig moment? Laat uw naam en nummer achter via de knop 'Bel mij terug' en ik neem persoonlijk contact met u op.\n• Prettig leesbaar voor iedereen: Linksonder in beeld vindt u een handig hulpmiddel (het ronde icoontje). Hiermee kunt u met één klik de lettergrootte aanpassen, de pagina extra contrastrijk maken of kiezen voor een speciaal rustig lettertype dat heel fijn leest bij dyslexie.\n• Alles over de 5 Natuurgerichte Principes & Vergoedingen: U leest precies hoe Shiatsu, Voetreflexologie, de Dorn-methode en Littekenbehandeling werken en hoe deze deels vergoed worden vanuit uw aanvullende verzekering."
         ]
       },
       {
-        heading: "Innovatieve functies voor optimaal gebruiksgemak",
+        heading: "Met dank aan BitbloX Webdesign",
         paragraphs: [
-          "Bij het ontwikkelen van de nieuwe website stonden gebruiksgemak en toegankelijkheid centraal. Enkele highlights die u direct kunt uitproberen:",
-          "• Toegankelijkheidstoolbar (A11y): Linksonder vindt u een handig menu waarmee u de tekst kunt vergroten, hoog contrast kunt inschakelen of kunt schakelen naar een wetenschappelijk dyslexie-vriendelijk lettertype.\n• Direct contact via WhatsApp: Met één klik op de knop start u een WhatsApp-gesprek voor het plannen van een afspraak of het stellen van een vraag.\n• Uitgebreide Kennisbank: In onze nieuwe blogsectie delen we regelmatig waardevolle artikelen over gezondheid, zelfhelend vermogen en natuurlijke therapieën.\n• Duidelijke vergoedingen en tarieven: In één oogopslag ziet u welke natuurgeneeskundige consulten in aanmerking komen voor vergoeding via uw aanvullende zorgverzekering.",
-          "We nodigen u van harte uit om op uw gemak rond te kijken op onze nieuwe website. Heeft u vragen, opmerkingen of wilt u een afspraak maken? Neem gerust contact met ons op!"
+          "Ik ben zelf vooral bezig met het welzijn en de gezondheid van mijn cliënten en niet met computers of techniek. Daarom ben ik enorm blij met de fijne hulp van <a href=\"https://bitblox.nl\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #9d467e; font-weight: 700; text-decoration: underline;\">BitbloX Webdesign</a>.",
+          "Zij hebben ervoor gezorgd dat alles heel eenvoudig, overzichtelijk en soepel werkt op zowel uw mobiele telefoon, tablet als computer. Zo kan ik mij blijven focussen op wat ik het allerliefste doe: u helpen ontspannen en herstellen in de praktijk.",
+          "Ik nodig u van harte uit om rustig een kijkje te nemen op de pagina's. Heeft u een vraag of wilt u langskomen voor een behandeling? Mijn deur staat altijd voor u open!"
         ]
       }
     ]
