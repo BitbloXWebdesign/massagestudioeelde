@@ -2,7 +2,9 @@
 import siteConfig from '../../public/site-config.json';
 
 const isEnabled = siteConfig.modules.form || siteConfig.modules.contactForm;
-const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY";
+const targetEmail = siteConfig.email || "info@massagestudioeelde.nl";
+const clientName = siteConfig.clientName || "Massage Studio Eelde";
+const domain = siteConfig.domain || "massagestudioeelde.nl";
 ---
 
 {isEnabled && (
@@ -12,11 +14,11 @@ const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY
       <p class="card-sub">Vul het formulier in en Alianne neemt binnen 1 werkdag contact met u op.</p>
     </div>
 
-    <form id="mainContactForm" class="contact-form" action="https://api.web3forms.com/submit" method="POST">
-      <!-- Web3Forms Configuration -->
-      <input type="hidden" name="access_key" value={web3formsKey} />
-      <input type="hidden" name="subject" value="Nieuwe Contactaanvraag via Massage Studio Eelde Website" />
-      <input type="hidden" name="from_name" value="Massage Studio Eelde Website" />
+    <form id="mainContactForm" class="contact-form">
+      <!-- Target Configuration (Geen tokens nodig, pakt direct het klant-mailadres) -->
+      <input type="hidden" name="to" value={targetEmail} />
+      <input type="hidden" name="clientName" value={clientName} />
+      <input type="hidden" name="domain" value={domain} />
       
       <!-- Anti-Spam Honeypot -->
       <input type="checkbox" name="botcheck" class="hidden" style="display: none !important;" />
@@ -82,14 +84,8 @@ const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY
     background: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-lg);
-    padding: 2.75rem;
-    box-shadow: var(--shadow-sm);
-  }
-
-  @media (max-width: 640px) {
-    .contact-form-card {
-      padding: 1.75rem;
-    }
+    padding: 2.5rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
   }
 
   .card-header {
@@ -97,37 +93,42 @@ const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY
   }
 
   .card-title {
-    font-size: 1.75rem;
+    font-size: 1.5rem;
+    color: var(--text-color);
     margin-bottom: 0.5rem;
   }
 
   .card-sub {
-    color: var(--text-muted);
     font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.5;
   }
 
   .contact-form {
     display: flex;
     flex-direction: column;
-    gap: 1.35rem;
+    gap: 1.5rem;
   }
 
   .form-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1.35rem;
+    gap: 1.25rem;
   }
 
   @media (max-width: 640px) {
     .form-row {
       grid-template-columns: 1fr;
     }
+    .contact-form-card {
+      padding: 1.75rem;
+    }
   }
 
   .form-group {
     display: flex;
     flex-direction: column;
-    gap: 0.4rem;
+    gap: 0.45rem;
   }
 
   .form-group label {
@@ -138,21 +139,19 @@ const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY
 
   .form-input {
     width: 100%;
-    padding: 0.85rem 1.15rem;
-    border: 1.5px solid var(--border-color);
-    border-radius: var(--radius-sm);
-    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
     font-family: inherit;
+    font-size: 0.95rem;
     color: var(--text-color);
     background-color: var(--surface);
-    transition: all 0.2s ease;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-sm);
+    transition: all var(--transition-fast);
   }
 
   .form-input:focus {
     outline: none;
     border-color: var(--primary);
-    background-color: #ffffff;
-    box-shadow: 0 0 0 3px rgba(157, 70, 126, 0.12);
   }
 
   .form-select {
@@ -240,19 +239,40 @@ const web3formsKey = siteConfig.web3formsAccessKey || "YOUR_WEB3FORMS_ACCESS_KEY
       status.className = 'form-status';
       status.style.display = 'none';
 
-      const formData = new FormData(form);
-      const object = Object.fromEntries(formData);
-      const json = JSON.stringify(object);
+      const payload = {
+        to: (form.querySelector('input[name="to"]') as HTMLInputElement)?.value || 'info@massagestudioeelde.nl',
+        name: (document.getElementById('contactName') as HTMLInputElement).value,
+        email: (document.getElementById('contactEmail') as HTMLInputElement).value,
+        phone: (document.getElementById('contactPhone') as HTMLInputElement).value,
+        service: (document.getElementById('contactService') as HTMLSelectElement).value,
+        message: (document.getElementById('contactMessage') as HTMLTextAreaElement).value,
+        domain: (form.querySelector('input[name="domain"]') as HTMLInputElement)?.value || window.location.hostname,
+        clientName: (form.querySelector('input[name="clientName"]') as HTMLInputElement)?.value || 'Massage Studio Eelde'
+      };
 
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
+        let response = await fetch('https://bitblox.nl/api/contact', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-          },
-          body: json
-        });
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify(payload)
+        }).catch(() => null);
+
+        if (!response || !response.ok) {
+          response = await fetch(`https://formsubmit.co/ajax/${encodeURIComponent(payload.to)}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+            body: JSON.stringify({
+              _subject: `📩 Nieuw contactbericht via ${payload.domain}`,
+              Naam: payload.name,
+              "E-mailadres": payload.email,
+              Telefoonnummer: payload.phone || "Niet opgegeven",
+              "Onderwerp / Dienst": payload.service,
+              Bericht: payload.message,
+              _replyto: payload.email,
+              _template: "table"
+            })
+          });
+        }
 
         const result = await response.json();
 
