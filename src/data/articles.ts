@@ -23,6 +23,50 @@ export interface Article {
 
 export const articles: Article[] = [
   {
+    slug: "nieuwe-website-live-massagestudio-eelde-bitblox",
+    title: "Onze Nieuwe Website is Live: Sneller, Toegankelijker en Volledig Vernieuwd door BitbloX",
+    excerpt: "Met trots presenteren wij de geheel vernieuwde website van Massage Studio Eelde. Ontwikkeld door BitbloX Webdesign met focus op ultieme snelheid, modern design, toegankelijkheid (A11y) en een optimale mobiele ervaring.",
+    category: "Praktijknieuws",
+    date: "17 augustus 2026",
+    readTime: "3 min leestijd",
+    image: "/images/DSC_1480.jpg",
+    author: {
+      name: "Alianne Zuidhof-Hoiting",
+      role: "BATC Complementair Therapeut",
+      avatar: "/images/Alianne.webp"
+    },
+    summaryPoints: [
+      { term: "Volledig Vernieuwd", description: "Een modern, rustgevend en overzichtelijk design dat perfect aansluit bij onze holistische wellnesspraktijk in Eelde." },
+      { term: "Ontwikkeld door BitbloX", description: "Gerealiseerd door <a href='https://bitblox.nl' target='_blank' rel='noopener noreferrer' style='color: #9d467e; font-weight: 700; text-decoration: underline;'>BitbloX Webdesign</a> op basis van de nieuwste Astro & Cloudflare Pages technologie." },
+      { term: "Toegankelijkheid (A11y)", description: "Voorzien van slimme opties voor hoog contrast, tekstvergroting en een wetenschappelijk onderbouwd dyslexie-lettertype." },
+      { term: "Eenvoudig Contact", description: "Direct afspraken maken en vragen stellen via WhatsApp, e-mail of het handige terugbelverzoek." }
+    ],
+    content: [
+      {
+        heading: "Een frisse digitale start voor Massage Studio Eelde",
+        paragraphs: [
+          "In de afgelopen jaren is Massage Studio Eelde uitgegroeid tot een vertrouwde plek voor therapeutische behandelingen, ontspanning en natuurlijk herstel. Om onze cliënten online dezelfde rust, helderheid en persoonlijke aandacht te bieden als in de praktijk, was het tijd voor een complete metamorfose van onze website.",
+          "Met trots presenteren we vandaag ons nieuwe digitale thuis! De website is van de grond af aan opnieuw ontworpen en gebouwd om u nog beter te informeren over onze behandelvormen zoals Shiatsu, de Dorn-methode, Voetreflexologie, Littekenbehandeling en de 5 natuurgerichte principes van de BATC."
+        ]
+      },
+      {
+        heading: "Ontwikkeld in samenwerking met BitbloX Webdesign",
+        paragraphs: [
+          "Voor het ontwerp en de technische realisatie hebben we gekozen voor de expertise van <a href=\"https://bitblox.nl\" target=\"_blank\" rel=\"noopener noreferrer\" style=\"color: #9d467e; font-weight: 700; text-decoration: underline;\">BitbloX Webdesign</a>. Het team van BitbloX is gespecialiseerd in het bouwen van ultrasnelle, veilige en toekomstbestendige websites op het moderne Astro-framework en Cloudflare netwerk.",
+          "Dankzij deze samenwerking laadt de website razendsnel op zowel smartphones, tablets als computers. Pagina's openen zonder enige vertraging, wat zorgt voor een ontspannen en soepele gebruikerservaring. Daarnaast is de website geoptimaliseerd voor lokale vindbaarheid (GEO en SEO) in de regio Eelde, Paterswolde, Haren, Groningen en Noord-Drenthe."
+        ]
+      },
+      {
+        heading: "Innovatieve functies voor optimaal gebruiksgemak",
+        paragraphs: [
+          "Bij het ontwikkelen van de nieuwe website stonden gebruiksgemak en toegankelijkheid centraal. Enkele highlights die u direct kunt uitproberen:",
+          "• Toegankelijkheidstoolbar (A11y): Linksonder vindt u een handig menu waarmee u de tekst kunt vergroten, hoog contrast kunt inschakelen of kunt schakelen naar een wetenschappelijk dyslexie-vriendelijk lettertype.\n• Direct contact via WhatsApp: Met één klik op de knop start u een WhatsApp-gesprek voor het plannen van een afspraak of het stellen van een vraag.\n• Uitgebreide Kennisbank: In onze nieuwe blogsectie delen we regelmatig waardevolle artikelen over gezondheid, zelfhelend vermogen en natuurlijke therapieën.\n• Duidelijke vergoedingen en tarieven: In één oogopslag ziet u welke natuurgeneeskundige consulten in aanmerking komen voor vergoeding via uw aanvullende zorgverzekering.",
+          "We nodigen u van harte uit om op uw gemak rond te kijken op onze nieuwe website. Heeft u vragen, opmerkingen of wilt u een afspraak maken? Neem gerust contact met ons op!"
+        ]
+      }
+    ]
+  },
+  {
     slug: "shiatsu-en-de-5-natuurgerichte-principes",
     title: "Shiatsu en de 5 Natuurgerichte Principes: Hoe energie en aanraking uw herstel activeren",
     excerpt: "Ontdek hoe Japanse drukpuntmassage (Shiatsu) en de holistische BATC 5 principes samenwerken om chronische stress, spierspanning en vermoeidheid bij de bron aan te pakken.",

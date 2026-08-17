@@ -113,11 +113,11 @@ const schemaArticle = {
               if (p.startsWith('•')) {
                 return (
                   <ul class="article-bullet-list">
-                    {p.split('\n').map((li) => <li>{li.replace('•', '').trim()}</li>)}
+                    {p.split('\n').map((li) => <li set:html={li.replace('•', '').trim()} />)}
                   </ul>
                 );
               }
-              return <p>{p}</p>;
+              return <p set:html={p} />;
             })}
           </div>
         ))}
