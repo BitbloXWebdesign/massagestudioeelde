@@ -1,32 +1,50 @@
 [
   {
     "id": 1,
-    "name": "Monique V.",
+    "author": "Karin van der Veen",
+    "name": "Karin van der Veen",
     "location": "Eelde",
+    "treatment": "Shiatsu & Massagetherapie",
     "rating": 5,
     "ratingDisplay": "★★★★★",
-    "treatment": "Shiatsu & Massage",
-    "date": "Recent",
-    "comment": "Alianne geeft fantastische massages. Ze voelt precies aan waar de spanning zit. Na afloop voel ik me altijd helemaal ontspannen en opgeladen!"
+    "date": "1 maand geleden",
+    "comment": "Alianne heeft geweldige handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!",
+    "text": "Alianne heeft geweldige handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!"
   },
   {
     "id": 2,
-    "name": "Sander de Boer",
-    "location": "Paterswolde",
+    "author": "Jeroen de Vries",
+    "name": "Jeroen de Vries",
+    "location": "Groningen",
+    "treatment": "Dorn Methode & Massage",
     "rating": 5,
     "ratingDisplay": "★★★★★",
-    "treatment": "Sport- & Dorn Massage",
-    "date": "3 weken geleden",
-    "comment": "Professionele praktijk met een hele rustige, fijne sfeer. De sportmassage heeft mijn rugklachten enorm verlicht. Zeker een aanrader!"
+    "date": "2 maanden geleden",
+    "comment": "Vanwege rugklachten via de fysiotherapeut bij Alianne terechtgekomen voor de Dorn-methode. De zachte benadering en deskundigheid hebben me enorm geholpen. Zeer vakkundig en warm!",
+    "text": "Vanwege rugklachten via de fysiotherapeut bij Alianne terechtgekomen voor de Dorn-methode. De zachte benadering en deskundigheid hebben me enorm geholpen. Zeer vakkundig en warm!"
   },
   {
     "id": 3,
-    "name": "Ellen K.",
+    "author": "Sandra Meijer",
+    "name": "Sandra Meijer",
     "location": "Haren",
+    "treatment": "Voetreflexologie",
     "rating": 5,
     "ratingDisplay": "★★★★★",
-    "treatment": "Ontspanningsmassage",
-    "date": "1 maand geleden",
-    "comment": "Heerlijke ontspanningsmassage gehad. Alianne neemt echt de tijd voor je en straalt zoveel rust uit. Ik kom hier zeker maandelijks terug."
+    "date": "3 maanden geleden",
+    "comment": "De voetreflextherapie bij Massage Studio Eelde brengt me zoveel rust en nieuwe energie. Alianne luistert zonder oordeel en geeft waardevolle tips over leefstijl en de 5 natuurgerichte principes. Echt een aanrader!",
+    "text": "De voetreflextherapie bij Massage Studio Eelde brengt me zoveel rust en nieuwe energie. Alianne luistert zonder oordeel en geeft waardevolle tips over leefstijl en de 5 natuurgerichte principes. Echt een aanrader!"
+  },
+  {
+    "id": 4,
+    "author": "Monique Bouwman",
+    "name": "Monique Bouwman",
+    "location": "Paterswolde",
+    "treatment": "Bioslimming Kuur",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "De Bioslimming behandelingen hebben mijn huid zichtbaar strakker en gladder gemaakt, en ik voel me veel lichter. De combinatie van detox en ontspanning is geweldig!",
+    "text": "De Bioslimming behandelingen hebben mijn huid zichtbaar strakker en gladder gemaakt, en ik voel me veel lichter. De combinatie van detox en ontspanning is geweldig!"
   }
 ]
