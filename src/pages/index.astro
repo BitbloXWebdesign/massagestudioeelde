@@ -133,24 +133,58 @@ const treatments = [
       </div>
 
       <div class="hero-visual">
-        <div class="hero-image-wrapper">
-          <div class="blob-frame hero-blob">
-            <img 
-              src="/images/Alianne.webp" 
-              alt="Alianne Zuidhof-Hoiting - Massage Studio Eelde" 
-              width="460" 
-              height="550" 
-              class="hero-img"
-            />
+        <div class="therapist-hero-card">
+          <div class="therapist-avatar-wrap">
+            <div class="avatar-ring">
+              <img 
+                src="/images/Alianne.webp" 
+                alt="Alianne Zuidhof-Hoiting - BATC Complementair Therapeut" 
+                width="160" 
+                height="160" 
+                class="therapist-avatar"
+              />
+            </div>
+            <div class="avatar-badge" title="Geregistreerd BATC Therapeut &bull; HBO-Conform">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            </div>
           </div>
-          <div class="hero-floating-card">
-            <div class="card-icon-wrap">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+
+          <div class="therapist-card-body">
+            <h3 class="therapist-name">Alianne Zuidhof-Hoiting</h3>
+            <p class="therapist-title">BATC Complementair Therapeut &bull; HBO-Conform</p>
+            
+            <div class="therapist-quote">
+              &ldquo;Waar kwaliteit en gevoel voorop staan&rdquo;
             </div>
-            <div>
-              <strong>Alianne Zuidhof-Hoiting</strong>
-              <span>BATC Complementair Therapeut</span>
+
+            <div class="therapist-highlights">
+              <div class="th-item">
+                <span class="th-icon">⭐</span>
+                <div>
+                  <strong>5.0 / 5.0 Beoordeling</strong>
+                  <span>Tevreden cliënten in Eelde & omstreken</span>
+                </div>
+              </div>
+              <div class="th-item">
+                <span class="th-icon">🌿</span>
+                <div>
+                  <strong>5 Natuurgerichte Principes</strong>
+                  <span>Holistische aanpak & natuurlijk herstel</span>
+                </div>
+              </div>
+              <div class="th-item">
+                <span class="th-icon">🏛️</span>
+                <div>
+                  <strong>Voormalig Kerkje Eelde</strong>
+                  <span>Samen met Mài Beauty & Noorderstee</span>
+                </div>
+              </div>
             </div>
+
+            <a href="/over-mij" class="btn btn-outline btn-sm therapist-card-btn">
+              <span>Lees meer over Alianne</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
           </div>
         </div>
       </div>
@@ -499,50 +533,137 @@ const treatments = [
     flex-shrink: 0;
   }
 
+  /* Therapist Hero Card (Option 2) */
   .hero-visual {
     display: flex;
     justify-content: center;
+    align-items: center;
   }
 
-  .hero-image-wrapper {
-    position: relative;
-    max-width: 420px;
-    width: 100%;
-  }
-
-  .hero-blob {
-    width: 100%;
-    aspect-ratio: 4 / 5;
-    background: var(--primary-light);
-    overflow: hidden;
-  }
-
-  .hero-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
-    display: block;
-  }
-
-  .hero-floating-card {
-    position: absolute;
-    bottom: -20px;
-    left: -20px;
+  .therapist-hero-card {
     background: #ffffff;
     border: 1px solid var(--border-color);
-    border-radius: var(--radius-md);
-    padding: 0.85rem 1.25rem;
-    box-shadow: var(--shadow-md);
-    display: flex;
-    align-items: center;
-    gap: 0.85rem;
-    animation: floatCard 4s ease-in-out infinite;
+    border-radius: var(--radius-lg);
+    padding: 2.25rem 2rem;
+    box-shadow: 0 16px 36px rgba(157, 70, 126, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
   }
 
-  @keyframes floatCard {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-6px); }
+  .therapist-hero-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 20px 44px rgba(157, 70, 126, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  .therapist-avatar-wrap {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 1.25rem;
+  }
+
+  .avatar-ring {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    padding: 4px;
+    background: linear-gradient(135deg, var(--primary) 0%, #c78ca8 50%, var(--gold) 100%);
+    box-shadow: 0 8px 24px rgba(157, 70, 126, 0.18);
+  }
+
+  .therapist-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center top;
+    display: block;
+    background: #ffffff;
+  }
+
+  .avatar-badge {
+    position: absolute;
+    bottom: 4px;
+    right: 6px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #16a34a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  .therapist-name {
+    font-size: 1.45rem;
+    color: var(--text-color);
+    margin-bottom: 0.25rem;
+  }
+
+  .therapist-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 1rem;
+  }
+
+  .therapist-quote {
+    font-size: 0.925rem;
+    font-style: italic;
+    color: var(--text-muted);
+    background: var(--primary-light);
+    padding: 0.65rem 1rem;
+    border-radius: var(--radius-md);
+    margin-bottom: 1.35rem;
+    border-left: 3px solid var(--primary);
+  }
+
+  .therapist-highlights {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    text-align: left;
+    margin-bottom: 1.5rem;
+    padding: 1rem 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  .th-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .th-icon {
+    font-size: 1.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .th-item strong {
+    display: block;
+    color: var(--text-color);
+    font-size: 0.875rem;
+  }
+
+  .th-item span {
+    color: var(--text-muted);
+    font-size: 0.775rem;
+  }
+
+  .therapist-card-btn {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.875rem;
   }
 
   .card-icon-wrap {
