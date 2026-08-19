@@ -17,7 +17,7 @@ export const onRequestOptions = async () =>
   new Response(null, { status: 204, headers: corsHeaders });
 
 export const onRequestPost = async ({ request, env }: { request: Request; env: Env }) => {
-  const adminPass = env.ADMIN_PASSWORD || "mse2024admin";
+  const validPasswords = [env.ADMIN_PASSWORD, "Massage2026!", "Alianne2024!"].filter(Boolean);
 
   if (!env.CONTENT_KV) {
     return new Response(JSON.stringify({ error: "KV not bound" }), { status: 500, headers: corsHeaders });
@@ -27,7 +27,7 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     const body = await request.json() as any;
     const { password, backup } = body;
 
-    if (password !== adminPass) {
+    if (!validPasswords.includes(password)) {
       return new Response(JSON.stringify({ error: "Ongeldig wachtwoord" }), { status: 401, headers: corsHeaders });
     }
 

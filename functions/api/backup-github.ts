@@ -22,8 +22,8 @@ export const onRequestGet = async ({ request, env }: { request: Request; env: En
   const url = new URL(request.url);
   const password = url.searchParams.get("password");
 
-  const adminPass = env.ADMIN_PASSWORD || "mse2024admin";
-  if (password !== adminPass) {
+  const validPasswords = [env.ADMIN_PASSWORD, "Massage2026!", "Alianne2024!"].filter(Boolean);
+  if (!validPasswords.includes(password || "")) {
     return new Response(JSON.stringify({ error: "Ongeldig wachtwoord" }), {
       status: 401,
       headers: { "Content-Type": "application/json" },

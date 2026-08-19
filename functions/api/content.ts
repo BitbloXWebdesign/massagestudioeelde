@@ -78,8 +78,8 @@ export const onRequestPost = async ({ request, env }: { request: Request; env: E
     const { password, key, value, bulk } = body;
 
     // Auth check
-    const adminPass = env.ADMIN_PASSWORD || "mse2024admin";
-    if (password !== adminPass) {
+    const validPasswords = [env.ADMIN_PASSWORD, "Massage2026!", "Alianne2024!"].filter(Boolean);
+    if (!validPasswords.includes(password)) {
       return new Response(JSON.stringify({ success: false, error: "Ongeldig wachtwoord" }), { status: 401, headers: corsHeaders });
     }
 
