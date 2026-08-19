@@ -54,10 +54,10 @@ import siteConfig from '../../../public/site-config.json';
 
     <!-- TABS -->
     <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:16px;">
-      {['hero','over','behandelingen','openingstijden','contact','fotos'].map((tab, i) => (
+      {['hero','over','behandelingen','openingstijden','contact','fotos','backup'].map((tab, i) => (
         <button class="tab-btn" data-tab={tab}
           style={`padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:0.88rem;font-weight:600;transition:all 0.2s;${i===0?'background:#9d467e;color:#fff;':'background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);'}`}>
-          {tab === 'hero' ? '🏠 Hero' : tab === 'over' ? '👩 Over Mij' : tab === 'behandelingen' ? '💆 Behandelingen' : tab === 'openingstijden' ? '🕐 Openingstijden' : tab === 'contact' ? '📞 Contact' : '📸 Foto\'s'}
+          {tab === 'hero' ? '🏠 Hero' : tab === 'over' ? '👩 Over Mij' : tab === 'behandelingen' ? '💆 Behandelingen' : tab === 'openingstijden' ? '🕐 Openingstijden' : tab === 'contact' ? '📞 Contact' : tab === 'fotos' ? '📸 Foto\'s' : '🔒 Backup'}
         </button>
       ))}
     </div>
@@ -192,6 +192,61 @@ import siteConfig from '../../../public/site-config.json';
 
       </div>
       <p style="font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:20px;">⚡ Foto's worden direct na selectie opgeslagen en zijn meteen live.</p>
+    </div>
+
+    <!-- ===== TAB: BACKUP ===== -->
+    <div id="tab-backup" class="tab-pane" style="display:none;">
+      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:8px;">🔒 Backup & Herstel</h2>
+      <p style="color:rgba(255,255,255,0.45);font-size:0.88rem;margin-bottom:28px;">Exporteer alle inhoud als JSON bestand of herstel vanuit een eerder gemaakte backup.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
+
+        <!-- Download backup -->
+        <div class="field-card">
+          <div style="font-size:2rem;margin-bottom:12px;">📥</div>
+          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup Downloaden</h3>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Download alle website-inhoud als JSON bestand. Sla dit op als noodkopie op je computer of USB-stick.</p>
+          <button onclick="downloadBackup()" class="save-btn" style="background:#1d4ed8;">
+            📥 Download Backup (.json)
+          </button>
+          <p id="backupDownloadStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
+        </div>
+
+        <!-- Terugzetten vanuit bestand -->
+        <div class="field-card">
+          <div style="font-size:2rem;margin-bottom:12px;">📤</div>
+          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup Terugzetten</h3>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Herstel alle inhoud vanuit een eerder gedownload .json backup bestand.</p>
+          <input type="file" id="restoreFileInput" accept=".json" style="display:none;" onchange="restoreFromFile(this)" />
+          <button onclick="document.getElementById('restoreFileInput').click()" class="save-btn" style="background:#b45309;">
+            📤 Kies Backup Bestand
+          </button>
+          <p id="restoreStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
+        </div>
+
+        <!-- GitHub auto-backup -->
+        <div class="field-card">
+          <div style="font-size:2rem;margin-bottom:12px;">☁️</div>
+          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup naar GitHub</h3>
+          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Sla een backup op in de GitHub repository. Dit gebeurt automatisch elke nacht, maar je kunt het ook handmatig starten.</p>
+          <button onclick="triggerGithubBackup()" class="save-btn" style="background:#16a34a;">
+            ☁️ Nu Backup naar GitHub
+          </button>
+          <p id="githubBackupStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
+        </div>
+
+      </div>
+
+      <!-- Info box -->
+      <div style="margin-top:28px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:20px;">
+        <h4 style="color:#60a5fa;margin:0 0 10px;font-size:0.9rem;">ℹ️ Hoe werkt het backup systeem?</h4>
+        <ul style="color:rgba(255,255,255,0.5);font-size:0.84rem;line-height:2;margin:0;padding-left:18px;">
+          <li>Alle aanpassingen worden opgeslagen in Cloudflare KV (een aparte database)</li>
+          <li>De GitHub repository bevat de code — die staat altijd veilig op GitHub</li>
+          <li>De backup in GitHub (<code style="background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;">data/kv-backup.json</code>) wordt elke nacht automatisch bijgewerkt</li>
+          <li>Als er ooit iets misgaat: download een backup → herstel met 'Backup Terugzetten'</li>
+        </ul>
+      </div>
     </div>
 
   </div><!-- /container -->
@@ -556,6 +611,104 @@ import siteConfig from '../../../public/site-config.json';
     el.style.display = 'block';
     setTimeout(() => { el.style.display = 'none'; }, 3000);
   }
+
+  // ---- BACKUP FUNCTIES ----
+
+  // Download alle KV content als JSON bestand
+  (window as any).downloadBackup = async () => {
+    const statusEl = document.getElementById('backupDownloadStatus')!;
+    statusEl.style.display = 'block';
+    statusEl.style.color = '#94a3b8';
+    statusEl.textContent = '⏳ Backup ophalen...';
+
+    const res = await fetch(`/api/backup-export?password=${encodeURIComponent(adminPass)}`);
+    if (!res.ok) {
+      statusEl.style.color = '#f87171';
+      statusEl.textContent = '❌ Fout bij ophalen backup';
+      return;
+    }
+
+    const json = await res.text();
+    const blob = new Blob([json], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `mse-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+    statusEl.style.color = '#4ade80';
+    statusEl.textContent = '✅ Backup gedownload!';
+  };
+
+  // Herstel KV content vanuit een JSON backup bestand
+  (window as any).restoreFromFile = (input: HTMLInputElement) => {
+    const file = input.files?.[0];
+    if (!file) return;
+
+    const statusEl = document.getElementById('restoreStatus')!;
+    statusEl.style.display = 'block';
+    statusEl.style.color = '#94a3b8';
+    statusEl.textContent = '⏳ Bestand lezen...';
+
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      try {
+        const backup = JSON.parse(e.target?.result as string);
+        if (!backup.content) {
+          statusEl.style.color = '#f87171';
+          statusEl.textContent = '❌ Ongeldig backup bestand';
+          return;
+        }
+
+        if (!confirm(`Weet je zeker dat je ${Object.keys(backup.content).length} onderdelen wilt terugzetten?\n\nDit overschrijft de huidige inhoud!`)) {
+          statusEl.style.display = 'none';
+          return;
+        }
+
+        statusEl.textContent = '⏳ Terugzetten...';
+        const res = await fetch('/api/backup-import', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ password: adminPass, backup })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          statusEl.style.color = '#4ade80';
+          statusEl.textContent = `✅ ${data.message}`;
+          // Herlaad content in de admin
+          setTimeout(() => loadAllContent(), 1000);
+        } else {
+          statusEl.style.color = '#f87171';
+          statusEl.textContent = `❌ ${data.error}`;
+        }
+      } catch (err) {
+        statusEl.style.color = '#f87171';
+        statusEl.textContent = '❌ Kan bestand niet lezen';
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  // Handmatige backup naar GitHub triggeren
+  (window as any).triggerGithubBackup = async () => {
+    const statusEl = document.getElementById('githubBackupStatus')!;
+    statusEl.style.display = 'block';
+    statusEl.style.color = '#94a3b8';
+    statusEl.textContent = '⏳ Backup naar GitHub...';
+
+    const res = await fetch(`/api/backup-github?password=${encodeURIComponent(adminPass)}`);
+    const data = await res.json();
+
+    if (data.success) {
+      statusEl.style.color = '#4ade80';
+      statusEl.textContent = `✅ Opgeslagen! ${data.keyCount} sleutels → GitHub`;
+    } else {
+      statusEl.style.color = '#f87171';
+      statusEl.textContent = `❌ ${data.error || 'GitHub backup mislukt'}`;
+    }
+  };
 </script>
 
 </Layout>
