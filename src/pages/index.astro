@@ -133,58 +133,39 @@ const treatments = [
       </div>
 
       <div class="hero-visual">
-        <div class="therapist-hero-card">
-          <div class="therapist-avatar-wrap">
-            <div class="avatar-ring">
-              <img 
-                src="/images/Alianne.webp" 
-                alt="Alianne Zuidhof-Hoiting - BATC Complementair Therapeut" 
-                width="160" 
-                height="160" 
-                class="therapist-avatar"
-              />
-            </div>
-            <div class="avatar-badge" title="Geregistreerd BATC Therapeut &bull; HBO-Conform">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        <div class="hero-composition">
+          <!-- Main Ambient Practice Photo in Elegant Rounded Card -->
+          <div class="hero-main-card">
+            <img 
+              src="/images/praktijkruimte-massagestudio-eelde.webp" 
+              alt="Sfeervolle behandelruimte en massagetafel - Massage Studio Eelde in het voormalig kerkje" 
+              width="480" 
+              height="600" 
+              class="hero-practice-img"
+            />
+            <div class="practice-location-tag">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              <span>Praktijkruimte Eelde-Paterswolde</span>
             </div>
           </div>
 
-          <div class="therapist-card-body">
-            <h3 class="therapist-name">Alianne Zuidhof-Hoiting</h3>
-            <p class="therapist-title">BATC Complementair Therapeut &bull; HBO-Conform</p>
-            
-            <div class="therapist-quote">
-              &ldquo;Waar kwaliteit en gevoel voorop staan&rdquo;
+          <!-- Overlapping Therapist Floating Badge with Alianne's Portrait -->
+          <div class="hero-therapist-badge">
+            <div class="therapist-badge-avatar">
+              <img 
+                src="/images/Alianne.webp" 
+                alt="Alianne Zuidhof-Hoiting - BATC Complementair Therapeut" 
+                width="84" 
+                height="84" 
+                class="badge-img"
+              />
+              <span class="badge-check" title="BATC Erkend Therapeut">✓</span>
             </div>
-
-            <div class="therapist-highlights">
-              <div class="th-item">
-                <span class="th-icon">⭐</span>
-                <div>
-                  <strong>5.0 / 5.0 Beoordeling</strong>
-                  <span>Tevreden cliënten in Eelde & omstreken</span>
-                </div>
-              </div>
-              <div class="th-item">
-                <span class="th-icon">🌿</span>
-                <div>
-                  <strong>5 Natuurgerichte Principes</strong>
-                  <span>Holistische aanpak & natuurlijk herstel</span>
-                </div>
-              </div>
-              <div class="th-item">
-                <span class="th-icon">🏛️</span>
-                <div>
-                  <strong>Voormalig Kerkje Eelde</strong>
-                  <span>Samen met Mài Beauty & Noorderstee</span>
-                </div>
-              </div>
+            <div class="therapist-badge-info">
+              <strong>Alianne Zuidhof-Hoiting</strong>
+              <span>BATC Complementair Therapeut</span>
+              <div class="badge-sub">HBO-Conform &bull; NAP</div>
             </div>
-
-            <a href="/over-mij" class="btn btn-outline btn-sm therapist-card-btn">
-              <span>Lees meer over Alianne</span>
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </a>
           </div>
         </div>
       </div>
@@ -533,159 +514,153 @@ const treatments = [
     flex-shrink: 0;
   }
 
-  /* Therapist Hero Card (Option 2) */
+  /* Hero Visual: Optie 1 Gelaagde Wellness Compositie */
   .hero-visual {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 
-  .therapist-hero-card {
-    background: #ffffff;
-    border: 1px solid var(--border-color);
-    border-radius: var(--radius-lg);
-    padding: 2.25rem 2rem;
-    box-shadow: 0 16px 36px rgba(157, 70, 126, 0.08), 0 2px 8px rgba(0, 0, 0, 0.04);
-    max-width: 400px;
+  .hero-composition {
+    position: relative;
+    max-width: 440px;
     width: 100%;
-    text-align: center;
+  }
+
+  .hero-main-card {
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    box-shadow: 0 20px 48px rgba(157, 70, 126, 0.12), 0 4px 14px rgba(0, 0, 0, 0.05);
+    border: 4px solid #ffffff;
+    background: var(--surface);
+    aspect-ratio: 4 / 5;
   }
 
-  .therapist-hero-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 20px 44px rgba(157, 70, 126, 0.12), 0 4px 12px rgba(0, 0, 0, 0.06);
-  }
-
-  .therapist-avatar-wrap {
-    position: relative;
-    width: 150px;
-    height: 150px;
-    margin: 0 auto 1.25rem;
-  }
-
-  .avatar-ring {
+  .hero-practice-img {
     width: 100%;
     height: 100%;
-    border-radius: 50%;
-    padding: 4px;
-    background: linear-gradient(135deg, var(--primary) 0%, #c78ca8 50%, var(--gold) 100%);
-    box-shadow: 0 8px 24px rgba(157, 70, 126, 0.18);
+    object-fit: cover;
+    object-position: center center;
+    display: block;
+    transition: transform 0.6s ease;
   }
 
-  .therapist-avatar {
+  .hero-main-card:hover .hero-practice-img {
+    transform: scale(1.03);
+  }
+
+  .practice-location-tag {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(255, 255, 255, 0.94);
+    backdrop-filter: blur(8px);
+    color: var(--text-color);
+    padding: 0.45rem 0.95rem;
+    border-radius: var(--radius-full);
+    font-size: 0.825rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+  }
+
+  .practice-location-tag svg {
+    color: var(--primary);
+  }
+
+  .hero-therapist-badge {
+    position: absolute;
+    bottom: -22px;
+    left: -22px;
+    background: #ffffff;
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-md);
+    padding: 0.85rem 1.35rem 0.85rem 0.85rem;
+    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(157, 70, 126, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 0.95rem;
+    animation: floatBadge 4.5s ease-in-out infinite;
+    max-width: 330px;
+  }
+
+  @keyframes floatBadge {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  .therapist-badge-avatar {
+    position: relative;
+    width: 68px;
+    height: 68px;
+    flex-shrink: 0;
+  }
+
+  .badge-img {
     width: 100%;
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
     object-position: center top;
     display: block;
-    background: #ffffff;
+    border: 2.5px solid var(--primary);
+    box-shadow: 0 4px 12px rgba(157, 70, 126, 0.2);
   }
 
-  .avatar-badge {
+  .badge-check {
     position: absolute;
-    bottom: 4px;
-    right: 6px;
-    width: 28px;
-    height: 28px;
+    bottom: -2px;
+    right: -2px;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
     background: #16a34a;
     color: #ffffff;
+    font-size: 0.7rem;
+    font-weight: 900;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   }
 
-  .therapist-name {
-    font-size: 1.45rem;
-    color: var(--text-color);
-    margin-bottom: 0.25rem;
-  }
-
-  .therapist-title {
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--primary);
-    margin-bottom: 1rem;
-  }
-
-  .therapist-quote {
-    font-size: 0.925rem;
-    font-style: italic;
-    color: var(--text-muted);
-    background: var(--primary-light);
-    padding: 0.65rem 1rem;
-    border-radius: var(--radius-md);
-    margin-bottom: 1.35rem;
-    border-left: 3px solid var(--primary);
-  }
-
-  .therapist-highlights {
+  .therapist-badge-info {
     display: flex;
     flex-direction: column;
-    gap: 0.75rem;
-    text-align: left;
-    margin-bottom: 1.5rem;
-    padding: 1rem 0;
-    border-top: 1px solid var(--border-color);
-    border-bottom: 1px solid var(--border-color);
+    gap: 0.15rem;
   }
 
-  .th-item {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-  }
-
-  .th-icon {
-    font-size: 1.15rem;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-
-  .th-item strong {
-    display: block;
+  .therapist-badge-info strong {
+    font-size: 0.95rem;
     color: var(--text-color);
-    font-size: 0.875rem;
+    line-height: 1.2;
   }
 
-  .th-item span {
-    color: var(--text-muted);
-    font-size: 0.775rem;
-  }
-
-  .therapist-card-btn {
-    width: 100%;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 0.65rem 1rem;
-    font-size: 0.875rem;
-  }
-
-  .card-icon-wrap {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--primary-light);
+  .therapist-badge-info span {
+    font-size: 0.8rem;
+    font-weight: 600;
     color: var(--primary);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    line-height: 1.2;
   }
 
-  .hero-floating-card strong {
-    display: block;
-    font-size: 0.9rem;
-    color: var(--text-color);
-  }
-
-  .hero-floating-card span {
-    font-size: 0.75rem;
+  .badge-sub {
+    font-size: 0.725rem;
     color: var(--text-muted);
+    margin-top: 0.1rem;
+  }
+
+  @media (max-width: 640px) {
+    .hero-therapist-badge {
+      position: relative;
+      bottom: auto;
+      left: auto;
+      margin-top: 1rem;
+      max-width: 100%;
+    }
   }
 
   /* Intro */
