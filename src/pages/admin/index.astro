@@ -57,7 +57,6 @@ import reviews from '../../data/reviews.json';
           <button class="adm-tab" data-target="tab-treatments">💆 Massages &amp; Tarieven</button>
           {siteConfig.modules.shop && <button class="adm-tab" data-target="tab-shop">🛒 Webshop Producten</button>}
           {siteConfig.modules.reviews && <button class="adm-tab" data-target="tab-reviews">⭐ Google Reviews</button>}
-          <button class="adm-tab" data-target="tab-backup">🔒 Backup &amp; Noodherstel</button>
         </div>
 
         <!-- Tab 1: Website Modules & Functies (Gesynchroniseerd met centrale BitbloX schakelaars) -->
@@ -68,15 +67,15 @@ import reviews from '../../data/reviews.json';
           </div>
 
           <div class="modules-grid">
-            {siteConfig.modules.shop && (
+            {siteConfig.modules.cookies && (
               <div class="module-card">
                 <div class="mod-top">
                   <div class="mod-info">
-                    <strong>🛒 Webshop &amp; Skincare</strong>
-                    <span>Online assortiment, winkelmandje &amp; checkout</span>
+                    <strong>🍪 Cookiebanner (Privacy)</strong>
+                    <span>AVG / GDPR privacymelding onderin het scherm</span>
                   </div>
                   <label class="switch">
-                    <input type="checkbox" id="mod-shop" checked={siteConfig.modules.shop} />
+                    <input type="checkbox" id="mod-cookies" checked={siteConfig.modules.cookies} />
                     <span class="slider"></span>
                   </label>
                 </div>
@@ -122,36 +121,6 @@ import reviews from '../../data/reviews.json';
                   </div>
                   <label class="switch">
                     <input type="checkbox" id="mod-accessibility" checked={siteConfig.modules.accessibility} />
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </div>
-            )}
-
-            {siteConfig.modules.geo && (
-              <div class="module-card">
-                <div class="mod-top">
-                  <div class="mod-info">
-                    <strong>🤖 AI GEO-Vindbaarheid</strong>
-                    <span>Korte samenvattingen voor zoekmachines &amp; AI</span>
-                  </div>
-                  <label class="switch">
-                    <input type="checkbox" id="mod-geo" checked={siteConfig.modules.geo} />
-                    <span class="slider"></span>
-                  </label>
-                </div>
-              </div>
-            )}
-
-            {siteConfig.modules.blog && (
-              <div class="module-card">
-                <div class="mod-top">
-                  <div class="mod-info">
-                    <strong>📰 Kennisbank &amp; Blog</strong>
-                    <span>Educatieve artikelen &amp; huidadvies pagina</span>
-                  </div>
-                  <label class="switch">
-                    <input type="checkbox" id="mod-blog" checked={siteConfig.modules.blog} />
                     <span class="slider"></span>
                   </label>
                 </div>
@@ -379,48 +348,6 @@ import reviews from '../../data/reviews.json';
             </div>
           </div>
         )}
-
-        <!-- Tab 6: Backup & Noodherstel -->
-        <div class="tab-pane" id="tab-backup">
-          <div class="pane-header">
-            <h3>🔒 Backup, Export &amp; Noodherstel</h3>
-            <p>Download een volledige reservekopie van al uw teksten, prijzen en instellingen of zet een eerdere backup terug.</p>
-          </div>
-
-          <div class="backup-grid">
-            
-            <div class="backup-card">
-              <div class="backup-icon">📥</div>
-              <h4>Backup Downloaden</h4>
-              <p>Download alle website-gegevens in één klik als een veilig .json bestand naar uw computer.</p>
-              <button class="btn btn-primary btn-sm btn-full" id="btn-download-backup">📥 Download Reservekopie</button>
-              <span id="backup-dl-status" class="backup-msg"></span>
-            </div>
-
-            <div class="backup-card">
-              <div class="backup-icon">📤</div>
-              <h4>Backup Terugzetten</h4>
-              <p>Heeft u per ongeluk iets gewijzigd? Herstel direct vanuit een eerder gedownload .json bestand.</p>
-              <input type="file" id="restore-file-input" accept=".json" style="display:none;" />
-              <button class="btn btn-outline btn-sm btn-full" id="btn-trigger-restore">📤 Kies Backup Bestand</button>
-              <span id="backup-restore-status" class="backup-msg"></span>
-            </div>
-
-            <div class="backup-card">
-              <div class="backup-icon">☁️</div>
-              <h4>GitHub Cloud Sync</h4>
-              <p>Uw website wordt elke nacht automatisch gesynchroniseerd met de veilige BitbloX GitHub Cloud.</p>
-              <button class="btn btn-secondary btn-sm btn-full" id="btn-trigger-github">☁️ Direct Nu Syncen</button>
-              <span id="backup-gh-status" class="backup-msg"></span>
-            </div>
-
-          </div>
-
-          <div class="backup-info-callout">
-            <strong>ℹ️ Veiligheid &amp; Bescherming:</strong>
-            <p>Al uw gegevens worden dubbel beveiligd opgeslagen in Cloudflare KV en in de centrale BitbloX cloud. Mocht er ooit een storing zijn, dan kan uw complete website binnen 10 seconden foutloos worden hersteld.</p>
-          </div>
-        </div>
 
       </div>
     </div>
@@ -1396,7 +1323,6 @@ import reviews from '../../data/reviews.json';
     await loadCmsContent();
     setupModuleListeners();
     setupCmsListeners();
-    setupBackupListeners();
   }
 
   // Render Treatments
@@ -1526,7 +1452,7 @@ import reviews from '../../data/reviews.json';
     } catch(e) {}
   }
 
-  // Setup Module Listeners
+  // Setup Module Listeners (5 Client Switches)
   function setupModuleListeners() {
     const btnSave = document.getElementById('btn-save-modules');
     const saveStatus = document.getElementById('save-status');
@@ -1537,14 +1463,22 @@ import reviews from '../../data/reviews.json';
         saveStatus.style.color = '#7a2b60';
       }
 
-      const annText = (document.getElementById('ann-text') as HTMLInputElement)?.value;
-      const annBtnText = (document.getElementById('ann-btn-text') as HTMLInputElement)?.value;
-      const annEnabled = (document.getElementById('mod-announcement') as HTMLInputElement)?.checked;
+      const cookies = (document.getElementById('mod-cookies') as HTMLInputElement)?.checked ?? true;
+      const whatsapp = (document.getElementById('mod-whatsapp') as HTMLInputElement)?.checked ?? true;
+      const callback = (document.getElementById('mod-callback') as HTMLInputElement)?.checked ?? false;
+      const a11y = (document.getElementById('mod-accessibility') as HTMLInputElement)?.checked ?? true;
+      const annEnabled = (document.getElementById('mod-announcement') as HTMLInputElement)?.checked ?? false;
+      const annText = (document.getElementById('ann-text') as HTMLInputElement)?.value || '';
+      const annBtnText = (document.getElementById('ann-btn-text') as HTMLInputElement)?.value || '';
 
       await syncToKV({
-        announcement_text: annText || '',
-        announcement_button: annBtnText || '',
-        announcement_enabled: annEnabled ? 'true' : 'false'
+        module_cookies: cookies ? 'true' : 'false',
+        module_whatsapp: whatsapp ? 'true' : 'false',
+        module_callback: callback ? 'true' : 'false',
+        module_accessibility: a11y ? 'true' : 'false',
+        announcement_enabled: annEnabled ? 'true' : 'false',
+        announcement_text: annText,
+        announcement_button: annBtnText
       });
 
       if (saveStatus) {
@@ -1552,10 +1486,9 @@ import reviews from '../../data/reviews.json';
         saveStatus.style.color = '#2E7D32';
         setTimeout(() => { saveStatus.textContent = ''; }, 3500);
       }
-    });
   }
 
-  // Setup CMS Listeners
+  // Setup CMS Listeners (Teksten & Foto's)
   function setupCmsListeners() {
     const btnSave = document.getElementById('btn-save-content');
     const status = document.getElementById('save-content-status');
@@ -1632,93 +1565,6 @@ import reviews from '../../data/reviews.json';
       img.src = dataUrl;
     };
     reader.readAsDataURL(file);
-  }
-
-  // Setup Backup Listeners
-  function setupBackupListeners() {
-    const btnDl = document.getElementById('btn-download-backup');
-    const dlStatus = document.getElementById('backup-dl-status');
-
-    btnDl?.addEventListener('click', async () => {
-      if (dlStatus) {
-        dlStatus.textContent = '⏳ Reservekopie genereren...';
-        dlStatus.style.color = '#7a2b60';
-      }
-      try {
-        const res = await fetch(`/api/backup-export?password=${encodeURIComponent(activePassword)}`);
-        const json = await res.text();
-        const blob = new Blob([json], { type: 'application/json' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = `mse-backup-${new Date().toISOString().slice(0, 10)}.json`;
-        a.click();
-        URL.revokeObjectURL(url);
-        if (dlStatus) {
-          dlStatus.textContent = '✅ Reservekopie gedownload!';
-          dlStatus.style.color = '#2E7D32';
-        }
-      } catch(e) {
-        if (dlStatus) {
-          dlStatus.textContent = '❌ Fout bij downloaden';
-          dlStatus.style.color = '#C62828';
-        }
-      }
-    });
-
-    const btnTriggerRestore = document.getElementById('btn-trigger-restore');
-    const fileInput = document.getElementById('restore-file-input') as HTMLInputElement;
-    const restoreStatus = document.getElementById('backup-restore-status');
-
-    btnTriggerRestore?.addEventListener('click', () => fileInput?.click());
-    fileInput?.addEventListener('change', () => {
-      const file = fileInput.files?.[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = async (e) => {
-        try {
-          const backup = JSON.parse(e.target?.result as string);
-          if (!confirm('Weet u zeker dat u deze backup wilt terugzetten?')) return;
-          const res = await fetch('/api/backup-import', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ password: activePassword, backup })
-          });
-          const data = await res.json();
-          if (data.success && restoreStatus) {
-            restoreStatus.textContent = '✅ Backup succesvol hersteld!';
-            restoreStatus.style.color = '#2E7D32';
-            setTimeout(() => window.location.reload(), 1500);
-          }
-        } catch(err) {
-          if (restoreStatus) {
-            restoreStatus.textContent = '❌ Ongeldig bestand';
-            restoreStatus.style.color = '#C62828';
-          }
-        }
-      };
-      reader.readAsText(file);
-    });
-
-    const btnGh = document.getElementById('btn-trigger-github');
-    const ghStatus = document.getElementById('backup-gh-status');
-    btnGh?.addEventListener('click', async () => {
-      if (ghStatus) {
-        ghStatus.textContent = '⏳ Syncen met GitHub...';
-        ghStatus.style.color = '#7a2b60';
-      }
-      try {
-        const res = await fetch(`/api/backup-github?password=${encodeURIComponent(activePassword)}`);
-        const data = await res.json();
-        if (data.success && ghStatus) {
-          ghStatus.textContent = `✅ Gesynchroniseerd (${data.keyCount} items)!`;
-          ghStatus.style.color = '#2E7D32';
-        } else if (ghStatus) {
-          ghStatus.textContent = 'ℹ️ Cloudflare KV is 100% up-to-date!';
-          ghStatus.style.color = '#2E7D32';
-        }
-      } catch(e) {}
-    });
   }
 
   // Treatment Actions Delegation
