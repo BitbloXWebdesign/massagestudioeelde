@@ -33,7 +33,7 @@ export const articles: Article[] = [
     author: {
       name: "Alianne Zuidhof-Hoiting",
       role: "BATC Complementair Therapeut",
-      avatar: "/images/Alianne.webp"
+      avatar: "/images/Alianne-avatar.webp"
     },
     summaryPoints: [
       { term: "Rust & Eenvoud", description: "Een overzichtelijke website waar u snel en helder de juiste informatie over behandelingen en vergoedingen vindt." },
@@ -77,7 +77,7 @@ export const articles: Article[] = [
     author: {
       name: "Alianne Zuidhof-Hoiting",
       role: "BATC Complementair Therapeut",
-      avatar: "/images/Alianne.webp"
+      avatar: "/images/Alianne-avatar.webp"
     },
     summaryPoints: [
       { term: "Energetische Balans", description: "Shiatsu heft blokkades op in de meridianen en stimuleert de vitale levensenergie (Qi)." },
@@ -121,7 +121,7 @@ export const articles: Article[] = [
     author: {
       name: "Alianne Zuidhof-Hoiting",
       role: "BATC Complementair Therapeut",
-      avatar: "/images/Alianne.webp"
+      avatar: "/images/Alianne-avatar.webp"
     },
     summaryPoints: [
       { term: "Dynamische Correctie", description: "Correctie van gewrichten en wervels vindt altijd plaats tijdens een natuurlijke been- of armzwaai." },
@@ -164,7 +164,7 @@ export const articles: Article[] = [
     author: {
       name: "Alianne Zuidhof-Hoiting",
       role: "BATC Complementair Therapeut",
-      avatar: "/images/Alianne.webp"
+      avatar: "/images/Alianne-avatar.webp"
     },
     summaryPoints: [
       { term: "Reflexzones", description: "Elke zone op de voet correspondeert via zenuw- en energiebanen met organen en klieren." },
