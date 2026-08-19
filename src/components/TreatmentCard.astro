@@ -9,6 +9,8 @@ interface Props {
   tags?: string[];
 }
 
+const { title, duration, price, description, image, slug = '/behandelingen', tags = [] } = Astro.props;
+
 const isContainImage = image && (
   image.toLowerCase().includes('oor') || 
   image.toLowerCase().includes('reflexologie') || 
