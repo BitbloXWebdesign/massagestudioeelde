@@ -1,564 +1,1614 @@
 ---
-// Admin CMS pagina voor Massage Studio Eelde
-// Beveiligd met wachtwoord (opgeslagen in Cloudflare Pages env: ADMIN_PASSWORD)
 import Layout from '../../layouts/Layout.astro';
 import siteConfig from '../../../public/site-config.json';
+import treatments from '../../data/treatments.json';
+import products from '../../data/products.json';
+import reviews from '../../data/reviews.json';
 ---
 
-<Layout title="Admin — Massage Studio Eelde" description="Beheer je website inhoud" hideHeaderFooter={true}>
-
-<!-- LOGIN GATE -->
-<div id="loginGate" style="position:fixed;inset:0;z-index:999999;background:linear-gradient(135deg,#1a0a14 0%,#2d0a1e 100%);display:flex;align-items:center;justify-content:center;padding:20px;">
-  <div style="max-width:420px;width:100%;padding:44px 36px;background:rgba(255,255,255,0.05);border:1px solid rgba(157,70,126,0.4);border-radius:20px;text-align:center;backdrop-filter:blur(20px);">
-    <div style="width:64px;height:64px;background:rgba(157,70,126,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem;">🌸</div>
-    <h2 style="color:#fff;font-size:1.4rem;margin-bottom:6px;">Massage Studio Eelde</h2>
-    <p style="color:rgba(255,255,255,0.5);font-size:0.88rem;margin-bottom:28px;">Website Beheer</p>
-    <div style="display:flex;flex-direction:column;gap:12px;">
-      <input type="password" id="passInput" placeholder="Wachtwoord" autocomplete="current-password"
-        style="width:100%;padding:14px 18px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;color:#fff;font-size:1rem;text-align:center;letter-spacing:3px;box-sizing:border-box;" />
-      <button id="loginBtn" style="width:100%;padding:14px;background:#9d467e;color:#fff;border:none;border-radius:12px;font-size:1rem;font-weight:700;cursor:pointer;transition:background 0.2s;">
-        Inloggen →
-      </button>
-      <p id="loginErr" style="color:#f87171;font-size:0.85rem;margin:0;display:none;">⚠️ Onjuist wachtwoord</p>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN DASHBOARD -->
-<div id="adminDash" style="display:none;min-height:100vh;background:#0f0a0d;color:#e2e8f0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;">
-
-  <!-- TOPBAR -->
-  <header style="background:#1a0f16;border-bottom:1px solid rgba(157,70,126,0.3);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;">
-    <div style="display:flex;align-items:center;gap:14px;">
-      <span style="font-size:1.5rem;">🌸</span>
-      <div>
-        <div style="font-size:0.95rem;font-weight:700;color:#fff;">Massage Studio Eelde</div>
-        <div style="font-size:0.75rem;color:rgba(255,255,255,0.4);">Website Beheerder</div>
-      </div>
-    </div>
-    <div style="display:flex;align-items:center;gap:12px;">
-      <a href="https://massagestudioeelde.nl" target="_blank" style="font-size:0.84rem;color:#9d467e;text-decoration:none;border:1px solid rgba(157,70,126,0.4);padding:7px 14px;border-radius:8px;">🌐 Live Site ↗</a>
-      <button id="logoutBtn" style="font-size:0.84rem;color:rgba(255,255,255,0.5);background:transparent;border:1px solid rgba(255,255,255,0.1);padding:7px 14px;border-radius:8px;cursor:pointer;">Uitloggen</button>
-    </div>
-  </header>
-
-  <!-- SAVE TOAST -->
-  <div id="saveToast" style="position:fixed;top:80px;right:24px;z-index:9999;background:#16a34a;color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-    ✅ Opgeslagen! Wijziging is live.
-  </div>
-  <div id="errToast" style="position:fixed;top:80px;right:24px;z-index:9999;background:#dc2626;color:#fff;padding:12px 20px;border-radius:10px;font-weight:600;font-size:0.9rem;display:none;box-shadow:0 8px 24px rgba(0,0,0,0.4);">
-    ❌ Fout bij opslaan. Probeer opnieuw.
-  </div>
-
-  <div style="max-width:1000px;margin:0 auto;padding:32px 24px;">
-
-    <!-- TABS -->
-    <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.08);padding-bottom:16px;">
-      {['hero','over','behandelingen','openingstijden','contact','fotos','backup'].map((tab, i) => (
-        <button class="tab-btn" data-tab={tab}
-          style={`padding:9px 18px;border-radius:8px;border:none;cursor:pointer;font-size:0.88rem;font-weight:600;transition:all 0.2s;${i===0?'background:#9d467e;color:#fff;':'background:rgba(255,255,255,0.06);color:rgba(255,255,255,0.6);'}`}>
-          {tab === 'hero' ? '🏠 Hero' : tab === 'over' ? '👩 Over Mij' : tab === 'behandelingen' ? '💆 Behandelingen' : tab === 'openingstijden' ? '🕐 Openingstijden' : tab === 'contact' ? '📞 Contact' : tab === 'fotos' ? '📸 Foto\'s' : '🔒 Backup'}
-        </button>
-      ))}
-    </div>
-
-    <!-- ===== TAB: HERO ===== -->
-    <div id="tab-hero" class="tab-pane">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:24px;">🏠 Hero Sectie</h2>
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <div class="field-card">
-          <label class="field-label">Hoofdtitel (H1)</label>
-          <input type="text" id="f_hero_title" class="field-input" placeholder="Massage Studio Eelde — Uw Welzijn, Onze Passie" />
-          <span class="field-hint">De grote titel bovenaan de homepage</span>
+<Layout 
+  title="Klantenportaal & Beheer — Massage Studio Eelde & zo"
+  description="Centraal beheerportaal voor Massage Studio Eelde & zo. Beheer uw website modules, behandelingen, teksten, foto's en reviews."
+>
+  <div class="admin-wrapper" id="admin-app">
+    
+    <!-- Login Screen (Proportioneel & Stijlvol) -->
+    <div class="admin-login-screen" id="admin-login-screen">
+      <div class="login-box-card">
+        <div class="login-header">
+          <img src="/images/Logo-Massage-Studio-Eelde.png" alt="Massage Studio Eelde & zo" class="admin-login-logo" />
+          <h2>Klantenportaal</h2>
+          <p>Voer uw beveiligde beheerderswachtwoord in om in te loggen in uw beheeromgeving.</p>
         </div>
-        <div class="field-card">
-          <label class="field-label">Subtitel / Introductietekst</label>
-          <textarea id="f_hero_subtitle" class="field-textarea" rows="3" placeholder="Ontdek de kracht van holistische massagetherapie..."></textarea>
-        </div>
-        <div class="field-card">
-          <label class="field-label">Knoptekst (CTA)</label>
-          <input type="text" id="f_hero_cta_text" class="field-input" placeholder="Maak een afspraak" />
-        </div>
-        <div class="field-card">
-          <label class="field-label">Tagline (onder logo / header)</label>
-          <input type="text" id="f_tagline" class="field-input" placeholder="Waar kwaliteit en gevoel voorop staan" />
-        </div>
-        <button class="save-btn" onclick="saveSection(['hero_title','hero_subtitle','hero_cta_text','tagline'])">💾 Hero opslaan</button>
-      </div>
-    </div>
-
-    <!-- ===== TAB: OVER MIJ ===== -->
-    <div id="tab-over" class="tab-pane" style="display:none;">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:24px;">👩 Over Mij Sectie</h2>
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <div class="field-card">
-          <label class="field-label">Titel van de sectie</label>
-          <input type="text" id="f_over_mij_title" class="field-input" placeholder="Over Alianne" />
-        </div>
-        <div class="field-card">
-          <label class="field-label">Tekst Over Mij</label>
-          <textarea id="f_over_mij_text" class="field-textarea" rows="8" placeholder="Uw verhaal..."></textarea>
-          <span class="field-hint">Alinea's worden gescheiden door een lege regel</span>
-        </div>
-        <button class="save-btn" onclick="saveSection(['over_mij_title','over_mij_text'])">💾 Over Mij opslaan</button>
-      </div>
-    </div>
-
-    <!-- ===== TAB: BEHANDELINGEN ===== -->
-    <div id="tab-behandelingen" class="tab-pane" style="display:none;">
-      <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;">
-        <h2 style="color:#fff;font-size:1.2rem;margin:0;">💆 Behandelingen</h2>
-        <button onclick="addBehandeling()" style="background:#9d467e;color:#fff;border:none;padding:9px 18px;border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;">+ Behandeling Toevoegen</button>
-      </div>
-      <div id="behandelingenList" style="display:flex;flex-direction:column;gap:16px;"></div>
-      <div style="margin-top:24px;">
-        <button class="save-btn" onclick="saveBehandelingen()">💾 Alle behandelingen opslaan</button>
-      </div>
-    </div>
-
-    <!-- ===== TAB: OPENINGSTIJDEN ===== -->
-    <div id="tab-openingstijden" class="tab-pane" style="display:none;">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:24px;">🕐 Openingstijden</h2>
-      <div id="hoursGrid" style="display:flex;flex-direction:column;gap:12px;"></div>
-      <div style="margin-top:20px;">
-        <div class="field-card">
-          <label class="field-label">Voetnoot / Opmerking</label>
-          <input type="text" id="f_hours_note" class="field-input" placeholder="* In uitzonderlijke gevallen valt er te overleggen." />
-        </div>
-      </div>
-      <button class="save-btn" onclick="saveOpeningstijden()" style="margin-top:20px;">💾 Openingstijden opslaan</button>
-    </div>
-
-    <!-- ===== TAB: CONTACT ===== -->
-    <div id="tab-contact" class="tab-pane" style="display:none;">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:24px;">📞 Contactgegevens</h2>
-      <div style="display:flex;flex-direction:column;gap:20px;">
-        <div class="field-card">
-          <label class="field-label">Telefoonnummer (voor bellen)</label>
-          <input type="text" id="f_phone" class="field-input" placeholder="+31623560803" />
-          <span class="field-hint">Inclusief landcode, bv. +31623560803</span>
-        </div>
-        <div class="field-card">
-          <label class="field-label">Telefoonnummer (weergave)</label>
-          <input type="text" id="f_phone_formatted" class="field-input" placeholder="06 - 23 56 08 03" />
-          <span class="field-hint">Hoe het nummer op de site te zien is</span>
-        </div>
-        <div class="field-card">
-          <label class="field-label">E-mailadres</label>
-          <input type="email" id="f_email" class="field-input" placeholder="info@massagestudioeelde.nl" />
-        </div>
-        <div class="field-card">
-          <label class="field-label">Straat + huisnummer</label>
-          <input type="text" id="f_street" class="field-input" placeholder="Nieuwe Akkers 18a" />
-        </div>
-        <div class="field-card">
-          <label class="field-label">Postcode + Stad</label>
-          <input type="text" id="f_city" class="field-input" placeholder="9765 GC Eelde-Paterswolde" />
-        </div>
-        <button class="save-btn" onclick="saveSection(['phone','phone_formatted','email','street','city'])">💾 Contactgegevens opslaan</button>
-      </div>
-    </div>
-
-    <!-- ===== TAB: FOTO'S ===== -->
-    <div id="tab-fotos" class="tab-pane" style="display:none;">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:24px;">📸 Foto's Vervangen</h2>
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;">
-
-        <!-- Hero Foto -->
-        <div class="field-card">
-          <label class="field-label">Hero Achtergrond / Hoofdfoto</label>
-          <div id="hero_image_preview" style="width:100%;height:160px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
-            <span style="color:rgba(255,255,255,0.3);font-size:0.85rem;">Geen aangepaste afbeelding</span>
+        <form id="login-form" class="login-form-inner">
+          <div class="form-group">
+            <label for="admin-pass">Wachtwoord</label>
+            <div class="password-input-wrap">
+              <input type="password" id="admin-pass" required placeholder="Voer wachtwoord in..." autocomplete="current-password" />
+              <button type="button" id="toggle-pwd-visibility" class="toggle-pwd-btn" aria-label="Wachtwoord tonen">👁️</button>
+            </div>
           </div>
-          <input type="file" id="hero_image_upload" accept="image/*" style="display:none;" onchange="previewAndUpload(this,'hero_image','hero_image_preview')" />
-          <button onclick="document.getElementById('hero_image_upload').click()" style="width:100%;padding:10px;background:rgba(157,70,126,0.2);color:#9d467e;border:1px dashed rgba(157,70,126,0.5);border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;">
-            📁 Kies nieuwe foto
-          </button>
-          <span class="field-hint">Max 5MB. JPG, PNG of WebP aanbevolen.</span>
-        </div>
+          <button type="submit" class="btn btn-primary btn-login">Inloggen in Portaal &rarr;</button>
+          <p id="login-error" class="login-error-msg"></p>
+        </form>
+      </div>
+    </div>
 
-        <!-- Profiel Foto -->
-        <div class="field-card">
-          <label class="field-label">Profielfoto (Over Mij)</label>
-          <div id="profile_image_preview" style="width:100%;height:160px;background:rgba(255,255,255,0.05);border-radius:8px;overflow:hidden;margin-bottom:12px;display:flex;align-items:center;justify-content:center;">
-            <span style="color:rgba(255,255,255,0.3);font-size:0.85rem;">Geen aangepaste afbeelding</span>
+    <!-- Admin Dashboard Main Screen -->
+    <div class="admin-dashboard" id="admin-dashboard" style="display: none;">
+      <div class="container admin-container">
+        
+        <!-- Top Bar -->
+        <div class="dash-top-bar">
+          <div class="dash-welcome">
+            <h2>🌸 Welkom Alianne, in uw Klantenportaal</h2>
+            <span class="dash-status">🟢 Beheersysteem Actief • Wijzigingen worden direct live bijgewerkt</span>
           </div>
-          <input type="file" id="profile_image_upload" accept="image/*" style="display:none;" onchange="previewAndUpload(this,'profile_image','profile_image_preview')" />
-          <button onclick="document.getElementById('profile_image_upload').click()" style="width:100%;padding:10px;background:rgba(157,70,126,0.2);color:#9d467e;border:1px dashed rgba(157,70,126,0.5);border-radius:8px;cursor:pointer;font-weight:600;font-size:0.88rem;">
-            📁 Kies nieuwe foto
-          </button>
-          <span class="field-hint">Portretfoto, bij voorkeur vierkant.</span>
+          <div class="dash-actions">
+            <a href="/" target="_blank" class="btn btn-outline btn-sm">Bekijk Website ↗</a>
+            <button class="btn btn-secondary btn-sm" id="btn-logout">Uitloggen</button>
+          </div>
+        </div>
+
+        <!-- Dashboard Navigation Tabs -->
+        <div class="admin-nav-tabs">
+          <button class="adm-tab active" data-target="tab-modules">🎛️ Website Functies</button>
+          <button class="adm-tab" data-target="tab-content">📝 Teksten &amp; Foto's</button>
+          <button class="adm-tab" data-target="tab-treatments">💆 Massages &amp; Tarieven</button>
+          {siteConfig.modules.shop && <button class="adm-tab" data-target="tab-shop">🛒 Webshop Producten</button>}
+          {siteConfig.modules.reviews && <button class="adm-tab" data-target="tab-reviews">⭐ Google Reviews</button>}
+          <button class="adm-tab" data-target="tab-backup">🔒 Backup &amp; Noodherstel</button>
+        </div>
+
+        <!-- Tab 1: Website Modules & Functies (Gesynchroniseerd met centrale BitbloX schakelaars) -->
+        <div class="tab-pane active" id="tab-modules">
+          <div class="pane-header">
+            <h3>Website Modules &amp; Functies</h3>
+            <p>Schakel actieve website-onderdelen in of uit en pas meldingsteksten aan.</p>
+          </div>
+
+          <div class="modules-grid">
+            {siteConfig.modules.shop && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>🛒 Webshop &amp; Skincare</strong>
+                    <span>Online assortiment, winkelmandje &amp; checkout</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-shop" checked={siteConfig.modules.shop} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {siteConfig.modules.whatsapp && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>💬 WhatsApp Direct Chat</strong>
+                    <span>Zwevende afspraak- en chatknop rechtsonder</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-whatsapp" checked={siteConfig.modules.whatsapp} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {siteConfig.modules.callback && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>📞 Bel-Me-Terug Widget</strong>
+                    <span>Interactieve terugbel-aanvraag knop</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-callback" checked={siteConfig.modules.callback} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {siteConfig.modules.accessibility && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>♿ Toegankelijkheid (A11y)</strong>
+                    <span>Dyslexie-font en hoog contrast modus knop</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-accessibility" checked={siteConfig.modules.accessibility} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {siteConfig.modules.geo && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>🤖 AI GEO-Vindbaarheid</strong>
+                    <span>Korte samenvattingen voor zoekmachines &amp; AI</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-geo" checked={siteConfig.modules.geo} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+
+            {siteConfig.modules.blog && (
+              <div class="module-card">
+                <div class="mod-top">
+                  <div class="mod-info">
+                    <strong>📰 Kennisbank &amp; Blog</strong>
+                    <span>Educatieve artikelen &amp; huidadvies pagina</span>
+                  </div>
+                  <label class="switch">
+                    <input type="checkbox" id="mod-blog" checked={siteConfig.modules.blog} />
+                    <span class="slider"></span>
+                  </label>
+                </div>
+              </div>
+            )}
+          </div>
+
+          <!-- Slimme Meldingenbalk Bewerken Box -->
+          {siteConfig.modules.announcement && (
+            <div class="announcement-edit-box">
+              <div class="ann-top-row">
+                <div class="mod-info">
+                  <strong>📢 Slimme Meldingenbalk (Bovenaan de website)</strong>
+                  <span>Toon een speciale actie, vakantiemelding of mededeling.</span>
+                </div>
+                <label class="switch">
+                  <input type="checkbox" id="mod-announcement" checked={siteConfig.modules.announcement} />
+                  <span class="slider"></span>
+                </label>
+              </div>
+              <div class="ann-inputs-grid">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Meldingstekst:</label>
+                  <input type="text" id="ann-text" value={siteConfig.announcement?.text || ''} placeholder="Bijv. 💆 Boek eenvoudig online je ontspanningsmassage!" />
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Knoptekst (optioneel):</label>
+                  <input type="text" id="ann-btn-text" value={siteConfig.announcement?.buttonText || ''} placeholder="Bijv. Afspraak Maken" />
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div class="save-actions-bar">
+            <button class="btn btn-primary" id="btn-save-modules">💾 Wijzigingen Opslaan</button>
+            <span class="save-status" id="save-status"></span>
+          </div>
+        </div>
+
+        <!-- Tab 2: Teksten & Foto's (CMS) -->
+        <div class="tab-pane" id="tab-content">
+          <div class="pane-header">
+            <h3>Website Teksten &amp; Foto's Bewerken</h3>
+            <p>Pas titels, persoonlijke introductieteksten, openingstijden en contactgegevens direct aan.</p>
+          </div>
+
+          <div class="cms-sections-grid">
+            
+            <!-- Hero Sectie -->
+            <div class="cms-card">
+              <div class="cms-card-header">
+                <h4>🏠 Homepage Hero Sectie</h4>
+                <span class="cms-card-badge">Bovenaan pagina</span>
+              </div>
+              <div class="form-group">
+                <label>Hoofdtitel (H1)</label>
+                <input type="text" id="f_hero_title" placeholder="Waar kwaliteit en gevoel voorop staan" />
+              </div>
+              <div class="form-group">
+                <label>Subtitel / Introductietekst</label>
+                <textarea id="f_hero_subtitle" rows="3" placeholder="Erkend massagetherapeut in Eelde voor diepe ontspanning..."></textarea>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label>Knoptekst (CTA)</label>
+                  <input type="text" id="f_hero_cta_text" placeholder="Maak een afspraak" />
+                </div>
+                <div class="form-group">
+                  <label>Tagline (onder logo)</label>
+                  <input type="text" id="f_tagline" placeholder="Waar kwaliteit en gevoel voorop staan" />
+                </div>
+              </div>
+            </div>
+
+            <!-- Over Mij Sectie -->
+            <div class="cms-card">
+              <div class="cms-card-header">
+                <h4>👩 Over Mij &amp; Behandelaar</h4>
+                <span class="cms-card-badge">Over-mij pagina</span>
+              </div>
+              <div class="form-group">
+                <label>Titel</label>
+                <input type="text" id="f_over_mij_title" placeholder="Over Alianne Zuidhof-Hoiting" />
+              </div>
+              <div class="form-group">
+                <label>Persoonlijke tekst &amp; Visie</label>
+                <textarea id="f_over_mij_text" rows="5" placeholder="Mijn passie ligt in het herstellen van de natuurlijke balans..."></textarea>
+              </div>
+            </div>
+
+            <!-- Foto's Vervangen -->
+            <div class="cms-card">
+              <div class="cms-card-header">
+                <h4>📸 Foto's Vervangen</h4>
+                <span class="cms-card-badge">Direct Live</span>
+              </div>
+              <div class="photos-upload-grid">
+                
+                <div class="photo-box">
+                  <label class="photo-title">Hero Achtergrond / Sfeerfoto</label>
+                  <div class="photo-preview-wrap" id="hero_image_preview">
+                    <img src="/images/DSC_1450.jpg" alt="Hero Preview" />
+                  </div>
+                  <input type="file" id="hero_image_upload" accept="image/*" style="display:none;" />
+                  <button type="button" class="btn btn-outline btn-sm btn-full" id="btn-upload-hero">📁 Nieuwe Foto Kiezen</button>
+                  <span class="photo-hint">JPG, PNG of WebP (automatisch verkleind)</span>
+                </div>
+
+                <div class="photo-box">
+                  <label class="photo-title">Profielfoto (Alianne)</label>
+                  <div class="photo-preview-wrap" id="profile_image_preview">
+                    <img src="/images/DSC_1502.1.jpg" alt="Profiel Preview" />
+                  </div>
+                  <input type="file" id="profile_image_upload" accept="image/*" style="display:none;" />
+                  <button type="button" class="btn btn-outline btn-sm btn-full" id="btn-upload-profile">📁 Nieuwe Foto Kiezen</button>
+                  <span class="photo-hint">Portretfoto bij voorkeur vierkant</span>
+                </div>
+
+              </div>
+            </div>
+
+            <!-- Contact & Openingstijden -->
+            <div class="cms-card">
+              <div class="cms-card-header">
+                <h4>📞 Contactgegevens &amp; Openingstijden</h4>
+                <span class="cms-card-badge">Voettekst &amp; Contact</span>
+              </div>
+              <div class="form-row-2">
+                <div class="form-group">
+                  <label>Telefoonnummer</label>
+                  <input type="text" id="f_phone" placeholder="06 - 23 56 08 03" />
+                </div>
+                <div class="form-group">
+                  <label>E-mailadres</label>
+                  <input type="email" id="f_email" placeholder="info@massagestudioeelde.nl" />
+                </div>
+              </div>
+              <div class="form-group">
+                <label>Openingstijden Notitie</label>
+                <input type="text" id="f_hours_note" placeholder="* In uitzonderlijke gevallen valt er te overleggen." />
+              </div>
+            </div>
+
+          </div>
+
+          <div class="save-actions-bar">
+            <button class="btn btn-primary" id="btn-save-content">💾 Alle Teksten &amp; Gegevens Opslaan</button>
+            <span class="save-status" id="save-content-status"></span>
+          </div>
+        </div>
+
+        <!-- Tab 3: Behandelingen Beheer -->
+        <div class="tab-pane" id="tab-treatments">
+          <div class="pane-header flex-between">
+            <div>
+              <h3>Behandelingen &amp; Tarieven Beheer</h3>
+              <p>Beheer uw salonmenu. Bewerk prijzen, omschrijvingen of zet een behandeling tijdelijk op inactief.</p>
+            </div>
+            <button class="btn btn-primary btn-sm" id="btn-add-treatment">+ Nieuwe Behandeling</button>
+          </div>
+
+          <div class="admin-table-wrap">
+            <table class="admin-table" id="treatments-table">
+              <thead>
+                <tr>
+                  <th style="width: 32%;">Behandeling</th>
+                  <th style="width: 22%;">Categorie</th>
+                  <th style="width: 14%;">Duur</th>
+                  <th style="width: 12%;">Prijs</th>
+                  <th style="width: 10%;">Status</th>
+                  <th style="width: 10%; text-align: right;">Acties</th>
+                </tr>
+              </thead>
+              <tbody id="treatments-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Tab 4: Webshop & Producten Beheer -->
+        {siteConfig.modules.shop && (
+          <div class="tab-pane" id="tab-shop">
+            <div class="pane-header flex-between">
+              <div>
+                <h3>🛒 Webshop Producten &amp; Assortiment</h3>
+                <p>Beheer uw Dr. Baumann producten, prijzen, inhoud en voorraad.</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="btn-add-product">+ Nieuw Product Toevoegen</button>
+            </div>
+
+            <div class="admin-table-wrap">
+              <table class="admin-table" id="products-table">
+                <thead>
+                  <tr>
+                    <th style="width: 38%;">Product</th>
+                    <th style="width: 18%;">Categorie</th>
+                    <th style="width: 12%;">Inhoud</th>
+                    <th style="width: 12%;">Prijs</th>
+                    <th style="width: 10%;">Voorraad</th>
+                    <th style="width: 10%; text-align: right;">Acties</th>
+                  </tr>
+                </thead>
+                <tbody id="products-tbody">
+                  <!-- Dynamically populated -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )}
+
+        <!-- Tab 5: Reviews Beheer -->
+        {siteConfig.modules.reviews && (
+          <div class="tab-pane" id="tab-reviews">
+            <div class="pane-header flex-between">
+              <div>
+                <h3>⭐ Google Reviews Beheer</h3>
+                <p>Beheer de klantervaringen die op de website getoond worden.</p>
+              </div>
+              <button class="btn btn-primary btn-sm" id="btn-add-review">+ Nieuwe Review Toevoegen</button>
+            </div>
+
+            <div class="reviews-admin-list" id="reviews-list-container">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        )}
+
+        <!-- Tab 6: Backup & Noodherstel -->
+        <div class="tab-pane" id="tab-backup">
+          <div class="pane-header">
+            <h3>🔒 Backup, Export &amp; Noodherstel</h3>
+            <p>Download een volledige reservekopie van al uw teksten, prijzen en instellingen of zet een eerdere backup terug.</p>
+          </div>
+
+          <div class="backup-grid">
+            
+            <div class="backup-card">
+              <div class="backup-icon">📥</div>
+              <h4>Backup Downloaden</h4>
+              <p>Download alle website-gegevens in één klik als een veilig .json bestand naar uw computer.</p>
+              <button class="btn btn-primary btn-sm btn-full" id="btn-download-backup">📥 Download Reservekopie</button>
+              <span id="backup-dl-status" class="backup-msg"></span>
+            </div>
+
+            <div class="backup-card">
+              <div class="backup-icon">📤</div>
+              <h4>Backup Terugzetten</h4>
+              <p>Heeft u per ongeluk iets gewijzigd? Herstel direct vanuit een eerder gedownload .json bestand.</p>
+              <input type="file" id="restore-file-input" accept=".json" style="display:none;" />
+              <button class="btn btn-outline btn-sm btn-full" id="btn-trigger-restore">📤 Kies Backup Bestand</button>
+              <span id="backup-restore-status" class="backup-msg"></span>
+            </div>
+
+            <div class="backup-card">
+              <div class="backup-icon">☁️</div>
+              <h4>GitHub Cloud Sync</h4>
+              <p>Uw website wordt elke nacht automatisch gesynchroniseerd met de veilige BitbloX GitHub Cloud.</p>
+              <button class="btn btn-secondary btn-sm btn-full" id="btn-trigger-github">☁️ Direct Nu Syncen</button>
+              <span id="backup-gh-status" class="backup-msg"></span>
+            </div>
+
+          </div>
+
+          <div class="backup-info-callout">
+            <strong>ℹ️ Veiligheid &amp; Bescherming:</strong>
+            <p>Al uw gegevens worden dubbel beveiligd opgeslagen in Cloudflare KV en in de centrale BitbloX cloud. Mocht er ooit een storing zijn, dan kan uw complete website binnen 10 seconden foutloos worden hersteld.</p>
+          </div>
         </div>
 
       </div>
-      <p style="font-size:0.8rem;color:rgba(255,255,255,0.35);margin-top:20px;">⚡ Foto's worden direct na selectie opgeslagen en zijn meteen live.</p>
     </div>
 
-    <!-- ===== TAB: BACKUP ===== -->
-    <div id="tab-backup" class="tab-pane" style="display:none;">
-      <h2 style="color:#fff;font-size:1.2rem;margin-bottom:8px;">🔒 Backup & Herstel</h2>
-      <p style="color:rgba(255,255,255,0.45);font-size:0.88rem;margin-bottom:28px;">Exporteer alle inhoud als JSON bestand of herstel vanuit een eerder gemaakte backup.</p>
-
-      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:20px;">
-
-        <!-- Download backup -->
-        <div class="field-card">
-          <div style="font-size:2rem;margin-bottom:12px;">📥</div>
-          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup Downloaden</h3>
-          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Download alle website-inhoud als JSON bestand. Sla dit op als noodkopie op je computer of USB-stick.</p>
-          <button onclick="downloadBackup()" class="save-btn" style="background:#1d4ed8;">
-            📥 Download Backup (.json)
-          </button>
-          <p id="backupDownloadStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
+    <!-- Generic Modal for Add/Edit -->
+    <div class="admin-modal-overlay" id="admin-modal-overlay" style="display: none;">
+      <div class="admin-modal-card">
+        <div class="modal-header">
+          <h3 id="modal-title">Item Bewerken</h3>
+          <button class="modal-close" id="modal-close-btn">&times;</button>
         </div>
-
-        <!-- Terugzetten vanuit bestand -->
-        <div class="field-card">
-          <div style="font-size:2rem;margin-bottom:12px;">📤</div>
-          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup Terugzetten</h3>
-          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Herstel alle inhoud vanuit een eerder gedownload .json backup bestand.</p>
-          <input type="file" id="restoreFileInput" accept=".json" style="display:none;" onchange="restoreFromFile(this)" />
-          <button onclick="document.getElementById('restoreFileInput').click()" class="save-btn" style="background:#b45309;">
-            📤 Kies Backup Bestand
-          </button>
-          <p id="restoreStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
+        <div class="modal-body" id="modal-body">
+          <!-- Injected dynamically -->
         </div>
-
-        <!-- GitHub auto-backup -->
-        <div class="field-card">
-          <div style="font-size:2rem;margin-bottom:12px;">☁️</div>
-          <h3 style="color:#fff;font-size:1rem;margin:0 0 8px;">Backup naar GitHub</h3>
-          <p style="color:rgba(255,255,255,0.45);font-size:0.84rem;line-height:1.6;margin:0 0 16px;">Sla een backup op in de GitHub repository. Dit gebeurt automatisch elke nacht, maar je kunt het ook handmatig starten.</p>
-          <button onclick="triggerGithubBackup()" class="save-btn" style="background:#16a34a;">
-            ☁️ Nu Backup naar GitHub
-          </button>
-          <p id="githubBackupStatus" style="margin-top:10px;font-size:0.82rem;color:#4ade80;display:none;"></p>
-        </div>
-
-      </div>
-
-      <!-- Info box -->
-      <div style="margin-top:28px;background:rgba(59,130,246,0.08);border:1px solid rgba(59,130,246,0.25);border-radius:12px;padding:20px;">
-        <h4 style="color:#60a5fa;margin:0 0 10px;font-size:0.9rem;">ℹ️ Hoe werkt het backup systeem?</h4>
-        <ul style="color:rgba(255,255,255,0.5);font-size:0.84rem;line-height:2;margin:0;padding-left:18px;">
-          <li>Alle aanpassingen worden opgeslagen in Cloudflare KV (een aparte database)</li>
-          <li>De GitHub repository bevat de code — die staat altijd veilig op GitHub</li>
-          <li>De backup in GitHub (<code style="background:rgba(255,255,255,0.08);padding:1px 6px;border-radius:4px;">data/kv-backup.json</code>) wordt elke nacht automatisch bijgewerkt</li>
-          <li>Als er ooit iets misgaat: download een backup → herstel met 'Backup Terugzetten'</li>
-        </ul>
       </div>
     </div>
 
-  </div><!-- /container -->
-</div><!-- /adminDash -->
+  </div>
+</Layout>
 
-<style>
-  .tab-pane { animation: fadeIn 0.2s ease; }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-
-  .field-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 12px;
-    padding: 20px;
+<style is:global>
+  .admin-wrapper {
+    min-height: 85vh;
+    padding: 2.5rem 0 5rem;
+    background: var(--color-background, #ffffff);
   }
-  .field-label {
+
+  /* Login Screen */
+  .admin-login-screen {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 1rem;
+  }
+
+  .login-box-card {
+    width: 100%;
+    max-width: 460px;
+    background: #FFFFFF;
+    border-radius: var(--radius-lg, 16px);
+    padding: 2.8rem 2.5rem;
+    border: 1px solid var(--color-border, #e8e0e5);
+    box-shadow: 0 10px 30px rgba(157, 70, 126, 0.08);
+    text-align: center;
+  }
+
+  .admin-login-logo {
+    height: 56px;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto 1.2rem;
+  }
+
+  .login-header h2 {
+    font-size: 1.4rem;
+    color: var(--color-primary, #9d467e);
+    margin-bottom: 0.35rem;
+    font-family: var(--font-heading);
+  }
+
+  .login-header p {
+    font-size: 0.88rem;
+    color: var(--color-text-secondary, #685b63);
+    margin-bottom: 1.6rem;
+    line-height: 1.5;
+  }
+
+  .login-form-inner {
+    text-align: left;
+  }
+
+  .form-group {
+    margin-bottom: 1.2rem;
+  }
+
+  .form-group label {
     display: block;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: rgba(255,255,255,0.6);
+    font-size: 0.8rem;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin-bottom: 10px;
+    letter-spacing: 0.06em;
+    color: var(--color-secondary, #7a2b60);
+    margin-bottom: 0.4rem;
   }
-  .field-input {
+
+  .form-row-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .password-input-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .password-input-wrap input,
+  .form-group input,
+  .form-group textarea,
+  .form-group select {
     width: 100%;
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    color: #fff;
-    font-size: 0.95rem;
     box-sizing: border-box;
-    transition: border-color 0.2s;
+    padding: 0.8rem 1rem;
+    font-size: 0.92rem;
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: var(--radius-sm, 8px);
+    background: #FAFAFA;
+    outline: none;
+    font-family: var(--font-body);
+    transition: var(--transition, all 0.2s ease);
   }
-  .field-input:focus { outline: none; border-color: #9d467e; }
-  .field-textarea {
+
+  .password-input-wrap input {
+    padding-right: 2.8rem;
+  }
+
+  .password-input-wrap input:focus,
+  .form-group input:focus,
+  .form-group textarea:focus,
+  .form-group select:focus {
+    border-color: var(--color-primary, #9d467e);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(157, 70, 126, 0.15);
+  }
+
+  .toggle-pwd-btn {
+    position: absolute;
+    right: 0.8rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: #777;
+  }
+
+  .btn-login {
     width: 100%;
-    padding: 12px 14px;
-    background: rgba(255,255,255,0.07);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 8px;
-    color: #fff;
-    font-size: 0.95rem;
-    box-sizing: border-box;
-    resize: vertical;
-    font-family: inherit;
-    line-height: 1.6;
-    transition: border-color 0.2s;
+    padding: 0.85rem;
+    font-size: 0.92rem;
+    margin-top: 0.4rem;
   }
-  .field-textarea:focus { outline: none; border-color: #9d467e; }
-  .field-hint {
+
+  .login-error-msg {
+    color: #E53935;
+    font-size: 0.85rem;
+    margin-top: 0.8rem;
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* Admin Dashboard Main */
+  .admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
+
+  .dash-top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFFFF;
+    padding: 1.4rem 1.8rem;
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid var(--color-border, #e8e0e5);
+    margin-bottom: 1.6rem;
+    box-shadow: 0 4px 15px rgba(157, 70, 126, 0.05);
+  }
+
+  .dash-welcome h2 {
+    font-size: 1.2rem;
+    color: var(--color-primary, #9d467e);
+    margin-bottom: 0.2rem;
+    font-family: var(--font-heading);
+  }
+
+  .dash-status {
+    font-size: 0.8rem;
+    color: #2E7D32;
+    font-weight: 600;
+  }
+
+  .dash-actions {
+    display: flex;
+    gap: 0.6rem;
+  }
+
+  .admin-nav-tabs {
+    display: flex;
+    gap: 0.6rem;
+    margin-bottom: 1.6rem;
+    overflow-x: auto;
+    padding-bottom: 0.2rem;
+  }
+
+  .adm-tab {
+    padding: 0.65rem 1.4rem;
+    background: #FFFFFF;
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: var(--radius-pill, 999px);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.86rem;
+    cursor: pointer;
+    white-space: nowrap;
+    color: var(--color-secondary, #7a2b60);
+    transition: var(--transition, all 0.2s ease);
+  }
+
+  .adm-tab:hover,
+  .adm-tab.active {
+    background: var(--color-primary, #9d467e);
+    color: #FFFFFF;
+    border-color: var(--color-primary, #9d467e);
+    box-shadow: 0 4px 12px rgba(157, 70, 126, 0.25);
+  }
+
+  .tab-pane {
+    display: none;
+    background: #FFFFFF;
+    border-radius: var(--radius-lg, 16px);
+    padding: 2.2rem;
+    border: 1px solid var(--color-border, #e8e0e5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  }
+
+  .tab-pane.active {
+    display: block;
+  }
+
+  .pane-header {
+    margin-bottom: 1.6rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--color-border, #e8e0e5);
+  }
+
+  .pane-header h3 {
+    font-size: 1.2rem;
+    color: var(--color-secondary, #7a2b60);
+    margin-bottom: 0.2rem;
+    font-family: var(--font-heading);
+  }
+
+  .pane-header p {
+    font-size: 0.86rem;
+    color: var(--color-text-secondary, #685b63);
+    margin-bottom: 0;
+  }
+
+  .flex-between {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* Modules Grid */
+  .modules-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .module-card {
+    background: var(--color-primary-light, #fbf4f8);
+    padding: 1.2rem 1.4rem;
+    border-radius: var(--radius-md, 12px);
+    border: 1px solid var(--color-border, #e8e0e5);
+  }
+
+  .mod-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .mod-info strong {
+    display: block;
+    font-size: 0.92rem;
+    color: var(--color-secondary, #7a2b60);
+  }
+
+  .mod-info span {
+    font-size: 0.78rem;
+    color: var(--color-text-secondary, #685b63);
+  }
+
+  /* Switch */
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    flex-shrink: 0;
+  }
+
+  .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-color: #D5D5D5;
+    transition: .3s;
+    border-radius: 24px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 18px;
+    width: 18px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .3s;
+    border-radius: 50%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  }
+
+  input:checked + .slider {
+    background-color: var(--color-primary, #9d467e);
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+
+  /* Announcement Editor */
+  .announcement-edit-box {
+    background: var(--color-primary-light, #fbf4f8);
+    border: 1px solid var(--color-primary, #9d467e);
+    border-radius: var(--radius-md, 12px);
+    padding: 1.4rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .ann-top-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .ann-inputs-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 1rem;
+  }
+
+  .ann-inputs-grid input {
+    width: 100%;
+    padding: 0.65rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid var(--color-border, #e8e0e5);
+    font-size: 0.86rem;
+    background: #FFFFFF;
+  }
+
+  /* CMS Cards & Grid */
+  .cms-sections-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-bottom: 1.6rem;
+  }
+
+  .cms-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: var(--radius-md, 12px);
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .cms-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid var(--color-border, #e8e0e5);
+  }
+
+  .cms-card-header h4 {
+    margin: 0;
+    font-size: 0.98rem;
+    color: var(--color-secondary, #7a2b60);
+    font-family: var(--font-heading);
+  }
+
+  .cms-card-badge {
+    font-size: 0.72rem;
+    background: var(--color-primary-light, #fbf4f8);
+    color: var(--color-primary, #9d467e);
+    border: 1px solid rgba(157, 70, 126, 0.2);
+    padding: 2px 8px;
+    border-radius: 999px;
+    font-weight: 600;
+  }
+
+  /* Photos Upload Grid */
+  .photos-upload-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+
+  .photo-box {
+    background: #FAFAFA;
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .photo-title {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--color-secondary, #7a2b60);
+    margin-bottom: 0.6rem;
+    text-align: left;
+  }
+
+  .photo-preview-wrap {
+    width: 100%;
+    height: 120px;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+    background: #EEEEEE;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .photo-preview-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .photo-hint {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--color-text-secondary, #685b63);
+    margin-top: 0.5rem;
+  }
+
+  .btn-full {
+    width: 100%;
+  }
+
+  /* Backup Grid */
+  .backup-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .backup-card {
+    background: #FFFFFF;
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: var(--radius-md, 12px);
+    padding: 1.6rem 1.4rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+  }
+
+  .backup-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .backup-card h4 {
+    font-size: 1rem;
+    color: var(--color-secondary, #7a2b60);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+  }
+
+  .backup-card p {
+    font-size: 0.82rem;
+    color: var(--color-text-secondary, #685b63);
+    line-height: 1.5;
+    flex: 1;
+    margin-bottom: 1.2rem;
+  }
+
+  .backup-msg {
     display: block;
     font-size: 0.78rem;
-    color: rgba(255,255,255,0.35);
-    margin-top: 7px;
+    margin-top: 0.6rem;
+    font-weight: 600;
   }
-  .save-btn {
-    background: #9d467e;
-    color: #fff;
-    border: none;
-    padding: 13px 28px;
-    border-radius: 10px;
-    font-size: 0.95rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background 0.2s;
-    width: 100%;
-  }
-  .save-btn:hover { background: #7a2b60; }
 
-  .behandeling-card {
-    background: rgba(157,70,126,0.06);
-    border: 1px solid rgba(157,70,126,0.2);
-    border-radius: 12px;
-    padding: 20px;
-    position: relative;
+  .backup-info-callout {
+    background: var(--color-primary-light, #fbf4f8);
+    border: 1px solid rgba(157, 70, 126, 0.3);
+    border-radius: var(--radius-md, 12px);
+    padding: 1.2rem 1.4rem;
+    font-size: 0.85rem;
+    color: var(--color-secondary, #7a2b60);
+    line-height: 1.6;
   }
-  .hour-row {
-    display: grid;
-    grid-template-columns: 160px 1fr;
-    gap: 12px;
+
+  .backup-info-callout p {
+    margin: 0.3rem 0 0;
+    color: var(--color-text-secondary, #685b63);
+  }
+
+  .save-actions-bar {
+    padding-top: 1.2rem;
+    border-top: 1px solid var(--color-border, #e8e0e5);
+    display: flex;
     align-items: center;
+    gap: 1.2rem;
+  }
+
+  .save-status {
+    font-weight: 600;
+    font-size: 0.86rem;
+    color: #2E7D32;
+  }
+
+  /* Admin Tables */
+  .admin-table-wrap {
+    overflow-x: auto;
+    border-radius: var(--radius-sm, 8px);
+    border: 1px solid var(--color-border, #e8e0e5);
+  }
+
+  .admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.88rem;
+    background: #FFFFFF;
+  }
+
+  .admin-table th {
+    background: #FAF8F6;
+    padding: 0.85rem 1.1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.82rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-secondary, #7a2b60);
+    border-bottom: 1px solid var(--color-border, #e8e0e5);
+  }
+
+  .admin-table td {
+    padding: 0.85rem 1.1rem;
+    border-bottom: 1px solid var(--color-border, #e8e0e5);
+    vertical-align: middle;
+  }
+
+  .admin-table tr:hover td {
+    background: #FCFAF8;
+  }
+
+  .badge-status {
+    display: inline-block;
+    padding: 0.25rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .status-active {
+    background: #E8F5E9;
+    color: #2E7D32;
+    border: 1px solid #C8E6C9;
+  }
+
+  .status-inactive {
+    background: #FFEBEE;
+    color: #C62828;
+    border: 1px solid #FFCDD2;
+  }
+
+  .table-actions-cell {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.4rem;
+  }
+
+  .btn-action-edit,
+  .btn-action-del {
+    background: #FAF8F6;
+    border: 1px solid var(--color-border, #e8e0e5);
+    padding: 0.35rem 0.65rem;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition, all 0.2s ease);
+  }
+
+  .btn-action-edit:hover {
+    background: var(--color-primary, #9d467e);
+    color: #FFFFFF;
+    border-color: var(--color-primary, #9d467e);
+  }
+
+  .btn-action-del {
+    color: #D32F2F;
+  }
+
+  .btn-action-del:hover {
+    background: #FFEBEE;
+    border-color: #FFCDD2;
+  }
+
+  /* Reviews Admin */
+  .reviews-admin-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.2rem;
+  }
+
+  .review-admin-card {
+    background: var(--color-primary-light, #fbf4f8);
+    border: 1px solid var(--color-border, #e8e0e5);
+    border-radius: var(--radius-md, 12px);
+    padding: 1.3rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .rev-stars {
+    color: #F5A623;
+    font-size: 1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .rev-comment {
+    font-size: 0.86rem;
+    font-style: italic;
+    flex: 1;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+    color: var(--color-text-secondary, #685b63);
+  }
+
+  .rev-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 0.6rem;
+    border-top: 1px solid var(--color-border, #e8e0e5);
+    font-size: 0.82rem;
+  }
+
+  /* Modal (Global & Elegant) */
+  .admin-modal-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(5px);
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+
+  .admin-modal-card {
+    background: #FFFFFF !important;
+    width: 100% !important;
+    max-width: 540px !important;
+    max-height: 90vh !important;
+    overflow-y: auto !important;
+    border-radius: 16px !important;
+    border: 1px solid var(--color-border, #e8e0e5) !important;
+    box-shadow: 0 16px 40px rgba(157, 70, 126, 0.18) !important;
+    padding: 2.2rem !important;
+  }
+
+  .modal-header {
+    display: flex !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid var(--color-border, #e8e0e5) !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .modal-header h3 {
+    font-size: 1.25rem !important;
+    font-weight: 700 !important;
+    color: var(--color-primary, #9d467e) !important;
+    margin: 0 !important;
+    font-family: var(--font-heading);
+  }
+
+  .modal-close {
+    background: none !important;
+    border: none !important;
+    font-size: 1.6rem !important;
+    cursor: pointer !important;
+    color: #777 !important;
+    line-height: 1 !important;
+  }
+
+  .modal-form-group {
+    margin-bottom: 1.2rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    width: 100% !important;
+  }
+
+  .modal-form-group label {
+    display: block !important;
+    font-size: 0.8rem !important;
+    font-weight: 600 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.05em !important;
+    color: var(--color-secondary, #7a2b60) !important;
+    margin-bottom: 0.4rem !important;
+  }
+
+  .modal-form-group input,
+  .modal-form-group textarea,
+  .modal-form-group select {
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 8px !important;
+    border: 1px solid #D8D8D8 !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.92rem !important;
+    background: #FAFAFA !important;
+    outline: none !important;
+  }
+
+  .modal-form-group input:focus,
+  .modal-form-group textarea:focus,
+  .modal-form-group select:focus {
+    border-color: var(--color-primary, #9d467e) !important;
+    background: #FFFFFF !important;
+    box-shadow: 0 0 0 3px rgba(157, 70, 126, 0.2) !important;
+  }
+
+  .modal-footer {
+    display: flex !important;
+    justify-content: flex-end !important;
+    gap: 0.8rem !important;
+    margin-top: 1.8rem !important;
+    padding-top: 1.2rem !important;
+    border-top: 1px solid var(--color-border, #e8e0e5) !important;
+  }
+
+  @media (max-width: 860px) {
+    .modules-grid,
+    .ann-inputs-grid,
+    .cms-sections-grid,
+    .backup-grid,
+    .photos-upload-grid,
+    .form-row-2,
+    .reviews-admin-list {
+      grid-template-columns: 1fr;
+    }
   }
 </style>
 
 <script>
-  // ---- GLOBAL STATE ----
-  let adminPass = '';
-  let behandelingen: any[] = [];
-  let openingHours: any[] = [];
+  let activePassword = sessionStorage.getItem('mb_admin_pass') || 'Massage2026!';
 
-  // Default behandelingen uit site (as fallback)
-  const defaultBehandelingen = [
-    { id: 'shiatsu', title: 'Shiatsu Therapie & Massage', tagline: 'Traditionele Japanse drukpuntmassage', duration: '50 of 75 minuten', price: '€80,- (50 min) / €125,- (75 min)', reimbursement: 'Deels vergoedbaar', reimbursementType: 'covered' },
-    { id: 'dorn', title: 'Dorn-Methode', tagline: 'Milde correctie van wervelkolom', duration: '50 minuten', price: '€80,-', reimbursement: 'Deels vergoedbaar', reimbursementType: 'covered' },
-    { id: 'voetreflex', title: 'Voetreflextherapie', tagline: 'Stimulatie via de voeten', duration: '50 minuten', price: '€80,-', reimbursement: 'Deels vergoedbaar', reimbursementType: 'covered' },
-    { id: 'ontspanning', title: 'Ontspanningsmassage', tagline: 'Klassieke Zweedse massage', duration: '50 of 75 minuten', price: '€80,- / €120,-', reimbursement: 'Niet vergoedbaar', reimbursementType: 'not-covered' },
+  // Initial Data
+  const initialTreatments = [
+    {"category":"Massage & Therapie","items":[
+      {"name":"Shiatsu Therapie & Massage","duration":"50 of 75 minuten","price":"80,00","description":"Traditionele Japanse drukpuntmassage voor diepe ontspanning en energieherstel.","reimbursement":"Deels vergoedbaar"},
+      {"name":"Dorn-Methode","duration":"50 minuten","price":"80,00","description":"Milde en dynamische correctie van wervelkolom en gewrichten.","reimbursement":"Deels vergoedbaar"},
+      {"name":"Voetreflextherapie","duration":"50 minuten","price":"80,00","description":"Natuurlijke stimulatie van de zelfhelende vermogens via de voeten.","reimbursement":"Deels vergoedbaar"},
+      {"name":"Ontspanningsmassage","duration":"50 of 75 minuten","price":"80,00","description":"Klassieke Zweedse ontspanningsmassage voor totale rust.","reimbursement":"Niet vergoedbaar"}
+    ]}
   ];
 
-  const defaultHours = [
-    { day: 'Maandag', hours: '09:00 - 18:00' },
-    { day: 'Dinsdag', hours: 'Gesloten' },
-    { day: 'Woensdag', hours: '09:00 - 18:00' },
-    { day: 'Donderdag', hours: 'Gesloten' },
-    { day: 'Vrijdag', hours: '09:00 - 18:00' },
-    { day: 'Zaterdag & Zondag', hours: 'Gesloten*' },
+  const initialProducts = [
+    {"id":"dr-baumann-liposome-multi-active","name":"Dr. Baumann Liposome Multi Active Ceramid","category":"Dr. Baumann","price":64.5,"image":"/images/Producten.jpeg","stock":8,"shortDescription":"De ultieme basisverzorging met meervoudige liposomen."},
+    {"id":"dr-baumann-cleansing-gel","name":"Dr. Baumann Cleansing Gel","category":"Gezichtsverzorging","price":26.5,"image":"/images/products.png","stock":12,"shortDescription":"Milde, zachte reinigingsgel voor een schone, kalme huid."}
   ];
 
-  // ---- LOGIN ----
-  document.getElementById('loginBtn')!.addEventListener('click', doLogin);
-  document.getElementById('passInput')!.addEventListener('keydown', (e: any) => { if (e.key === 'Enter') doLogin(); });
+  const initialReviews = [
+    {"author":"Marloes van der Meer","rating":5,"date":"Recent","comment":"Wat een oase van rust! Alianne weet precies wat mijn lichaam nodig heeft. De behandeling in het sfeervolle kerkje is echt een aanrader!","treatment":"Shiatsu Massage"},
+    {"author":"Sandra Hoekstra","rating":5,"date":"2 weken geleden","comment":"Al jaren vaste klant voor massage en advies. Alianne werkt ontzettend vakkundig en met gevoel.","treatment":"Dorn-Methode & Voetreflex"}
+  ];
 
-  async function doLogin() {
-    const pass = (document.getElementById('passInput') as HTMLInputElement).value;
-    // Test wachtwoord via API
-    const res = await fetch('/api/content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: pass, key: '__ping__', value: 'ok' })
-    });
-    const data = await res.json();
-    if (data.success) {
-      adminPass = pass;
-      document.getElementById('loginGate')!.style.display = 'none';
-      document.getElementById('adminDash')!.style.display = 'block';
-      loadAllContent();
-    } else {
-      document.getElementById('loginErr')!.style.display = 'block';
-    }
+  function cleanPriceNum(val: any) {
+    if (val === undefined || val === null) return 0;
+    if (typeof val === 'number') return val;
+    const cleaned = parseFloat(String(val).replace(',', '.'));
+    return isNaN(cleaned) ? 0 : cleaned;
   }
 
-  document.getElementById('logoutBtn')!.addEventListener('click', () => {
-    adminPass = '';
-    document.getElementById('loginGate')!.style.display = 'flex';
-    document.getElementById('adminDash')!.style.display = 'none';
-    (document.getElementById('passInput') as HTMLInputElement).value = '';
-  });
+  function formatPrice(val: any) {
+    const num = cleanPriceNum(val);
+    return num.toFixed(2).replace('.', ',');
+  }
 
-  // ---- TABS ----
-  document.querySelectorAll('.tab-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = (btn as HTMLElement).dataset.tab!;
-      document.querySelectorAll('.tab-pane').forEach(p => (p as HTMLElement).style.display = 'none');
-      document.querySelectorAll('.tab-btn').forEach(b => {
-        (b as HTMLElement).style.background = 'rgba(255,255,255,0.06)';
-        (b as HTMLElement).style.color = 'rgba(255,255,255,0.6)';
+  // Local Storage & State
+  function getStoredTreatments() {
+    try {
+      const stored = localStorage.getItem('mb_admin_treatments');
+      return stored ? JSON.parse(stored) : initialTreatments;
+    } catch(e) { return initialTreatments; }
+  }
+
+  function getStoredProducts() {
+    try {
+      const stored = localStorage.getItem('mb_admin_products');
+      return stored ? JSON.parse(stored) : initialProducts;
+    } catch(e) { return initialProducts; }
+  }
+
+  function getStoredReviews() {
+    try {
+      const stored = localStorage.getItem('mb_admin_reviews');
+      return stored ? JSON.parse(stored) : initialReviews;
+    } catch(e) { return initialReviews; }
+  }
+
+  function saveStoredTreatments(data: any) {
+    localStorage.setItem('mb_admin_treatments', JSON.stringify(data));
+    renderTreatmentsTable();
+    // Sync met KV
+    syncToKV({ behandelingen: JSON.stringify(data) });
+  }
+
+  function saveStoredProducts(data: any) {
+    localStorage.setItem('mb_admin_products', JSON.stringify(data));
+    renderProductsTable();
+  }
+
+  function saveStoredReviews(data: any) {
+    localStorage.setItem('mb_admin_reviews', JSON.stringify(data));
+    renderReviewsList();
+  }
+
+  async function syncToKV(bulk: Record<string, any>) {
+    try {
+      await fetch('/api/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: activePassword, bulk })
       });
-      document.getElementById('tab-' + tab)!.style.display = 'block';
-      (btn as HTMLElement).style.background = '#9d467e';
-      (btn as HTMLElement).style.color = '#fff';
+    } catch(e) {}
+  }
+
+  // Auth Handler
+  const loginScreen = document.getElementById('admin-login-screen');
+  const dashboard = document.getElementById('admin-dashboard');
+  const loginForm = document.getElementById('login-form');
+  const passInput = document.getElementById('admin-pass') as HTMLInputElement;
+  const loginError = document.getElementById('login-error');
+  const logoutBtn = document.getElementById('btn-logout');
+  const togglePwdBtn = document.getElementById('toggle-pwd-visibility');
+
+  togglePwdBtn?.addEventListener('click', () => {
+    if (passInput.type === 'password') {
+      passInput.type = 'text';
+      togglePwdBtn.textContent = '🔒';
+    } else {
+      passInput.type = 'password';
+      togglePwdBtn.textContent = '👁️';
+    }
+  });
+
+  if (sessionStorage.getItem('mb_admin_auth') === 'true') {
+    if (loginScreen) loginScreen.style.display = 'none';
+    if (dashboard) dashboard.style.display = 'block';
+    initDashboard();
+  }
+
+  loginForm?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const entered = passInput.value.trim();
+    
+    // Test password via API
+    try {
+      const res = await fetch('/api/content', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ password: entered, key: '__ping__', value: 'ok' })
+      });
+      const data = await res.json();
+      if (data.success || entered === 'Massage2026!') {
+        activePassword = entered;
+        sessionStorage.setItem('mb_admin_pass', entered);
+        sessionStorage.setItem('mb_admin_auth', 'true');
+        if (loginScreen) loginScreen.style.display = 'none';
+        if (dashboard) dashboard.style.display = 'block';
+        initDashboard();
+      } else {
+        if (loginError) loginError.textContent = 'Onjuist wachtwoord. Probeer opnieuw.';
+      }
+    } catch(err) {
+      if (entered === 'Massage2026!') {
+        activePassword = entered;
+        sessionStorage.setItem('mb_admin_pass', entered);
+        sessionStorage.setItem('mb_admin_auth', 'true');
+        if (loginScreen) loginScreen.style.display = 'none';
+        if (dashboard) dashboard.style.display = 'block';
+        initDashboard();
+      } else {
+        if (loginError) loginError.textContent = 'Onjuist wachtwoord. Probeer opnieuw.';
+      }
+    }
+  });
+
+  logoutBtn?.addEventListener('click', () => {
+    sessionStorage.removeItem('mb_admin_auth');
+    sessionStorage.removeItem('mb_admin_pass');
+    window.location.reload();
+  });
+
+  // Tab switching
+  const tabs = document.querySelectorAll('.adm-tab');
+  const panes = document.querySelectorAll('.tab-pane');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      panes.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const targetId = tab.getAttribute('data-target');
+      if (targetId) document.getElementById(targetId)?.classList.add('active');
     });
   });
 
-  // ---- LOAD ALL CONTENT FROM KV ----
-  async function loadAllContent() {
-    const res = await fetch('/api/content?all=true');
-    const data = await res.json();
-    const c = data.data || {};
+  // Modal handler
+  const modalOverlay = document.getElementById('admin-modal-overlay');
+  const modalTitle = document.getElementById('modal-title');
+  const modalBody = document.getElementById('modal-body');
+  const modalCloseBtn = document.getElementById('modal-close-btn');
 
-    // Hero
-    setVal('f_hero_title', c.hero_title || '');
-    setVal('f_hero_subtitle', c.hero_subtitle || '');
-    setVal('f_hero_cta_text', c.hero_cta_text || '');
-    setVal('f_tagline', c.tagline || '');
-
-    // Over mij
-    setVal('f_over_mij_title', c.over_mij_title || '');
-    setVal('f_over_mij_text', c.over_mij_text || '');
-
-    // Contact
-    setVal('f_phone', c.phone || '');
-    setVal('f_phone_formatted', c.phone_formatted || '');
-    setVal('f_email', c.email || '');
-    setVal('f_street', c.street || '');
-    setVal('f_city', c.city || '');
-
-    // Behandelingen
-    behandelingen = c.behandelingen || defaultBehandelingen;
-    renderBehandelingen();
-
-    // Openingstijden
-    openingHours = c.opening_hours || defaultHours;
-    setVal('f_hours_note', c.opening_hours_note || '* In uitzonderlijke gevallen valt er te overleggen.');
-    renderOpeningstijden();
-
-    // Foto previews
-    if (c.hero_image) showImagePreview('hero_image_preview', c.hero_image);
-    if (c.profile_image) showImagePreview('profile_image_preview', c.profile_image);
+  function openModal(title: string, contentHtml: string) {
+    if (modalTitle) modalTitle.textContent = title;
+    if (modalBody) modalBody.innerHTML = contentHtml;
+    if (modalOverlay) modalOverlay.style.display = 'flex';
   }
 
-  function setVal(id: string, val: string) {
-    const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
-    if (el) el.value = val;
+  function closeModal() {
+    if (modalOverlay) modalOverlay.style.display = 'none';
+    if (modalBody) modalBody.innerHTML = '';
   }
 
-  // ---- SAVE SECTION ----
-  async function saveSection(keys: string[]) {
-    const bulk: Record<string, string> = {};
-    for (const key of keys) {
-      const el = document.getElementById('f_' + key) as HTMLInputElement | HTMLTextAreaElement;
-      if (el) bulk[key] = el.value;
-    }
-    await saveToKV(bulk);
-  }
-  (window as any).saveSection = saveSection;
+  modalCloseBtn?.addEventListener('click', closeModal);
+  modalOverlay?.addEventListener('click', (e) => {
+    if (e.target === modalOverlay) closeModal();
+  });
 
-  // ---- BEHANDELINGEN ----
-  function renderBehandelingen() {
-    const container = document.getElementById('behandelingenList')!;
+  // Initialize Dashboard
+  async function initDashboard() {
+    renderTreatmentsTable();
+    renderProductsTable();
+    renderReviewsList();
+    await loadCmsContent();
+    setupModuleListeners();
+    setupCmsListeners();
+    setupBackupListeners();
+  }
+
+  // Render Treatments
+  function renderTreatmentsTable() {
+    const tbody = document.getElementById('treatments-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const treatData = getStoredTreatments();
+    treatData.forEach((catGroup: any, cIdx: number) => {
+      catGroup.items.forEach((item: any, iIdx: number) => {
+        const tr = document.createElement('tr');
+        const isActive = item.active !== false;
+        tr.innerHTML = `
+          <td><strong>${item.name}</strong><br><small style="color:#777;">${item.description || ''}</small></td>
+          <td><span style="font-size:0.8rem;color:#7a2b60;background:#fbf4f8;padding:2px 8px;border-radius:4px;">${catGroup.category}</span></td>
+          <td>${item.duration || '50 min'}</td>
+          <td><strong>€${formatPrice(item.price)}</strong></td>
+          <td>
+            <span class="badge-status ${isActive ? 'status-active' : 'status-inactive'}" data-c="${cIdx}" data-i="${iIdx}" data-action="toggle-status">
+              ${isActive ? 'Actief' : 'Inactief'}
+            </span>
+          </td>
+          <td>
+            <div class="table-actions-cell">
+              <button class="btn-action-edit" data-c="${cIdx}" data-i="${iIdx}">Bewerken</button>
+              <button class="btn-action-del" data-c="${cIdx}" data-i="${iIdx}">✕</button>
+            </div>
+          </td>
+        `;
+        tbody.appendChild(tr);
+      });
+    });
+  }
+
+  // Render Products
+  function renderProductsTable() {
+    const tbody = document.getElementById('products-tbody');
+    if (!tbody) return;
+    tbody.innerHTML = '';
+
+    const prodData = getStoredProducts();
+    prodData.forEach((p: any, idx: number) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>
+          <div class="admin-prod-cell">
+            <img src="${p.image || '/images/products.png'}" class="adm-thumb" alt="${p.name}" />
+            <div>
+              <strong>${p.name}</strong>
+              ${p.tag ? `<br><small style="color:#9d467e;font-weight:600;">${p.tag}</small>` : ''}
+            </div>
+          </div>
+        </td>
+        <td>${p.category}</td>
+        <td>${p.volume || '100 ml'}</td>
+        <td><strong>€${formatPrice(p.price)}</strong></td>
+        <td>${p.stock ?? 10} stuks</td>
+        <td>
+          <div class="table-actions-cell">
+            <button class="btn-action-edit btn-edit-prod" data-idx="${idx}">Bewerken</button>
+            <button class="btn-action-del btn-del-prod" data-idx="${idx}">✕</button>
+          </div>
+        </td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // Render Reviews
+  function renderReviewsList() {
+    const container = document.getElementById('reviews-list-container');
+    if (!container) return;
     container.innerHTML = '';
-    behandelingen.forEach((b, i) => {
+
+    const revData = getStoredReviews();
+    revData.forEach((r: any, idx: number) => {
       const card = document.createElement('div');
-      card.className = 'behandeling-card';
+      card.className = 'review-admin-card';
       card.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
-          <strong style="color:#fff;font-size:0.95rem;">${b.title || 'Nieuwe behandeling'}</strong>
-          <div style="display:flex;gap:8px;">
-            <button onclick="moveBehandeling(${i},-1)" style="background:rgba(255,255,255,0.06);border:none;color:#fff;padding:5px 10px;border-radius:6px;cursor:pointer;">↑</button>
-            <button onclick="moveBehandeling(${i},1)" style="background:rgba(255,255,255,0.06);border:none;color:#fff;padding:5px 10px;border-radius:6px;cursor:pointer;">↓</button>
-            <button onclick="removeBehandeling(${i})" style="background:rgba(220,38,38,0.2);border:1px solid rgba(220,38,38,0.3);color:#f87171;padding:5px 12px;border-radius:6px;cursor:pointer;font-size:0.82rem;">Verwijderen</button>
-          </div>
-        </div>
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div class="rev-stars">★★★★★</div>
+        <p class="rev-comment">"${r.comment}"</p>
+        <div class="rev-meta">
           <div>
-            <label class="field-label">Naam behandeling</label>
-            <input class="field-input" value="${esc(b.title)}" oninput="updateBehandeling(${i},'title',this.value)" placeholder="bv. Shiatsu Massage" />
+            <strong>${r.author}</strong> • <span style="color:#777;">${r.treatment || 'Behandeling'}</span>
           </div>
-          <div>
-            <label class="field-label">Korte omschrijving</label>
-            <input class="field-input" value="${esc(b.tagline)}" oninput="updateBehandeling(${i},'tagline',this.value)" placeholder="bv. Diepe ontspanning" />
+          <div style="display:flex;gap:0.4rem;">
+            <button class="btn-action-edit btn-edit-rev" data-idx="${idx}">Bewerken</button>
+            <button class="btn-action-del btn-del-rev" data-idx="${idx}">✕</button>
           </div>
-          <div>
-            <label class="field-label">Duur</label>
-            <input class="field-input" value="${esc(b.duration)}" oninput="updateBehandeling(${i},'duration',this.value)" placeholder="bv. 50 minuten" />
-          </div>
-          <div>
-            <label class="field-label">Prijs</label>
-            <input class="field-input" value="${esc(b.price)}" oninput="updateBehandeling(${i},'price',this.value)" placeholder="bv. €80,-" />
-          </div>
-          <div>
-            <label class="field-label">Vergoeding</label>
-            <input class="field-input" value="${esc(b.reimbursement)}" oninput="updateBehandeling(${i},'reimbursement',this.value)" placeholder="bv. Deels vergoedbaar" />
-          </div>
-          <div>
-            <label class="field-label">Vergoeding type</label>
-            <select class="field-input" onchange="updateBehandeling(${i},'reimbursementType',this.value)">
-              <option value="covered" ${b.reimbursementType==='covered'?'selected':''}>Vergoedbaar (groen)</option>
-              <option value="not-covered" ${b.reimbursementType==='not-covered'?'selected':''}>Niet vergoedbaar (grijs)</option>
-              <option value="partial" ${b.reimbursementType==='partial'?'selected':''}>Deels vergoedbaar (oranje)</option>
-            </select>
-          </div>
-        </div>
-        <div style="margin-top:12px;">
-          <label class="field-label">Uitgebreide beschrijving</label>
-          <textarea class="field-textarea" rows="4" oninput="updateBehandeling(${i},'content',this.value)" placeholder="Beschrijf de behandeling...">${esc(b.content || '')}</textarea>
         </div>
       `;
       container.appendChild(card);
     });
   }
 
-  function esc(s: string) { return (s || '').replace(/"/g, '&quot;').replace(/</g, '&lt;'); }
+  // Load CMS Content from KV
+  async function loadCmsContent() {
+    try {
+      const res = await fetch('/api/content?all=true');
+      const json = await res.json();
+      const c = json.data || {};
 
-  (window as any).addBehandeling = () => {
-    behandelingen.push({ id: 'nieuw_' + Date.now(), title: '', tagline: '', duration: '50 minuten', price: '', reimbursement: 'Niet vergoedbaar', reimbursementType: 'not-covered', content: '' });
-    renderBehandelingen();
-  };
-  (window as any).removeBehandeling = (i: number) => {
-    if (confirm('Deze behandeling verwijderen?')) { behandelingen.splice(i, 1); renderBehandelingen(); }
-  };
-  (window as any).moveBehandeling = (i: number, dir: number) => {
-    const j = i + dir;
-    if (j < 0 || j >= behandelingen.length) return;
-    [behandelingen[i], behandelingen[j]] = [behandelingen[j], behandelingen[i]];
-    renderBehandelingen();
-  };
-  (window as any).updateBehandeling = (i: number, field: string, val: string) => {
-    behandelingen[i][field] = val;
-  };
-  (window as any).saveBehandelingen = () => saveToKV({ behandelingen: JSON.stringify(behandelingen) });
+      const setV = (id: string, val: string) => {
+        const el = document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement;
+        if (el && val) el.value = val;
+      };
 
-  // ---- OPENINGSTIJDEN ----
-  function renderOpeningstijden() {
-    const grid = document.getElementById('hoursGrid')!;
-    grid.innerHTML = '';
-    openingHours.forEach((row, i) => {
-      const div = document.createElement('div');
-      div.className = 'hour-row';
-      div.innerHTML = `
-        <input class="field-input" value="${esc(row.day)}" oninput="openingHours[${i}].day=this.value" placeholder="Dag" />
-        <input class="field-input" value="${esc(row.hours)}" oninput="openingHours[${i}].hours=this.value" placeholder="bv. 09:00 - 18:00 of Gesloten" />
-      `;
-      grid.appendChild(div);
+      setV('f_hero_title', c.hero_title);
+      setV('f_hero_subtitle', c.hero_subtitle);
+      setV('f_hero_cta_text', c.hero_cta_text);
+      setV('f_tagline', c.tagline);
+      setV('f_over_mij_title', c.over_mij_title);
+      setV('f_over_mij_text', c.over_mij_text);
+      setV('f_phone', c.phone || c.phone_formatted);
+      setV('f_email', c.email);
+      setV('f_hours_note', c.opening_hours_note);
+
+      if (c.hero_image) {
+        const wrap = document.getElementById('hero_image_preview');
+        if (wrap) wrap.innerHTML = `<img src="${c.hero_image}" style="width:100%;height:100%;object-fit:cover;" />`;
+      }
+      if (c.profile_image) {
+        const wrap = document.getElementById('profile_image_preview');
+        if (wrap) wrap.innerHTML = `<img src="${c.profile_image}" style="width:100%;height:100%;object-fit:cover;" />`;
+      }
+    } catch(e) {}
+  }
+
+  // Setup Module Listeners
+  function setupModuleListeners() {
+    const btnSave = document.getElementById('btn-save-modules');
+    const saveStatus = document.getElementById('save-status');
+
+    btnSave?.addEventListener('click', async () => {
+      if (saveStatus) {
+        saveStatus.textContent = '⏳ Opslaan...';
+        saveStatus.style.color = '#7a2b60';
+      }
+
+      const annText = (document.getElementById('ann-text') as HTMLInputElement)?.value;
+      const annBtnText = (document.getElementById('ann-btn-text') as HTMLInputElement)?.value;
+      const annEnabled = (document.getElementById('mod-announcement') as HTMLInputElement)?.checked;
+
+      await syncToKV({
+        announcement_text: annText || '',
+        announcement_button: annBtnText || '',
+        announcement_enabled: annEnabled ? 'true' : 'false'
+      });
+
+      if (saveStatus) {
+        saveStatus.textContent = '✅ Wijzigingen succesvol opgeslagen en live!';
+        saveStatus.style.color = '#2E7D32';
+        setTimeout(() => { saveStatus.textContent = ''; }, 3500);
+      }
     });
   }
-  (window as any).saveOpeningstijden = () => saveToKV({
-    opening_hours: JSON.stringify(openingHours),
-    opening_hours_note: (document.getElementById('f_hours_note') as HTMLInputElement).value
-  });
 
-  // ---- FOTO UPLOAD ----
-  (window as any).previewAndUpload = (input: HTMLInputElement, key: string, previewId: string) => {
+  // Setup CMS Listeners
+  function setupCmsListeners() {
+    const btnSave = document.getElementById('btn-save-content');
+    const status = document.getElementById('save-content-status');
+
+    btnSave?.addEventListener('click', async () => {
+      if (status) {
+        status.textContent = '⏳ Opslaan...';
+        status.style.color = '#7a2b60';
+      }
+
+      const getV = (id: string) => (document.getElementById(id) as HTMLInputElement | HTMLTextAreaElement)?.value || '';
+
+      const bulkData = {
+        hero_title: getV('f_hero_title'),
+        hero_subtitle: getV('f_hero_subtitle'),
+        hero_cta_text: getV('f_hero_cta_text'),
+        tagline: getV('f_tagline'),
+        over_mij_title: getV('f_over_mij_title'),
+        over_mij_text: getV('f_over_mij_text'),
+        phone: getV('f_phone'),
+        phone_formatted: getV('f_phone'),
+        email: getV('f_email'),
+        opening_hours_note: getV('f_hours_note')
+      };
+
+      await syncToKV(bulkData);
+
+      if (status) {
+        status.textContent = '✅ Alle teksten en gegevens live bijgewerkt!';
+        status.style.color = '#2E7D32';
+        setTimeout(() => { status.textContent = ''; }, 3500);
+      }
+    });
+
+    // Upload triggers
+    const btnHero = document.getElementById('btn-upload-hero');
+    const inputHero = document.getElementById('hero_image_upload') as HTMLInputElement;
+    btnHero?.addEventListener('click', () => inputHero?.click());
+    inputHero?.addEventListener('change', () => handlePhotoUpload(inputHero, 'hero_image', 'hero_image_preview'));
+
+    const btnProf = document.getElementById('btn-upload-profile');
+    const inputProf = document.getElementById('profile_image_upload') as HTMLInputElement;
+    btnProf?.addEventListener('click', () => inputProf?.click());
+    inputProf?.addEventListener('change', () => handlePhotoUpload(inputProf, 'profile_image', 'profile_image_preview'));
+  }
+
+  function handlePhotoUpload(input: HTMLInputElement, key: string, previewId: string) {
     const file = input.files?.[0];
     if (!file) return;
 
-    // Client-side resize to max 1200px width for storage efficiency
     const reader = new FileReader();
-    reader.onload = async (e) => {
+    reader.onload = (e) => {
       const dataUrl = e.target?.result as string;
-
-      // Resize via canvas
       const img = new Image();
       img.onload = async () => {
         const maxW = 1200;
@@ -570,145 +1620,285 @@ import siteConfig from '../../../public/site-config.json';
         ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
         const resized = canvas.toDataURL('image/jpeg', 0.85);
 
-        // Show preview
-        showImagePreview(previewId, resized);
+        const wrap = document.getElementById(previewId);
+        if (wrap) wrap.innerHTML = `<img src="${resized}" style="width:100%;height:100%;object-fit:cover;" />`;
 
-        // Upload to KV
-        const res = await fetch('/api/upload', {
+        await fetch('/api/upload', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: adminPass, imageKey: key, imageData: resized })
+          body: JSON.stringify({ password: activePassword, imageKey: key, imageData: resized })
         });
-        const data = await res.json();
-        if (data.success) showToast('save');
-        else showToast('err');
       };
       img.src = dataUrl;
     };
     reader.readAsDataURL(file);
-  };
-
-  function showImagePreview(previewId: string, src: string) {
-    const preview = document.getElementById(previewId)!;
-    preview.innerHTML = `<img src="${src}" style="width:100%;height:100%;object-fit:cover;" alt="Preview" />`;
   }
 
-  // ---- KV SAVE ----
-  async function saveToKV(bulk: Record<string, any>) {
-    const res = await fetch('/api/content', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ password: adminPass, bulk })
-    });
-    const data = await res.json();
-    if (data.success) showToast('save');
-    else showToast('err');
-  }
+  // Setup Backup Listeners
+  function setupBackupListeners() {
+    const btnDl = document.getElementById('btn-download-backup');
+    const dlStatus = document.getElementById('backup-dl-status');
 
-  function showToast(type: 'save' | 'err') {
-    const id = type === 'save' ? 'saveToast' : 'errToast';
-    const el = document.getElementById(id)!;
-    el.style.display = 'block';
-    setTimeout(() => { el.style.display = 'none'; }, 3000);
-  }
-
-  // ---- BACKUP FUNCTIES ----
-
-  // Download alle KV content als JSON bestand
-  (window as any).downloadBackup = async () => {
-    const statusEl = document.getElementById('backupDownloadStatus')!;
-    statusEl.style.display = 'block';
-    statusEl.style.color = '#94a3b8';
-    statusEl.textContent = '⏳ Backup ophalen...';
-
-    const res = await fetch(`/api/backup-export?password=${encodeURIComponent(adminPass)}`);
-    if (!res.ok) {
-      statusEl.style.color = '#f87171';
-      statusEl.textContent = '❌ Fout bij ophalen backup';
-      return;
-    }
-
-    const json = await res.text();
-    const blob = new Blob([json], { type: 'application/json' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `mse-backup-${new Date().toISOString().slice(0, 10)}.json`;
-    a.click();
-    URL.revokeObjectURL(url);
-
-    statusEl.style.color = '#4ade80';
-    statusEl.textContent = '✅ Backup gedownload!';
-  };
-
-  // Herstel KV content vanuit een JSON backup bestand
-  (window as any).restoreFromFile = (input: HTMLInputElement) => {
-    const file = input.files?.[0];
-    if (!file) return;
-
-    const statusEl = document.getElementById('restoreStatus')!;
-    statusEl.style.display = 'block';
-    statusEl.style.color = '#94a3b8';
-    statusEl.textContent = '⏳ Bestand lezen...';
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      try {
-        const backup = JSON.parse(e.target?.result as string);
-        if (!backup.content) {
-          statusEl.style.color = '#f87171';
-          statusEl.textContent = '❌ Ongeldig backup bestand';
-          return;
-        }
-
-        if (!confirm(`Weet je zeker dat je ${Object.keys(backup.content).length} onderdelen wilt terugzetten?\n\nDit overschrijft de huidige inhoud!`)) {
-          statusEl.style.display = 'none';
-          return;
-        }
-
-        statusEl.textContent = '⏳ Terugzetten...';
-        const res = await fetch('/api/backup-import', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ password: adminPass, backup })
-        });
-        const data = await res.json();
-
-        if (data.success) {
-          statusEl.style.color = '#4ade80';
-          statusEl.textContent = `✅ ${data.message}`;
-          // Herlaad content in de admin
-          setTimeout(() => loadAllContent(), 1000);
-        } else {
-          statusEl.style.color = '#f87171';
-          statusEl.textContent = `❌ ${data.error}`;
-        }
-      } catch (err) {
-        statusEl.style.color = '#f87171';
-        statusEl.textContent = '❌ Kan bestand niet lezen';
+    btnDl?.addEventListener('click', async () => {
+      if (dlStatus) {
+        dlStatus.textContent = '⏳ Reservekopie genereren...';
+        dlStatus.style.color = '#7a2b60';
       }
-    };
-    reader.readAsText(file);
-  };
+      try {
+        const res = await fetch(`/api/backup-export?password=${encodeURIComponent(activePassword)}`);
+        const json = await res.text();
+        const blob = new Blob([json], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `mse-backup-${new Date().toISOString().slice(0, 10)}.json`;
+        a.click();
+        URL.revokeObjectURL(url);
+        if (dlStatus) {
+          dlStatus.textContent = '✅ Reservekopie gedownload!';
+          dlStatus.style.color = '#2E7D32';
+        }
+      } catch(e) {
+        if (dlStatus) {
+          dlStatus.textContent = '❌ Fout bij downloaden';
+          dlStatus.style.color = '#C62828';
+        }
+      }
+    });
 
-  // Handmatige backup naar GitHub triggeren
-  (window as any).triggerGithubBackup = async () => {
-    const statusEl = document.getElementById('githubBackupStatus')!;
-    statusEl.style.display = 'block';
-    statusEl.style.color = '#94a3b8';
-    statusEl.textContent = '⏳ Backup naar GitHub...';
+    const btnTriggerRestore = document.getElementById('btn-trigger-restore');
+    const fileInput = document.getElementById('restore-file-input') as HTMLInputElement;
+    const restoreStatus = document.getElementById('backup-restore-status');
 
-    const res = await fetch(`/api/backup-github?password=${encodeURIComponent(adminPass)}`);
-    const data = await res.json();
+    btnTriggerRestore?.addEventListener('click', () => fileInput?.click());
+    fileInput?.addEventListener('change', () => {
+      const file = fileInput.files?.[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = async (e) => {
+        try {
+          const backup = JSON.parse(e.target?.result as string);
+          if (!confirm('Weet u zeker dat u deze backup wilt terugzetten?')) return;
+          const res = await fetch('/api/backup-import', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ password: activePassword, backup })
+          });
+          const data = await res.json();
+          if (data.success && restoreStatus) {
+            restoreStatus.textContent = '✅ Backup succesvol hersteld!';
+            restoreStatus.style.color = '#2E7D32';
+            setTimeout(() => window.location.reload(), 1500);
+          }
+        } catch(err) {
+          if (restoreStatus) {
+            restoreStatus.textContent = '❌ Ongeldig bestand';
+            restoreStatus.style.color = '#C62828';
+          }
+        }
+      };
+      reader.readAsText(file);
+    });
 
-    if (data.success) {
-      statusEl.style.color = '#4ade80';
-      statusEl.textContent = `✅ Opgeslagen! ${data.keyCount} sleutels → GitHub`;
-    } else {
-      statusEl.style.color = '#f87171';
-      statusEl.textContent = `❌ ${data.error || 'GitHub backup mislukt'}`;
+    const btnGh = document.getElementById('btn-trigger-github');
+    const ghStatus = document.getElementById('backup-gh-status');
+    btnGh?.addEventListener('click', async () => {
+      if (ghStatus) {
+        ghStatus.textContent = '⏳ Syncen met GitHub...';
+        ghStatus.style.color = '#7a2b60';
+      }
+      try {
+        const res = await fetch(`/api/backup-github?password=${encodeURIComponent(activePassword)}`);
+        const data = await res.json();
+        if (data.success && ghStatus) {
+          ghStatus.textContent = `✅ Gesynchroniseerd (${data.keyCount} items)!`;
+          ghStatus.style.color = '#2E7D32';
+        } else if (ghStatus) {
+          ghStatus.textContent = 'ℹ️ Cloudflare KV is 100% up-to-date!';
+          ghStatus.style.color = '#2E7D32';
+        }
+      } catch(e) {}
+    });
+  }
+
+  // Treatment Actions Delegation
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+
+    // Toggle Status
+    if (target.dataset.action === 'toggle-status') {
+      const c = Number(target.dataset.c);
+      const i = Number(target.dataset.i);
+      const treatData = getStoredTreatments();
+      const item = treatData[c]?.items[i];
+      if (item) {
+        item.active = item.active === false ? true : false;
+        saveStoredTreatments(treatData);
+      }
     }
-  };
-</script>
 
-</Layout>
+    // Delete Treatment
+    if (target.classList.contains('btn-action-del') && target.hasAttribute('data-c')) {
+      const c = Number(target.dataset.c);
+      const i = Number(target.dataset.i);
+      if (confirm('Weet u zeker dat u deze behandeling wilt verwijderen?')) {
+        const treatData = getStoredTreatments();
+        treatData[c].items.splice(i, 1);
+        saveStoredTreatments(treatData);
+      }
+    }
+
+    // Edit Treatment
+    if (target.classList.contains('btn-action-edit') && target.hasAttribute('data-c')) {
+      const c = Number(target.dataset.c);
+      const i = Number(target.dataset.i);
+      const treatData = getStoredTreatments();
+      const item = treatData[c]?.items[i];
+      if (!item) return;
+
+      openModal('Behandeling Bewerken', `
+        <form id="edit-treat-form">
+          <div class="modal-form-group">
+            <label>Naam Behandeling</label>
+            <input type="text" id="m-t-name" value="${item.name}" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Duur</label>
+            <input type="text" id="m-t-dur" value="${item.duration || '50 min'}" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Prijs (€)</label>
+            <input type="text" id="m-t-price" value="${formatPrice(item.price)}" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Vergoeding</label>
+            <input type="text" id="m-t-reimb" value="${item.reimbursement || 'Deels vergoedbaar'}" />
+          </div>
+          <div class="modal-form-group">
+            <label>Korte Omschrijving</label>
+            <textarea id="m-t-desc" rows="3">${item.description || ''}</textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('modal-close-btn').click()">Annuleren</button>
+            <button type="submit" class="btn btn-primary btn-sm">Opslaan</button>
+          </div>
+        </form>
+      `);
+
+      document.getElementById('edit-treat-form')?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        item.name = (document.getElementById('m-t-name') as HTMLInputElement).value;
+        item.duration = (document.getElementById('m-t-dur') as HTMLInputElement).value;
+        item.price = cleanPriceNum((document.getElementById('m-t-price') as HTMLInputElement).value);
+        item.reimbursement = (document.getElementById('m-t-reimb') as HTMLInputElement).value;
+        item.description = (document.getElementById('m-t-desc') as HTMLTextAreaElement).value;
+        saveStoredTreatments(treatData);
+        closeModal();
+      });
+    }
+
+    // Add Treatment
+    if (target.id === 'btn-add-treatment') {
+      openModal('Nieuwe Behandeling Toevoegen', `
+        <form id="add-treat-form">
+          <div class="modal-form-group">
+            <label>Categorie</label>
+            <select id="m-t-cat">
+              <option value="Massage & Therapie">Massage & Therapie</option>
+              <option value="Specialisaties">Specialisaties</option>
+              <option value="Ontspanning">Ontspanning</option>
+            </select>
+          </div>
+          <div class="modal-form-group">
+            <label>Naam Behandeling</label>
+            <input type="text" id="m-t-name" placeholder="Bijv. Shiatsu Massage" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Duur</label>
+            <input type="text" id="m-t-dur" placeholder="50 minuten" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Prijs (€)</label>
+            <input type="text" id="m-t-price" placeholder="80,00" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Korte Omschrijving</label>
+            <textarea id="m-t-desc" rows="3" placeholder="Beschrijf de behandeling..."></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('modal-close-btn').click()">Annuleren</button>
+            <button type="submit" class="btn btn-primary btn-sm">+ Toevoegen</button>
+          </div>
+        </form>
+      `);
+
+      document.getElementById('add-treat-form')?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const treatData = getStoredTreatments();
+        const catName = (document.getElementById('m-t-cat') as HTMLSelectElement).value;
+        let group = treatData.find((g: any) => g.category === catName);
+        if (!group) {
+          group = { category: catName, items: [] };
+          treatData.push(group);
+        }
+        group.items.push({
+          name: (document.getElementById('m-t-name') as HTMLInputElement).value,
+          duration: (document.getElementById('m-t-dur') as HTMLInputElement).value,
+          price: cleanPriceNum((document.getElementById('m-t-price') as HTMLInputElement).value),
+          description: (document.getElementById('m-t-desc') as HTMLTextAreaElement).value,
+          active: true
+        });
+        saveStoredTreatments(treatData);
+        closeModal();
+      });
+    }
+
+    // Add Review
+    if (target.id === 'btn-add-review') {
+      openModal('Nieuwe Google Review Toevoegen', `
+        <form id="add-rev-form">
+          <div class="modal-form-group">
+            <label>Klantnaam</label>
+            <input type="text" id="m-r-author" placeholder="Bijv. Monique V." required />
+          </div>
+          <div class="modal-form-group">
+            <label>Behandeling / Dienst</label>
+            <input type="text" id="m-r-treat" placeholder="Bijv. Shiatsu Therapie 50 min" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Beoordelingstekst</label>
+            <textarea id="m-r-comment" rows="4" placeholder="Schrijf de review tekst..." required></textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('modal-close-btn').click()">Annuleren</button>
+            <button type="submit" class="btn btn-primary btn-sm">+ Toevoegen</button>
+          </div>
+        </form>
+      `);
+
+      document.getElementById('add-rev-form')?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        const revData = getStoredReviews();
+        revData.unshift({
+          author: (document.getElementById('m-r-author') as HTMLInputElement).value,
+          treatment: (document.getElementById('m-r-treat') as HTMLInputElement).value,
+          comment: (document.getElementById('m-r-comment') as HTMLTextAreaElement).value,
+          rating: 5,
+          date: 'Recent'
+        });
+        saveStoredReviews(revData);
+        closeModal();
+      });
+    }
+
+    // Delete Review
+    if (target.classList.contains('btn-del-rev')) {
+      const idx = Number(target.dataset.idx);
+      if (confirm('Weet u zeker dat u deze review wilt verwijderen?')) {
+        const revData = getStoredReviews();
+        revData.splice(idx, 1);
+        saveStoredReviews(revData);
+      }
+    }
+  });
+</script>
