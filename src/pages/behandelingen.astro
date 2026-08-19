@@ -472,3 +472,50 @@ LET OP: BIOSLIMMING behandelingen zijn puur wellness/lichaamsverzorging en valle
     margin-top: 1.75rem;
   }
 </style>
+
+<!-- KV Dynamic Content Loader: laadt behandelingen als klant ze heeft aangepast via /admin -->
+<script>
+  (async () => {
+    try {
+      const res = await fetch('/api/content?key=behandelingen');
+      const data = await res.json();
+      if (!data.exists || !Array.isArray(data.value) || data.value.length === 0) return;
+
+      const behandelingen = data.value;
+      const container = document.getElementById('behandelingen-grid');
+      if (!container) return;
+
+      container.innerHTML = behandelingen.map((b: any) => {
+        const badgeColor = b.reimbursementType === 'covered'
+          ? 'background:rgba(34,197,94,0.12);color:#4ade80;border-color:rgba(34,197,94,0.3);'
+          : b.reimbursementType === 'partial'
+          ? 'background:rgba(251,191,36,0.12);color:#fbbf24;border-color:rgba(251,191,36,0.3);'
+          : 'background:rgba(148,163,184,0.1);color:#94a3b8;border-color:rgba(148,163,184,0.2);';
+
+        const benefits = Array.isArray(b.benefits) && b.benefits.length
+          ? `<ul style="margin:12px 0 0;padding:0 0 0 18px;font-size:0.88rem;color:var(--text-muted,#685b63);line-height:1.8;">${b.benefits.map((x: string) => `<li>${x}</li>`).join('')}</ul>`
+          : '';
+
+        return `
+          <div class="behandeling-card" style="background:var(--surface,#fcf9f7);border:1px solid var(--border,#e8e0e5);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;">
+            ${b.image ? `<img src="${b.image}" alt="${b.title}" style="width:100%;height:200px;object-fit:cover;" loading="lazy" />` : ''}
+            <div style="padding:24px;flex:1;display:flex;flex-direction:column;">
+              <div style="display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.04em;border:1px solid;${badgeColor}margin-bottom:12px;">
+                ${b.reimbursementType === 'covered' ? '✓ ' : ''}${b.reimbursement || ''}
+              </div>
+              <h3 style="margin:0 0 6px;font-size:1.1rem;color:var(--text,#2d232a);">${b.title}</h3>
+              <p style="margin:0 0 12px;font-size:0.9rem;color:var(--text-muted,#685b63);">${b.tagline || ''}</p>
+              ${b.content ? `<p style="font-size:0.88rem;color:var(--text-muted,#685b63);line-height:1.7;margin:0 0 12px;">${b.content.substring(0, 200)}${b.content.length > 200 ? '…' : ''}</p>` : ''}
+              ${benefits}
+              <div style="margin-top:auto;padding-top:16px;border-top:1px solid var(--border,#e8e0e5);display:flex;justify-content:space-between;align-items:center;">
+                <span style="font-size:0.85rem;color:var(--text-muted,#685b63);">⏱ ${b.duration || ''}</span>
+                <strong style="color:var(--primary,#9d467e);font-size:1rem;">${b.price || ''}</strong>
+              </div>
+            </div>
+          </div>`;
+      }).join('');
+    } catch (e) {
+      // Silently fail — static content blijft zichtbaar
+    }
+  })();
+</script>
