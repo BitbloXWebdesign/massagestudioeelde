@@ -29,21 +29,12 @@ export const onRequestGet = async ({ request, env }: { request: Request; env: En
 
   try {
     if (allKeys === "true") {
-      // Return all editable content as one object
-      const keys = [
-        "hero_title", "hero_subtitle", "hero_cta_text",
-        "over_mij_title", "over_mij_text",
-        "tagline",
-        "phone", "phone_formatted", "email",
-        "opening_hours",
-        "hero_image", "profile_image",
-        "behandelingen",
-      ];
+      const list = await env.CONTENT_KV.list();
       const result: Record<string, any> = {};
-      for (const k of keys) {
-        const val = await env.CONTENT_KV.get(k);
+      for (const item of list.keys) {
+        const val = await env.CONTENT_KV.get(item.name);
         if (val !== null) {
-          try { result[k] = JSON.parse(val); } catch { result[k] = val; }
+          try { result[item.name] = JSON.parse(val); } catch { result[item.name] = val; }
         }
       }
       return new Response(JSON.stringify({ success: true, data: result }), { headers: corsHeaders });

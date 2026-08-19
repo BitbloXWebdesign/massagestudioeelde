@@ -1227,6 +1227,7 @@ import reviews from '../../data/reviews.json';
   function saveStoredReviews(data: any) {
     localStorage.setItem('mb_admin_reviews', JSON.stringify(data));
     renderReviewsList();
+    syncToKV({ reviews: data });
   }
 
   async function syncToKV(bulk: Record<string, any>) {
@@ -1466,6 +1467,20 @@ import reviews from '../../data/reviews.json';
       setV('f_phone', c.phone || c.phone_formatted);
       setV('f_email', c.email);
       setV('f_hours_note', c.opening_hours_note);
+
+      if (c.reviews && Array.isArray(c.reviews)) {
+        localStorage.setItem('mb_admin_reviews', JSON.stringify(c.reviews));
+        renderReviewsList();
+      }
+      if (c.behandelingen) {
+        try {
+          const parsed = typeof c.behandelingen === 'string' ? JSON.parse(c.behandelingen) : c.behandelingen;
+          if (Array.isArray(parsed)) {
+            localStorage.setItem('mb_admin_treatments', JSON.stringify(parsed));
+            renderTreatmentsTable();
+          }
+        } catch(e) {}
+      }
 
       if (c.hero_image) {
         const wrap = document.getElementById('hero_image_preview');
