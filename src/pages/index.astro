@@ -525,6 +525,7 @@ const treatments = [
     position: relative;
     max-width: 440px;
     width: 100%;
+    margin-bottom: 2.25rem;
   }
 
   .hero-main-card {
@@ -574,18 +575,19 @@ const treatments = [
 
   .hero-therapist-badge {
     position: absolute;
-    bottom: -22px;
-    left: -22px;
+    bottom: -45px;
+    left: -15px;
     background: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: var(--radius-md);
-    padding: 0.85rem 1.35rem 0.85rem 0.85rem;
-    box-shadow: 0 14px 32px rgba(0, 0, 0, 0.12), 0 2px 8px rgba(157, 70, 126, 0.08);
+    padding: 0.75rem 1.25rem 0.75rem 0.85rem;
+    box-shadow: 0 16px 36px rgba(0, 0, 0, 0.14), 0 4px 12px rgba(157, 70, 126, 0.1);
     display: flex;
     align-items: center;
     gap: 0.95rem;
     animation: floatBadge 4.5s ease-in-out infinite;
-    max-width: 330px;
+    max-width: 340px;
+    z-index: 2;
   }
 
   @keyframes floatBadge {
