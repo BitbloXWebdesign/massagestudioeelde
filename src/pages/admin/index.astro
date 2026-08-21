@@ -1447,28 +1447,6 @@ import reviews from '../../data/reviews.json';
       }
     });
 
-      const bulkData = {
-        hero_title: getV('f_hero_title'),
-        hero_subtitle: getV('f_hero_subtitle'),
-        hero_cta_text: getV('f_hero_cta_text'),
-        tagline: getV('f_tagline'),
-        over_mij_title: getV('f_over_mij_title'),
-        over_mij_text: getV('f_over_mij_text'),
-        phone: getV('f_phone'),
-        phone_formatted: getV('f_phone'),
-        email: getV('f_email'),
-        opening_hours_note: getV('f_hours_note')
-      };
-
-      await syncToKV(bulkData);
-
-      if (status) {
-        status.textContent = '✅ Alle teksten en gegevens live bijgewerkt!';
-        status.style.color = '#2E7D32';
-        setTimeout(() => { status.textContent = ''; }, 3500);
-      }
-    });
-
     // Upload triggers
     const btnHero = document.getElementById('btn-upload-hero');
     const inputHero = document.getElementById('hero_image_upload') as HTMLInputElement;
