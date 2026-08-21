@@ -66,22 +66,24 @@ import reviews from '../../data/reviews.json';
           </div>
 
           <!-- Slimme Meldingenbalk / Vakantiesluiting Bewerken Box -->
-          <div class="announcement-edit-box" style="background: #F8F5F2; border: 1px solid var(--color-primary, #dec148); border-radius: 12px; padding: 1.4rem; margin-bottom: 1.8rem;">
-            <div class="ann-top-row" style="margin-bottom: 0.8rem;">
-              <strong style="color: var(--color-secondary, #1A1A1A); font-size: 0.95rem;">📢 Slimme Meldingenbalk (Bovenaan de website)</strong>
-              <span style="font-size: 0.8rem; color: var(--color-text-secondary, #4A4A4A);">Ideaal voor vakantiesluiting, seizoensacties of praktijk-aankondigingen.</span>
-            </div>
-            <div class="ann-inputs-grid" style="display: grid; grid-template-columns: 1fr 3fr; gap: 1rem;">
-              <div class="form-group" style="margin-bottom: 0;">
-                <label>Badge Label:</label>
-                <input type="text" id="f_ann_badge" value={siteConfig.announcement?.badge || 'AFSPRAAK'} placeholder="Bijv. VAKANTIE of AFSPRAAK" />
+          {(siteConfig.modules.announcement !== false && siteConfig.modules.announcementBar !== false) && (
+            <div class="announcement-edit-box" style="background: #F8F5F2; border: 1px solid var(--color-primary, #dec148); border-radius: 12px; padding: 1.4rem; margin-bottom: 1.8rem;">
+              <div class="ann-top-row" style="margin-bottom: 0.8rem;">
+                <strong style="color: var(--color-secondary, #1A1A1A); font-size: 0.95rem;">📢 Slimme Meldingenbalk (Bovenaan de website)</strong>
+                <span style="font-size: 0.8rem; color: var(--color-text-secondary, #4A4A4A);">Ideaal voor vakantiesluiting, seizoensacties of praktijk-aankondigingen.</span>
               </div>
-              <div class="form-group" style="margin-bottom: 0;">
-                <label>Meldingstekst:</label>
-                <input type="text" id="f_ann_text" value={siteConfig.announcement?.text || ''} placeholder="Bijv. 💆 Praktijk gesloten wegens vakantie van 1 t/m 15 augustus." />
+              <div class="ann-inputs-grid" style="display: grid; grid-template-columns: 1fr 3fr; gap: 1rem;">
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Badge Label:</label>
+                  <input type="text" id="f_ann_badge" value={siteConfig.announcement?.badge || 'AFSPRAAK'} placeholder="Bijv. VAKANTIE of AFSPRAAK" />
+                </div>
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label>Meldingstekst:</label>
+                  <input type="text" id="f_ann_text" value={siteConfig.announcement?.text || ''} placeholder="Bijv. 💆 Praktijk gesloten wegens vakantie van 1 t/m 15 augustus." />
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
           <div class="cms-sections-grid">
             
