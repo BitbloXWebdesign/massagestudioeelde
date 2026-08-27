@@ -12,7 +12,7 @@ const isMicrositesEnabled = siteConfig.modules.microsites || siteConfig.modules.
       <div class="badges-flex">
         {siteConfig.accreditations.map((badge) => (
           <a href={badge.url} target="_blank" rel="noopener noreferrer" class="badge-item">
-            <img src={badge.logo} alt={badge.name} class="badge-img" />
+            <img src={badge.logo} alt={badge.name} class="badge-img" width="80" height="40" loading="lazy" decoding="async" />
             <div class="badge-text">
               <span class="badge-title">{badge.name}</span>
               <span class="badge-sub">{badge.code}</span>

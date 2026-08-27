@@ -83,7 +83,7 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
   </div>
 
   <!-- Mobile Drawer -->
-  <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+  <div id="mobileDrawer" class="mobile-drawer">
     <div class="drawer-content">
       <nav aria-label="Mobiele navigatie">
         <ul class="mobile-nav-list">
@@ -274,13 +274,10 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
     display: none;
     background: #ffffff;
     border-top: 1px solid var(--border-color);
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.35s ease;
   }
 
   .mobile-drawer.is-open {
-    max-height: 500px;
+    display: block;
     padding: 1.5rem 1.5rem 2rem;
   }
 
@@ -339,9 +336,6 @@ const waMessage = encodeURIComponent("Hallo Alianne, ik wil graag een afspraak m
     }
     .mobile-toggle {
       display: flex;
-    }
-    .mobile-drawer {
-      display: block;
     }
   }
 

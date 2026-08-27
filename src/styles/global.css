@@ -1,4 +1,6 @@
 /* BitbloX Master V7 Global Stylesheet - Massage Studio Eelde */
+@import './fonts.css';
+
 :root {
   --primary: #9d467e;
   --primary-hover: #863f6d;
