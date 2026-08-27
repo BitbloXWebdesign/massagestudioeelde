@@ -83,6 +83,12 @@
       "url": "https://nap-koepel.nl/"
     },
     {
+      "name": "MijnTherapeut",
+      "code": "Geregistreerd Therapeut",
+      "logo": "/images/mijntherapeut-logo.png",
+      "url": "https://mijntherapeut.nl/t/subx-alianne-zuidhof"
+    },
+    {
       "name": "KIWA gecertificeerd",
       "code": "MijnDiad ECD Keurmerk",
       "logo": "/images/kiwa.png",
