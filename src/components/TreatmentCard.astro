@@ -21,7 +21,7 @@ const isContainImage = image && (
 <div class="treatment-card">
   {image && (
     <div class={`card-media ${isContainImage ? 'is-contain' : ''}`}>
-      <img src={image} alt={title} class={`treatment-img ${isContainImage ? 'contain-img' : ''}`} loading="lazy" />
+      <img src={image} alt={title} class={`treatment-img ${isContainImage ? 'contain-img' : ''}`} loading="lazy" decoding="async" width="400" height="260" />
       {price && <div class="price-badge">{price}</div>}
     </div>
   )}

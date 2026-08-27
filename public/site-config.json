@@ -73,37 +73,37 @@
     {
       "name": "BATC Complementair Therapeut",
       "code": "BATC HBO-conform",
-      "logo": "/images/batc-logo.jpg",
+      "logo": "/images/batc-logo.webp",
       "url": "https://batc.nu/"
     },
     {
       "name": "NAP Koepel",
       "code": "Nederlandse Associatie voor Psychotherapie & Natuurgeneeskunde",
-      "logo": "/images/Logo knap.png",
+      "logo": "/images/Logo knap.webp",
       "url": "https://nap-koepel.nl/"
     },
     {
       "name": "MijnTherapeut",
       "code": "Geregistreerd Therapeut",
-      "logo": "/images/mijntherapeut-logo.png",
+      "logo": "/images/mijntherapeut-logo.webp",
       "url": "https://mijntherapeut.nl/t/subx-alianne-zuidhof"
     },
     {
       "name": "KIWA gecertificeerd",
       "code": "MijnDiad ECD Keurmerk",
-      "logo": "/images/kiwa.png",
+      "logo": "/images/kiwa.webp",
       "url": "https://www.kiwa.com"
     },
     {
       "name": "PBEP Aantoonbaar Beter",
       "code": "Practice Based Evidence",
-      "logo": "/images/pbep-aantoonbaar-beter-logo.svg",
+      "logo": "/images/pbep-aantoonbaar-beter-logo.webp",
       "url": "https://www.aantoonbaar-beter.nl/"
     },
     {
       "name": "AVG Compliant",
       "code": "Privacy Gewaarborgd",
-      "logo": "/images/avg.jpeg",
+      "logo": "/images/avg.webp",
       "url": "/privacyverklaring"
     }
   ],

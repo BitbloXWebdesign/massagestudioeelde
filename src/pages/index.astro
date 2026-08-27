@@ -14,7 +14,7 @@ const treatments = [
     title: "Shiatsu Therapie & Massage",
     duration: "50 of 75 min",
     price: "Vanaf €80,-",
-    image: "/images/DSC_1450.jpg",
+    image: "/images/DSC_1450.webp",
     slug: "/behandelingen#shiatsu",
     description: "Japanse drukpunttherapie langs de energiebanen (meridianen). Brengt diepe rust, heft blokkades op en herstelt de balans bij stress, hoofdpijn en fysieke klachten.",
     tags: ["Deels Vergoedbaar", "Meridianen"]
@@ -23,7 +23,7 @@ const treatments = [
     title: "Dorn-Methode",
     duration: "50 min",
     price: "€80,-",
-    image: "/images/DSC_1502.1.jpg",
+    image: "/images/DSC_1502.1.webp",
     slug: "/behandelingen#dorn",
     description: "Een milde en zachte wervelkolom- en gewrichtscorrectie in dynamische beweging. Zeer effectief bij bekkenscheefstand, beenlengteverschil en rug-/nekpijn.",
     tags: ["Deels Vergoedbaar", "Wervelkolom"]
@@ -32,7 +32,7 @@ const treatments = [
     title: "Voetreflextherapie",
     duration: "50 min",
     price: "€80,-",
-    image: "/images/DSC_1465.jpg",
+    image: "/images/DSC_1465.webp",
     slug: "/behandelingen#voetreflex",
     description: "Stimulatie van reflexzones op de voeten die corresponderen met alle organen en weefsels. Activeert het zelfhelend vermogen en verbetert drainage en doorbloeding.",
     tags: ["Deels Vergoedbaar", "Reflexzones"]
@@ -41,7 +41,7 @@ const treatments = [
     title: "Littekenbehandeling",
     duration: "50 min",
     price: "€80,-",
-    image: "/images/littekenbehandeling-voor-en-na.jpg",
+    image: "/images/littekenbehandeling-voor-en-na.webp",
     slug: "/behandelingen#litteken",
     description: "Specifieke weefsel- en reflextechnieken om stugge, verkleefde littekens te versoepelen, de doorstroming te herstellen en energetische blokkades op te heffen.",
     tags: ["Deels Vergoedbaar", "Herstelweefsel"]
@@ -50,7 +50,7 @@ const treatments = [
     title: "Oorreflexologie",
     duration: "50 min",
     price: "€80,-",
-    image: "/images/Oorreflexologie.png",
+    image: "/images/Oorreflexologie.webp",
     slug: "/behandelingen#oorreflexologie",
     description: "Gerichte behandelmethode via reflexpunten op de oorschelp. Uitermate krachtig bij acute pijndemping, ontspanning en ondersteuning van het zenuwstelsel.",
     tags: ["Deels Vergoedbaar", "Zenuwstelsel"]
@@ -68,7 +68,7 @@ const treatments = [
     title: "Klassieke Ontspanningsmassage",
     duration: "50 of 75 min",
     price: "Vanaf €80,-",
-    image: "/images/massage-betaalde-stockfoto.jpg",
+    image: "/images/massage-betaalde-stockfoto.webp",
     slug: "/behandelingen#klassiek",
     description: "Verzorgende en losmakende massage van strakke spiergroepen. Verbetert de circulatie, voert afvalstoffen af en geeft pure ontspanning voor lichaam en geest.",
     tags: ["Niet-vergoed (Wellness)", "Totale Rust"]
@@ -77,7 +77,7 @@ const treatments = [
     title: "BIOSLIMMING Eelde",
     duration: "60 of 90 min",
     price: "Vanaf €108,-",
-    image: "/images/Bioslimming.jpg",
+    image: "/images/Bioslimming.webp",
     slug: "/behandelingen#bioslimming",
     description: "100% natuurlijke Multi-Award winnende body wrap. Wetenschappelijk bewezen effectief voor vetverbranding, huidversteviging en cellulitisvermindering.",
     tags: ["Niet-vergoed (Cosmetisch)", "100% Natuurlijk"]
@@ -141,6 +141,9 @@ const treatments = [
               alt="Sfeervolle behandelruimte en massagetafel - Massage Studio Eelde in het voormalig kerkje" 
               width="480" 
               height="600" 
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
               class="hero-practice-img"
             />
             <div class="practice-location-tag">
@@ -210,7 +213,7 @@ const treatments = [
 
         <div class="intro-media">
           <div class="media-collage">
-            <img src="/images/DSC_1469.jpg" alt="Rustgevende massagebehandeling" class="collage-main" />
+            <img src="/images/DSC_1469.webp" alt="Rustgevende massagebehandeling" class="collage-main" loading="lazy" decoding="async" width="480" height="550" />
             <div class="collage-badge">
               <span class="number">100%</span>
               <span class="desc">Aandacht & Maatwerk</span>
@@ -304,8 +307,8 @@ const treatments = [
 
         <div class="banner-visual hide-tablet">
           <div class="principles-logos-card">
-            <img src="/images/batc-logo.jpg" alt="BATC Complementair Therapeut" class="banner-batc-img" />
-            <img src="/images/Logo knap.png" alt="NAP Koepel" class="banner-nap-img" />
+            <img src="/images/batc-logo.webp" alt="BATC Complementair Therapeut" class="banner-batc-img" loading="lazy" decoding="async" width="120" height="60" />
+            <img src="/images/Logo knap.webp" alt="NAP Koepel" class="banner-nap-img" loading="lazy" decoding="async" width="120" height="60" />
           </div>
         </div>
       </div>
@@ -318,8 +321,8 @@ const treatments = [
       <div class="bioslimming-grid">
         <div class="bioslimming-media">
           <div class="bioslimming-img-wrap">
-            <img src="/images/Bioslimming.jpg" alt="Bioslimming Body Wrap Eelde" class="bioslimming-img" />
-            <img src="/images/Bioslimming Eelde billen.png" alt="Bioslimming Resultaten" class="bioslimming-sub-img" />
+            <img src="/images/Bioslimming.webp" alt="Bioslimming Body Wrap Eelde" class="bioslimming-img" loading="lazy" decoding="async" width="450" height="350" />
+            <img src="/images/Bioslimming Eelde billen.webp" alt="Bioslimming Resultaten" class="bioslimming-sub-img" loading="lazy" decoding="async" width="200" height="200" />
           </div>
         </div>
         <div class="bioslimming-text">
