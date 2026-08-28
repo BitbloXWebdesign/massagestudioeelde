@@ -1,50 +1,68 @@
 [
   {
     "id": 1,
-    "author": "Karin van der Veen",
-    "name": "Karin van der Veen",
-    "location": "Eelde",
-    "treatment": "Shiatsu & Massagetherapie",
-    "rating": 5,
-    "ratingDisplay": "★★★★★",
-    "date": "1 maand geleden",
-    "comment": "Alianne heeft geweldige handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!",
-    "text": "Alianne heeft geweldige handen en voelt feilloos aan waar de spanning in mijn lichaam vastzit. Na een aantal behandelingen zijn mijn langdurige nek- en schouderklachten aanzienlijk verminderd. Een oase van rust!"
-  },
-  {
-    "id": 2,
-    "author": "Jeroen de Vries",
-    "name": "Jeroen de Vries",
-    "location": "Groningen",
-    "treatment": "Dorn Methode & Massage",
-    "rating": 5,
-    "ratingDisplay": "★★★★★",
-    "date": "2 maanden geleden",
-    "comment": "Vanwege rugklachten via de fysiotherapeut bij Alianne terechtgekomen voor de Dorn-methode. De zachte benadering en deskundigheid hebben me enorm geholpen. Zeer vakkundig en warm!",
-    "text": "Vanwege rugklachten via de fysiotherapeut bij Alianne terechtgekomen voor de Dorn-methode. De zachte benadering en deskundigheid hebben me enorm geholpen. Zeer vakkundig en warm!"
-  },
-  {
-    "id": 3,
-    "author": "Sandra Meijer",
-    "name": "Sandra Meijer",
-    "location": "Haren",
-    "treatment": "Voetreflexologie",
-    "rating": 5,
-    "ratingDisplay": "★★★★★",
-    "date": "3 maanden geleden",
-    "comment": "De voetreflextherapie bij Massage Studio Eelde brengt me zoveel rust en nieuwe energie. Alianne luistert zonder oordeel en geeft waardevolle tips over leefstijl en de 5 natuurgerichte principes. Echt een aanrader!",
-    "text": "De voetreflextherapie bij Massage Studio Eelde brengt me zoveel rust en nieuwe energie. Alianne luistert zonder oordeel en geeft waardevolle tips over leefstijl en de 5 natuurgerichte principes. Echt een aanrader!"
-  },
-  {
-    "id": 4,
-    "author": "Monique Bouwman",
-    "name": "Monique Bouwman",
-    "location": "Paterswolde",
-    "treatment": "Bioslimming Kuur",
+    "author": "mw. de H.",
+    "name": "mw. de H.",
+    "treatment": "Shiatsu en massagetherapie",
     "rating": 5,
     "ratingDisplay": "★★★★★",
     "date": "Recent",
-    "comment": "De Bioslimming behandelingen hebben mijn huid zichtbaar strakker en gladder gemaakt, en ik voel me veel lichter. De combinatie van detox en ontspanning is geweldig!",
-    "text": "De Bioslimming behandelingen hebben mijn huid zichtbaar strakker en gladder gemaakt, en ik voel me veel lichter. De combinatie van detox en ontspanning is geweldig!"
+    "comment": "Inlevend. Prettige, stevige en doelgerichte behandeling.",
+    "text": "Inlevend. Prettige, stevige en doelgerichte behandeling."
+  },
+  {
+    "id": 2,
+    "author": "Mw. W",
+    "name": "Mw. W",
+    "treatment": "Dorn en massage therapie/cupping",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "Alianne heeft de gevoelige heup super behandeld, geen last meer. En alle spieren gegeven wat ze nodig hadden, hierdoor is mijn lichaam helemaal 'gereset'. Heerlijk!",
+    "text": "Alianne heeft de gevoelige heup super behandeld, geen last meer. En alle spieren gegeven wat ze nodig hadden, hierdoor is mijn lichaam helemaal 'gereset'. Heerlijk!"
+  },
+  {
+    "id": 3,
+    "author": "L.",
+    "name": "L.",
+    "treatment": "Voetreflex en litteken behandeling",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "Uitgebreide kennis, goede energie, warm bad waar je in terecht komt.",
+    "text": "Uitgebreide kennis, goede energie, warm bad waar je in terecht komt."
+  },
+  {
+    "id": 4,
+    "author": "mw. de R.",
+    "name": "mw. de R.",
+    "treatment": "Shiatsu therapie",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "Goede, op de persoon gerichte shiatsu massage!",
+    "text": "Goede, op de persoon gerichte shiatsu massage!"
+  },
+  {
+    "id": 5,
+    "author": "Mw. B.",
+    "name": "Mw. B.",
+    "treatment": "Ontspanningsmassage",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "Echt een aanrader. Ontspannen en vertrouwde sfeer. Uitstekende massage. Ik kom zeker terug!",
+    "text": "Echt een aanrader. Ontspannen en vertrouwde sfeer. Uitstekende massage. Ik kom zeker terug!"
+  },
+  {
+    "id": 6,
+    "author": "Dhr. K.",
+    "name": "Dhr. K.",
+    "treatment": "Massagetherapie & Lichaamswerk",
+    "rating": 5,
+    "ratingDisplay": "★★★★★",
+    "date": "Recent",
+    "comment": "Gedegen begeleiding bij klachten en de massages ondersteunen je waardoor je weer in je eigen kracht wordt gezet.",
+    "text": "Gedegen begeleiding bij klachten en de massages ondersteunen je waardoor je weer in je eigen kracht wordt gezet."
   }
 ]
