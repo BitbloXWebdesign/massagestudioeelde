@@ -1370,8 +1370,16 @@ import reviews from '../../data/reviews.json';
     revData.forEach((r: any, idx: number) => {
       const card = document.createElement('div');
       card.className = 'review-admin-card';
+      const isMijnDiad = r.source === 'mijndiad';
+      const sourceBadge = isMijnDiad 
+        ? `<span style="font-size:0.75rem;padding:3px 9px;border-radius:12px;background:#e6f7f4;color:#0b7264;font-weight:700;display:inline-flex;align-items:center;gap:4px;border:1px solid #b2ebd9;">✓ MijnDiad Review</span>`
+        : `<span style="font-size:0.75rem;padding:3px 9px;border-radius:12px;background:#f0f4f9;color:#1a73e8;font-weight:700;display:inline-flex;align-items:center;gap:4px;border:1px solid #d2e3fc;">G Google Review</span>`;
+
       card.innerHTML = `
-        <div class="rev-stars">★★★★★</div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.75rem;">
+          <div class="rev-stars">★★★★★</div>
+          ${sourceBadge}
+        </div>
         <p class="rev-comment">"${r.comment || r.text}"</p>
         <div class="rev-meta">
           <div>
@@ -1651,15 +1659,22 @@ import reviews from '../../data/reviews.json';
 
     // Add Review
     if (target.id === 'btn-add-review') {
-      openModal('Nieuwe Google Review Toevoegen', `
+      openModal('Nieuwe Review Toevoegen', `
         <form id="add-rev-form">
+          <div class="modal-form-group">
+            <label>Review Type / Platform</label>
+            <select id="m-r-source">
+              <option value="google">Google Review</option>
+              <option value="mijndiad">MijnDiad Review</option>
+            </select>
+          </div>
           <div class="modal-form-group">
             <label>Klantnaam</label>
             <input type="text" id="m-r-author" placeholder="Bijv. Monique V." required />
           </div>
           <div class="modal-form-group">
             <label>Behandeling / Dienst</label>
-            <input type="text" id="m-r-treat" placeholder="Bijv. Shiatsu Therapie 50 min" required />
+            <input type="text" id="m-r-treat" placeholder="Bijv. Shiatsu Therapie" required />
           </div>
           <div class="modal-form-group">
             <label>Beoordelingstekst</label>
@@ -1679,9 +1694,56 @@ import reviews from '../../data/reviews.json';
           author: (document.getElementById('m-r-author') as HTMLInputElement).value,
           treatment: (document.getElementById('m-r-treat') as HTMLInputElement).value,
           comment: (document.getElementById('m-r-comment') as HTMLTextAreaElement).value,
+          source: (document.getElementById('m-r-source') as HTMLSelectElement).value,
           rating: 5,
           date: 'Recent'
         });
+        saveStoredReviews(revData);
+        closeModal();
+      });
+    }
+
+    // Edit Review
+    if (target.classList.contains('btn-edit-rev')) {
+      const idx = Number(target.dataset.idx);
+      const revData = getStoredReviews();
+      const item = revData[idx];
+      if (!item) return;
+
+      openModal('Review Bewerken', `
+        <form id="edit-rev-form">
+          <div class="modal-form-group">
+            <label>Review Type / Platform</label>
+            <select id="m-r-source-edit">
+              <option value="google" ${item.source !== 'mijndiad' ? 'selected' : ''}>Google Review</option>
+              <option value="mijndiad" ${item.source === 'mijndiad' ? 'selected' : ''}>MijnDiad Review</option>
+            </select>
+          </div>
+          <div class="modal-form-group">
+            <label>Klantnaam</label>
+            <input type="text" id="m-r-author-edit" value="${item.author || item.name || ''}" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Behandeling / Dienst</label>
+            <input type="text" id="m-r-treat-edit" value="${item.treatment || ''}" required />
+          </div>
+          <div class="modal-form-group">
+            <label>Beoordelingstekst</label>
+            <textarea id="m-r-comment-edit" rows="4" required>${item.comment || item.text || ''}</textarea>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-outline btn-sm" onclick="document.getElementById('modal-close-btn').click()">Annuleren</button>
+            <button type="submit" class="btn btn-primary btn-sm">Opslaan</button>
+          </div>
+        </form>
+      `);
+
+      document.getElementById('edit-rev-form')?.addEventListener('submit', (ev) => {
+        ev.preventDefault();
+        item.author = (document.getElementById('m-r-author-edit') as HTMLInputElement).value;
+        item.treatment = (document.getElementById('m-r-treat-edit') as HTMLInputElement).value;
+        item.comment = (document.getElementById('m-r-comment-edit') as HTMLTextAreaElement).value;
+        item.source = (document.getElementById('m-r-source-edit') as HTMLSelectElement).value;
         saveStoredReviews(revData);
         closeModal();
       });
