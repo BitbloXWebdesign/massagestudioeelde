@@ -18,12 +18,30 @@
   },
   "kvk": "56086113",
   "openingHours": [
-    { "day": "Maandag", "hours": "09:00 - 18:00" },
-    { "day": "Dinsdag", "hours": "Gesloten" },
-    { "day": "Woensdag", "hours": "09:00 - 18:00" },
-    { "day": "Donderdag", "hours": "Gesloten" },
-    { "day": "Vrijdag", "hours": "09:00 - 18:00" },
-    { "day": "Zaterdag & Zondag", "hours": "Gesloten*" }
+    {
+      "day": "Maandag",
+      "hours": "09:00 - 18:00"
+    },
+    {
+      "day": "Dinsdag",
+      "hours": "Gesloten"
+    },
+    {
+      "day": "Woensdag",
+      "hours": "09:00 - 18:00"
+    },
+    {
+      "day": "Donderdag",
+      "hours": "Gesloten"
+    },
+    {
+      "day": "Vrijdag",
+      "hours": "09:00 - 18:00"
+    },
+    {
+      "day": "Zaterdag & Zondag",
+      "hours": "Gesloten*"
+    }
   ],
   "openingHoursNote": "* In uitzonderlijke gevallen valt er te overleggen.",
   "bicycleNotice": "Komt u met de fiets? Graag uw fiets buiten het hek plaatsen i.v.m. gemeentelijke afspraken en de veiligheid.",
@@ -108,13 +126,62 @@
     }
   ],
   "regions": [
-    { "slug": "eelde", "name": "Eelde", "distance": "0 km", "type": "Centrum & Hoofdlocatie", "postalCodes": "9761, 9765" },
-    { "slug": "paterswolde", "name": "Paterswolde", "distance": "1 km", "type": "Aangrenzend", "postalCodes": "9765" },
-    { "slug": "haren", "name": "Haren", "distance": "6 km (ca. 8 min)", "type": "Regio Groningen", "postalCodes": "9751, 9752, 9753" },
-    { "slug": "groningen", "name": "Groningen", "distance": "9 km (ca. 10 min)", "type": "Grootstedelijk", "postalCodes": "9711 t/m 9747" },
-    { "slug": "vries", "name": "Vries", "distance": "8 km (ca. 9 min)", "type": "Noord-Drenthe", "postalCodes": "9481, 9482" },
-    { "slug": "yde", "name": "Yde", "distance": "5 km (ca. 6 min)", "type": "Noord-Drenthe", "postalCodes": "9494" },
-    { "slug": "zuidlaren", "name": "Zuidlaren", "distance": "12 km (ca. 14 min)", "type": "Regio Tynaarlo", "postalCodes": "9471, 9472" },
-    { "slug": "eelderwolde", "name": "Eelderwolde", "distance": "4 km (ca. 5 min)", "type": "Paterswoldsemeer", "postalCodes": "9766" }
-  ]
+    {
+      "slug": "eelde",
+      "name": "Eelde",
+      "distance": "0 km",
+      "type": "Centrum & Hoofdlocatie",
+      "postalCodes": "9761, 9765"
+    },
+    {
+      "slug": "paterswolde",
+      "name": "Paterswolde",
+      "distance": "1 km",
+      "type": "Aangrenzend",
+      "postalCodes": "9765"
+    },
+    {
+      "slug": "haren",
+      "name": "Haren",
+      "distance": "6 km (ca. 8 min)",
+      "type": "Regio Groningen",
+      "postalCodes": "9751, 9752, 9753"
+    },
+    {
+      "slug": "groningen",
+      "name": "Groningen",
+      "distance": "9 km (ca. 10 min)",
+      "type": "Grootstedelijk",
+      "postalCodes": "9711 t/m 9747"
+    },
+    {
+      "slug": "vries",
+      "name": "Vries",
+      "distance": "8 km (ca. 9 min)",
+      "type": "Noord-Drenthe",
+      "postalCodes": "9481, 9482"
+    },
+    {
+      "slug": "yde",
+      "name": "Yde",
+      "distance": "5 km (ca. 6 min)",
+      "type": "Noord-Drenthe",
+      "postalCodes": "9494"
+    },
+    {
+      "slug": "zuidlaren",
+      "name": "Zuidlaren",
+      "distance": "12 km (ca. 14 min)",
+      "type": "Regio Tynaarlo",
+      "postalCodes": "9471, 9472"
+    },
+    {
+      "slug": "eelderwolde",
+      "name": "Eelderwolde",
+      "distance": "4 km (ca. 5 min)",
+      "type": "Paterswoldsemeer",
+      "postalCodes": "9766"
+    }
+  ],
+  "portalSlug": "mijn-mse"
 }
